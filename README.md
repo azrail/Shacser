@@ -1,1 +1,1 @@
-### Shacser - Movieverwaltung
+### Shacser - Blog und Movieverwaltung
