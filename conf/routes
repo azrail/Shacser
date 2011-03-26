@@ -17,10 +17,6 @@ GET     /admin/new                              Admin.form
 POST    /admin/new                              Admin.save
 *       /admin                                  module:crud
 
-# ElasticSearchAdmin
-GET     /es/									ElasticSearchAdmin.index
-GET     /lib/                                   staticDir:public
-
 # Import Secure routes
 *       /                                       module:secure
 
