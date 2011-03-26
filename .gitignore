@@ -3,3 +3,8 @@ eclipse
 temp
 .classpath
 .settings
+test-result
+logs
+server.pid
+tmp
+
