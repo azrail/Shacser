@@ -6,8 +6,10 @@ import javax.persistence.*;
 import play.data.binding.*;
 import play.data.validation.*;
 import play.db.jpa.Model;
+import play.modules.elasticsearch.ElasticSearchable;
 
 @Entity
+@ElasticSearchable
 public class Post extends Model {
  
     @Required
