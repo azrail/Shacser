@@ -3,6 +3,8 @@ package models;
 import java.util.*;
 import javax.persistence.*;
 
+import com.petebevin.markdown.MarkdownProcessor;
+
 import play.data.binding.*;
 import play.data.validation.*;
 import play.db.jpa.Model;
@@ -23,6 +25,10 @@ public class Post extends Model {
     @MaxSize(10000)
     public String content;
     
+    @Lob
+    public String html_content;
+    
+    
     @Required
     @ManyToOne
     public User author;
@@ -40,6 +46,9 @@ public class Post extends Model {
         this.title = title;
         this.content = content;
         this.postedAt = new Date();
+        
+        MarkdownProcessor m = new MarkdownProcessor();
+        html_content = m.markdown(content);
     }
     
     public Post addComment(String author, String content) {

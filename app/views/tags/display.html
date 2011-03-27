@@ -27,7 +27,7 @@
     #{if _as != 'teaser'}
         <div class="post-content">
             <div class="about">Detail: </div>
-            ${_post.content.nl2br()}
+            ${_post.html_content.raw()}
         </div>
     #{/if}
 </div>

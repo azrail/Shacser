@@ -1,24 +1,21 @@
 package controllers;
 
-import play.*;
-import play.modules.elasticsearch.ElasticSearch;
-import play.mvc.*;
-import play.data.validation.*;
-import play.libs.*;
-import play.cache.*;
+import java.util.List;
 
-import java.util.*;
+import com.google.gson.JsonObject;
 
-import org.elasticsearch.action.search.*;
-import org.elasticsearch.client.*;
-import org.elasticsearch.index.query.xcontent.FieldQueryBuilder;
-import org.elasticsearch.search.SearchHit;
-import org.elasticsearch.search.SearchHits;
-
-import static org.elasticsearch.index.query.xcontent.FilterBuilders.*;
-import static org.elasticsearch.index.query.xcontent.QueryBuilders.*;
-
-import models.*;
+import models.Post;
+import models.User;
+import play.Play;
+import play.cache.Cache;
+import play.data.validation.Required;
+import play.libs.Codec;
+import play.libs.Images;
+import play.modules.facebook.FbGraph;
+import play.modules.facebook.FbGraphException;
+import play.mvc.Before;
+import play.mvc.Controller;
+import play.mvc.Scope.Session;
 
 public class Application extends Controller {
 	
@@ -28,30 +25,52 @@ public class Application extends Controller {
 		renderArgs.put("blogBaseline", Play.configuration.getProperty("blog.baseline"));
 	}
 	
-	public static void index() {
-    	
-    	Client client = ElasticSearch.client();
-    	SearchResponse response = client.prepareSearch("models_post")
-    	.setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
-    	.setQuery(termQuery("content", "mvc"))
-    	.setFrom(0).setSize(60).setExplain(true)
-    	.execute()
-    	.actionGet();
-    	
-    	SearchHits sh = response.getHits();
-    	
-    	System.out.println(response.getSuccessfulShards());
-    	
-    	for (SearchHit searchHit : sh) {
-			System.out.println(searchHit.getSource());
+	public static void facebookLogin() {
+		try {
+			JsonObject profile = FbGraph.getObject("me");
+			// or use the basic api method directly -> JsonObject profile =
+			// FbGraph.api("me").getAsJsonObject();
+			String email = profile.get("email").getAsString();
+			User user = User.findByEmail(email);
+			if (user == null) {
+				String firstName = profile.get("first_name").getAsString();
+				String lastName = profile.get("last_name").getAsString();
+				String gender = profile.get("gender").getAsString();
+				
+				user = new User(firstName, lastName, email, gender);
+				user.save();
+			}
+			Session.current().put("username", email);
+		} catch (FbGraphException fbge) {
+			if (fbge.getType().equals("OAuthException")) {
+				flash.error("Facebook Authentication Failure", "");
+			}
 		}
-
-    
-    	
-        Post frontPost = Post.find("order by postedAt desc").first();
-        List<Post> olderPosts = Post.find("order by postedAt desc").from(1).fetch(10);
-        render(frontPost, olderPosts);
-    }
+		redirect("/admin/");
+	}
+	
+	public static void index() {
+		// System.out.println("domain: " + request.domain);
+		// Client client = ElasticSearch.client();
+		// SearchResponse response = client.prepareSearch("models_post")
+		// .setSearchType(SearchType.DFS_QUERY_THEN_FETCH)
+		// .setQuery(termQuery("content", "mvc"))
+		// .setFrom(0).setSize(60).setExplain(true)
+		// .execute()
+		// .actionGet();
+		//
+		// SearchHits sh = response.getHits();
+		//
+		// System.out.println(response.getSuccessfulShards());
+		//
+		// for (SearchHit searchHit : sh) {
+		// System.out.println(searchHit.getSource());
+		// }
+		
+		Post frontPost = Post.find("order by postedAt desc").first();
+		List<Post> olderPosts = Post.find("order by postedAt desc").from(1).fetch(10);
+		render(frontPost, olderPosts);
+	}
 	
 	public static void show(Long id) {
 		Post post = Post.findById(id);

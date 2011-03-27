@@ -1,6 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
- 
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xml:lang="de" lang="de">
     <head>
         <title>#{get 'title' /}</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -8,17 +7,28 @@
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}" />
         #{script src:"jquery-1.3.2.min.js" /}
         #{script src:"jquery.tools.min.js" /}
+        <script type="text/javascript">
+    		function facebookLogin() {
+        		// get current login status from facebook.com
+        		FB.getLoginStatus(function(response) {
+        	    	if (response.session) {
+        	    	    // logged in and connected user, someone you know
+        	        	window.location = "@{Application.facebookLogin()}";
+        	    	} else {
+        	     	   window.location = "@{Secure.logout()}";
+        	    	}
+        		});
+    		}
+		</script>
     </head>
-    <body>
-
+    <body>	
         <div id="header">
             <div id="logo">
                 yabe.
             </div>
             <ul id="tools">
                 <li>
-      				#{fbconnect.button label:'Login using your facebook account.' /}
-                    <a href="@{Admin.index()}">Log in to write something</a>
+                	<fb:login-button perms="email" size="medium" onlogin="facebookLogin();"></fb:login-button>
                 </li>
             </ul>
             <div id="title">
@@ -37,6 +47,10 @@
             <a href="http://www.playframework.org">play framework</a>
             as a tutorial application.
         </p>
-
+		<div id="fb-root"></div>
+		<script src="http://connect.facebook.net/de_DE/all.js"></script>
+		<script>
+			FB.init({appId: '119008341506791', status: true, cookie: true, xfbml : true});
+		</script>
     </body>
 </html>

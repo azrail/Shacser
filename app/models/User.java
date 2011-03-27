@@ -7,6 +7,8 @@ import com.google.gson.JsonObject;
  
 import play.db.jpa.*;
 import play.data.validation.*;
+import play.modules.facebook.FbGraph;
+import play.modules.facebook.FbGraphException;
 import play.mvc.Scope.Session;
  
 @Entity
@@ -19,7 +21,12 @@ public class User extends Model {
     @Required
     public String password;
     
+    public String firstName;
+    public String lastName;
+    public String gender;
+    
     public String fullname;
+    
     
     public boolean isAdmin;
     
@@ -29,24 +36,15 @@ public class User extends Model {
         this.fullname = fullname;
     }
     
-    public User(String email, String fullname) {
+    public User(String firstName, String lastName, String email, String gender) {
         this.email = email;
-        this.fullname = fullname;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.fullname = firstName + " " + lastName;
+        this.gender = gender;
     }
-    
-    public static void facebookOAuthCallback(JsonObject data){
-    	String email = data.get("email").getAsString();
-    	String fullname = data.get("name").getAsString();
-    	User user = findByEmail(email);
-    	if(user == null){
-    		user = new User(email, fullname);
-    		user.save();
-    	}
-    	Session.current().put("user", user.email);
-    }
-    
-    private static User findByEmail(String email) {
-    	System.out.println(email);
+        
+    public static User findByEmail(String email) {
     	return find("byEmail", email).first();
 	}
 
