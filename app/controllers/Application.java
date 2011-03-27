@@ -122,14 +122,13 @@ public class Application extends Controller {
 		response.setHeader("Content-Length", robots.length() + "");
 		response.cacheFor("2h");
 		response.contentType = "text/html";
-		response.direct = is; // renderBinary() will override any caching
-								// headers.
+		response.direct = is;
 	}
 	
 	public static void markdowPreview() {		
 		String content = Application.request.params.get("data").toString();
 		MarkdownProcessor m = new MarkdownProcessor();
 		String html_content = m.markdown(content);
-		render(html_content);
+		render("Application/markdowPreview.html", html_content);
 	}
 }
