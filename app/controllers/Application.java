@@ -2,20 +2,28 @@ package controllers;
 
 import java.util.List;
 
-import com.google.gson.JsonObject;
-
 import models.Post;
 import models.User;
+
+//import org.elasticsearch.*;
+//import org.elasticsearch.plugins.*;
+//import org.elasticsearch.action.search.*;
+//import org.elasticsearch.client.*;
+//import org.elasticsearch.index.query.xcontent.FieldQueryBuilder;
+//import static org.elasticsearch.index.query.xcontent.QueryBuilders.*;
 import play.Play;
 import play.cache.Cache;
 import play.data.validation.Required;
 import play.libs.Codec;
 import play.libs.Images;
+import play.modules.elasticsearch.*;
 import play.modules.facebook.FbGraph;
 import play.modules.facebook.FbGraphException;
 import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.Scope.Session;
+
+import com.google.gson.JsonObject;
 
 public class Application extends Controller {
 	
@@ -23,6 +31,8 @@ public class Application extends Controller {
 	static void addDefaults() {
 		renderArgs.put("blogTitle", Play.configuration.getProperty("blog.title"));
 		renderArgs.put("blogBaseline", Play.configuration.getProperty("blog.baseline"));
+
+		
 	}
 	
 	public static void facebookLogin() {
