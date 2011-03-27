@@ -1,22 +1,18 @@
 package controllers;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.List;
 
 import models.Post;
 import models.User;
-
-//import org.elasticsearch.*;
-//import org.elasticsearch.plugins.*;
-//import org.elasticsearch.action.search.*;
-//import org.elasticsearch.client.*;
-//import org.elasticsearch.index.query.xcontent.FieldQueryBuilder;
-//import static org.elasticsearch.index.query.xcontent.QueryBuilders.*;
 import play.Play;
 import play.cache.Cache;
 import play.data.validation.Required;
 import play.libs.Codec;
 import play.libs.Images;
-import play.modules.elasticsearch.*;
 import play.modules.facebook.FbGraph;
 import play.modules.facebook.FbGraphException;
 import play.mvc.Before;
@@ -31,7 +27,6 @@ public class Application extends Controller {
 	static void addDefaults() {
 		renderArgs.put("blogTitle", Play.configuration.getProperty("blog.title"));
 		renderArgs.put("blogBaseline", Play.configuration.getProperty("blog.baseline"));
-
 		
 	}
 	
@@ -118,6 +113,16 @@ public class Application extends Controller {
 	public static void listTagged(String tag) {
 		List<Post> posts = Post.findTaggedWith(tag);
 		render(tag, posts);
+	}
+	
+	public static void robots() throws FileNotFoundException {
+		File robots = play.Play.getFile("public/robots.txt");
+		InputStream is = new FileInputStream(robots);
+		response.setHeader("Content-Length", robots.length() + "");
+		response.cacheFor("2h");
+		response.contentType = "text/html";
+		response.direct = is; // renderBinary() will override any caching
+								// headers.
 	}
 	
 }
