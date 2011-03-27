@@ -28,7 +28,6 @@ public class Application extends Controller {
 	static void addDefaults() {
 		renderArgs.put("blogTitle", Play.configuration.getProperty("blog.title"));
 		renderArgs.put("blogBaseline", Play.configuration.getProperty("blog.baseline"));
-		
 	}
 	
 	public static void facebookLogin() {
@@ -78,6 +77,17 @@ public class Application extends Controller {
 		// for (SearchHit searchHit : sh) {
 		// System.out.println(searchHit.getSource());
 		// }
+		
+		try {
+			JsonObject user = FbGraph.getObject("lethargicprince");
+			System.out.println(user );
+		} catch (FbGraphException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NullPointerException  e) {
+			// TODO: handle exception
+		}
+		
 		
 		Post frontPost = Post.find("order by postedAt desc").first();
 		List<Post> olderPosts = Post.find("order by postedAt desc").from(1).fetch(10);
