@@ -5,6 +5,8 @@ import play.mvc.*;
 import play.data.validation.*;
  
 import java.util.*;
+
+import com.petebevin.markdown.MarkdownProcessor;
  
 import models.*;
  
@@ -44,6 +46,10 @@ public class Admin extends Controller {
             post = Post.findById(id);
             post.title = title;
             post.content = content;
+            
+            MarkdownProcessor m = new MarkdownProcessor();
+            post.html_content = m.markdown(content);
+            
             post.tags.clear();
         }
         // Set tags list
