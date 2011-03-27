@@ -15,6 +15,11 @@ public class Security extends Secure.Security {
         if("poster".equals(profile)) {
             return User.find("byEmail", connected()).<User>first().canPost;
         }
+        if("posteroradmin".equals(profile)) {
+            return (User.find("byEmail", connected()).<User>first().canPost || User.find("byEmail", connected()).<User>first().isAdmin);
+        }
+        
+        
         return false;
     }
     
