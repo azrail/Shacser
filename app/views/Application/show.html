@@ -40,7 +40,7 @@
     </p>
     <p>
         <label for="code">Please type the code below: </label>
-        <img src="@{Application.captcha(randomID)}" />
+        <img width="150" height="50" src="@{Application.captcha(randomID)}" />
         <br />
         <input type="text" name="code" id="code" size="18" value="" />
         <input type="hidden" name="randomID" value="${randomID}" />
