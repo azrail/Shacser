@@ -85,7 +85,7 @@ body {
 
 #main {
 	background: #314660;
-	background: gradient(linear, left top, left 30%, from(#314660), to(#364B66));
+	background: -webkit-gradient(linear, left top, left 30%, from(#314660), to(#364B66));
 	border-radius: 16px;
 	padding: 20px;
 }
@@ -223,7 +223,7 @@ h3 span {
 form {
 	padding: 10px;
 	background: #253142;
-	background: gradient(linear, left top, left 60%, from(#253142), to(#364B66));
+	background: -webkit-gradient(linear, left top, left 60%, from(#253142), to(#364B66));
 	border-radius: 10px;
 }
 form .error {
