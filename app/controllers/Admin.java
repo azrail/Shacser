@@ -19,6 +19,7 @@ public class Admin extends Controller {
         }
     }
  
+    @Check("poster")
     public static void index() {
         List<Post> posts = Post.find("author.email", Security.connected()).fetch();
         render(posts);

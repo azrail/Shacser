@@ -29,6 +29,7 @@ public class User extends Model {
     
     
     public boolean isAdmin;
+    public boolean canPost;
     
     public User(String email, String password, String fullname) {
         this.email = email;
