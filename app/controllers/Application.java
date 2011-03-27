@@ -79,7 +79,7 @@ public class Application extends Controller {
 		// }
 		
 		try {
-			JsonObject user = FbGraph.getObject("lethargicprince");
+			JsonObject user = FbGraph.getObject("me");
 			System.out.println(user );
 		} catch (FbGraphException e) {
 			// TODO Auto-generated catch block
