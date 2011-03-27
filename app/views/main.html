@@ -8,7 +8,7 @@
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}" />
         #{script src:"jquery-1.3.2.min.js" /}
         #{script src:"jquery.tools.min.js" /}
-        <script type="text/javascript">
+        <script>
     		function facebookLogin() {
         		// get current login status from facebook.com
         		FB.getLoginStatus(function(response) {
@@ -44,23 +44,23 @@
         </div>
 
         <p id="footer">
-            <a href="http://www.playframework.org" ><img width="88" height="32" src="@{'/public/images/powered_by_play_framework.png'}" alt="Powered by play framework" border="0" /></a>
-			<a href="http://www.cherokee-project.com"><img width="88" height="32" src="@{'/public/images/powered_by_cherokee.png'}" alt="Powered by Cherokee" border="0" /></a>
-			<a href="http://www.debian.org"><img width="88" height="32" src="@{'/public/images/powered_by_debian.png'}" alt="Powered by Debian" border="0" /></a>
+            <a href="http://www.playframework.org" ><img width="88" height="32" src="@{'/public/images/powered_by_play_framework.png'}" alt="Powered by play framework" /></a>
+			<a href="http://www.cherokee-project.com"><img width="88" height="32" src="@{'/public/images/powered_by_cherokee.png'}" alt="Powered by Cherokee" /></a>
+			<a href="http://www.debian.org"><img width="88" height="32" src="@{'/public/images/powered_by_debian.png'}" alt="Powered by Debian" /></a>
         </p>
         <!-- Facebook -->
 			<div id="fb-root"></div>
-			<script type="text/javascript" src="http://connect.facebook.net/de_DE/all.js"></script>
+			<script src="http://connect.facebook.net/de_DE/all.js"></script>
 			<script>
 				FB.init({appId: '119008341506791', status: true, cookie: true, xfbml : true});
 			</script>
 		<!-- End Facebook -->
 		<!-- Piwik --> 
-			<script type="text/javascript">
+			<script>
 				var pkBaseURL = (("https:" == document.location.protocol) ? "https://bumblebee.aheron.de/stats/" : "http://bumblebee.aheron.de/stats/");
 				document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
 			</script>
-			<script type="text/javascript">
+			<script>
 				try {
 					var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
 					piwikTracker.trackPageView();
