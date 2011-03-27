@@ -20,6 +20,7 @@ import play.mvc.Controller;
 import play.mvc.Scope.Session;
 
 import com.google.gson.JsonObject;
+import com.petebevin.markdown.MarkdownProcessor;
 
 public class Application extends Controller {
 	
@@ -125,4 +126,10 @@ public class Application extends Controller {
 								// headers.
 	}
 	
+	public static void markdowPreview() {		
+		String content = Application.request.params.get("data").toString();
+		MarkdownProcessor m = new MarkdownProcessor();
+		String html_content = m.markdown(content);
+		render(html_content);
+	}
 }

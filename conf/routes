@@ -24,5 +24,10 @@ POST    /admin/new                              Admin.save
 GET     /public/                                staticDir:public
 GET 	/robots.txt  							Application.robots
 
+POST 	/markdown.html  								Application.markdowPreview
+GET 	/markdown.html  								Application.markdowPreview
+
+
+
 # Catch all
 *       /{controller}/{action}                  {controller}.{action}
