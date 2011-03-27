@@ -45,10 +45,30 @@
         <p id="footer">
             Yabe is built with the <a href="http://www.playframework.org">play framework</a>.
         </p>
-		<div id="fb-root"></div>
-		<script src="http://connect.facebook.net/de_DE/all.js"></script>
-		<script>
-			FB.init({appId: '119008341506791', status: true, cookie: true, xfbml : true});
-		</script>
+        <!-- Facebook -->
+			<div id="fb-root"></div>
+			<script src="http://connect.facebook.net/de_DE/all.js"></script>
+			<script>
+				FB.init({appId: '119008341506791', status: true, cookie: true, xfbml : true});
+			</script>
+		<!-- End Facebook -->
+		<!-- Piwik --> 
+			<script type="text/javascript">
+				var pkBaseURL = (("https:" == document.location.protocol) ? "https://bumblebee.aheron.de/stats/" : "http://bumblebee.aheron.de/stats/");
+				document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+			</script>
+			<script type="text/javascript">
+				try {
+					var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
+					piwikTracker.trackPageView();
+					piwikTracker.enableLinkTracking();
+				} catch( err ) {}
+			</script>
+			<noscript>
+				<p>
+					<img src="http://bumblebee.aheron.de/stats/piwik.php?idsite=1" style="border:0" alt="" />
+				</p>
+			</noscript>
+		<!-- End Piwik Tracking Code -->
     </body>
 </html>
