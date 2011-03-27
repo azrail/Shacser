@@ -51,12 +51,18 @@ public class Application extends Controller {
 				user.save();
 			}
 			Session.current().put("username", email);
+			
+			if (user.isAdmin || user.canPost) {
+				redirect("/admin/");
+			} else {
+				redirect("/");
+			}
 		} catch (FbGraphException fbge) {
 			if (fbge.getType().equals("OAuthException")) {
 				flash.error("Facebook Authentication Failure", "");
 			}
 		}
-		redirect("/admin/");
+		
 	}
 	
 	public static void index() {
