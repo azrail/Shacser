@@ -41,8 +41,14 @@
                     <a href="@{Admin.index()}">My posts</a>
                 </li>
                 #{secure.check 'admin'}
+                	<li class="${request.controller == 'AdminSites' ? 'selected' : ''}">
+                    	<a href="@{AdminSites.index()}">My Sites</a>
+                	</li>
                     <li class="${request.controller == 'Posts' ? 'selected' : ''}">
                         <a href="@{Posts.list()}">Posts</a>
+                    </li>
+                    <li class="${request.controller == 'Sites' ? 'selected' : ''}">
+                        <a href="@{Sites.list()}">Sites</a>
                     </li>
                     <li class="${request.controller == 'Tags' ? 'selected' : ''}">
                         <a href="@{Tags.list()}">Tags</a>

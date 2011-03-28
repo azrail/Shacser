@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import models.Post;
+import models.Site;
 import models.User;
 import play.Play;
 import play.cache.Cache;
@@ -99,6 +100,14 @@ public class Application extends Controller {
 		String randomID = Codec.UUID();
 		render(post, randomID);
 	}
+	
+	
+	public static void site(Long id) {
+		Site site = Site.findById(id);
+		String randomID = Codec.UUID();
+		render(site, randomID);
+	}
+	
 	
 	public static void postComment(Long postId, @Required(message = "Author is required") String author, @Required(message = "A message is required") String content, @Required(message = "Please type the code") String code, String randomID) {
 		Post post = Post.findById(postId);

@@ -1,0 +1,13 @@
+#{extends 'admin.html' /}
+
+<h3>Welcome ${user}, <span>you have written ${sites.size() ?: 'no'} ${sites.pluralize('site', 'sites')} so far</span></h3>
+
+#{list items:sites, as:'site'}
+    <p class="site ${site_parity}">
+        <a href="@{form(site.id)}">${site.title}</a>
+    </p>
+#{/list}
+
+<p id="newPost" >
+    <a href="@{form()}"><span>+</span> write a new Site</a>
+</p>

@@ -133,6 +133,52 @@ body {
 	top: -6px;
 	left: 24px;
 }
+
+/** Site **/
+
+.site .site-title {
+	margin: 0;
+}
+.site .site-title a {
+	font-size: 36px;
+	color: #F5C2CC;
+	text-decoration: none;
+}
+.site .site-metadata {
+	color: #BAC36E;
+	display: block;
+	font-size: 70%;
+	display: inline-block;
+}
+.site .site-author {
+	font-size: 130%;
+	font-weight: bold;
+}
+.site .site-metadata a {
+	color: #9FA85D;
+}
+.site .site-content {
+	position: relative;
+	background: #fff;
+	padding: 10px;
+	margin: 10px 0 50px 0;
+	border-radius: 10px;
+	box-shadow: 0 2px 0 #BBBBBB;
+}
+.site .about {
+	text-indent: -999em;
+	display: block;
+	width: 0;
+	height: 0;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-bottom: 10px solid #fff;
+	border-top: 0;
+	position: absolute;
+	top: -6px;
+	left: 24px;
+}
+
 /** Older posts **/
 
 .older-posts h3 {
@@ -450,4 +496,44 @@ tr.odd {
 }
 .hasError {
 	background: pink;
+}
+
+/** My Sites **/
+
+#admin .site {
+	background: #fff;
+	padding: 4px;
+	margin: 0;
+	font-size: 90%;
+}
+#admin .site.odd {
+	background: #C0CBE5;
+}
+#admin .site a {
+	color: #444;
+}
+#newSite {
+	border-top: 1px dotted #C0CBE5;
+	padding-top: 15px;
+}
+#newSite a {
+	background: #C88116;
+	border-radius: 12px;
+	padding: 5px 10px;
+	font-size: 80%;
+	text-decoration: none;
+	color: #fff;
+	font-weight: bold;
+	box-shadow: 1px 1px 2px rgba(0,0,0,.3);
+}
+#newSite a span {
+	background: #7D510E;
+	border-radius: 8px;
+	padding: 0 5px 2px 5px;
+	position: relative;
+	top: -1px;
+}
+#siteContent {
+	width: 100%;
+	height: 300px;
 }

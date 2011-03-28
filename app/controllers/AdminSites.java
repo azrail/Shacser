@@ -11,7 +11,7 @@ import com.petebevin.markdown.MarkdownProcessor;
 import models.*;
  
 @With(Secure.class)
-public class Admin extends Controller {
+public class AdminSites extends Controller {
     
     @Before
     static void setConnectedUser() {
@@ -20,52 +20,44 @@ public class Admin extends Controller {
             renderArgs.put("user", user.fullname);
         }
     }
- 
+    
     @Check("posteroradmin")
     public static void index() {
-        List<Post> posts = Post.find("author.email", Security.connected()).fetch();
-        render(posts);
+        List<Site> sites = Site.find("author.email", Security.connected()).fetch();
+        render(sites);
     }
-    
+
     public static void form(Long id) {
         if(id != null) {
-            Post post = Post.findById(id);
-            render(post);
+        	Site site = Site.findById(id);
+            render(site);
         }
         render();
     }
     
-    public static void save(Long id, String title, String content, String tags) {
-        Post post;
+    public static void save(Long id, String title, String content) {
+    	Site site;
         if(id == null) {
             // Create post
             User author = User.find("byEmail", Security.connected()).first();
-            post = new Post(author, title, content);
+            site = new Site(author, title, content);
         } else {
             // Retrieve post
-            post = Post.findById(id);
-            post.title = title;
-            post.content = content;
+            site = Site.findById(id);
+            site.title = title;
+            site.content = content;
             
             MarkdownProcessor m = new MarkdownProcessor();
-            post.html_content = m.markdown(content);
-            
-            post.tags.clear();
-        }
-        // Set tags list
-        for(String tag : tags.split("\\s+")) {
-            if(tag.trim().length() > 0) {
-                post.tags.add(Tag.findOrCreateByName(tag));
-            }
+            site.html_content = m.markdown(content);
+
         }
         // Validate
-        validation.valid(post);
+        validation.valid(site);
         if(validation.hasErrors()) {
-            render("@form", post);
+            render("@form", site);
         }
         // Save
-        post.save();
+        site.save();
         index();
     }
-
 }

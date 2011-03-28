@@ -1,0 +1,18 @@
+*{ Display a site in one of these modes: 'full', 'home' or 'teaser' }*
+ 
+<div class="site ${_as == 'teaser' ? 'teaser' : ''}">
+    <h2 class="site-title">
+        <a href="@{Application.show(_site.id)}">${_site.title}</a>
+    </h2>
+    <div class="site-metadata">
+        <span class="site-author">by ${_site.author.fullname}</span>,
+        <span class="site-date">${_site.postedAt.format('dd MMM yy')}</span>
+    </div>
+    #{if _as != 'teaser'}
+        <div class="site-content">
+            <div class="about">Detail: </div>
+            ${_site.html_content.raw()}
+        </div>
+    #{/if}
+</div>
+ 

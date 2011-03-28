@@ -1,0 +1,8 @@
+#{extends 'main.html' /}
+#{set title:site.title /}
+
+#{if flash.success}
+    <p class="success">${flash.success}</p>
+#{/if}
+ 
+#{displaysite site:site, as:'full' /}

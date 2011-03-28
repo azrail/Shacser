@@ -1,0 +1,38 @@
+#{extends 'admin.html' /}
+ 
+#{ifnot site?.id}
+    <h3>Write, <span>a new site</span></h3>
+#{/ifnot}
+#{else}
+    <h3>Edit, <span>this site</span></h3>
+#{/else}
+ 
+#{form @save(site?.id)}
+ 
+    #{ifErrors}
+        <p class="error">
+            Please correct these errors.
+        </p>
+    #{/ifErrors}
+     
+    <p>
+        #{field 'title'}
+        <label>site title:</label>
+        <input type="text" name="${field.name}" 
+            value="${site?.title}" class="${field.errorClass}" />
+        #{/field}
+    </p>
+ 
+    <p>
+        #{field 'content'}
+        <label>Write here:</label>
+        <textarea id="markdown" name="${field.name}" 
+            class="${field.errorClass}">${site?.content}</textarea>
+        #{/field}
+    </p>
+    
+    <p>
+        <input type="submit" value="Publish this site to the blog" />
+    </p>
+    
+#{/form}

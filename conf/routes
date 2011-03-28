@@ -8,6 +8,9 @@ GET     /posts/{<[0-9]+>id}                     Application.show
 GET     /posts/{tag}                            Application.listTagged
 POST    /posts/{<[0-9]+>postId}/comments        Application.postComment
 GET     /captcha                                Application.captcha
+GET     /site/{<[0-9]+>id}                     	Application.site
+GET		/impressum								Application.site(id:'1')
+GET		/datenschutz							Application.site(id:'2')
 
 # Adminstration
 GET     /admin/?                                Admin.index
@@ -15,6 +18,11 @@ GET     /admin/myPosts/{id}                     Admin.form
 POST    /admin/myPosts/{id}                     Admin.save
 GET     /admin/new                              Admin.form
 POST    /admin/new                              Admin.save
+GET     /admin/Sites/							AdminSites.index
+GET     /admin/Sites/{id}                     	AdminSites.form
+POST    /admin/Sites/{id}                     	AdminSites.save
+GET     /admin/newSite                          AdminSites.form
+POST    /admin/newSite                          AdminSites.save
 *       /admin                                  module:crud
 
 # Import Secure routes
