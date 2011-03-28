@@ -5,7 +5,9 @@ import javax.persistence.*;
  
 import play.db.jpa.*;
 import play.data.validation.*;
+import play.modules.elasticsearch.annotations.ElasticSearchable;
  
+@ElasticSearchable
 @Entity
 public class Comment extends Model {
  
