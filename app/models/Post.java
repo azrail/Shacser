@@ -8,7 +8,7 @@ import com.petebevin.markdown.MarkdownProcessor;
 import play.data.binding.*;
 import play.data.validation.*;
 import play.db.jpa.Model;
-import play.modules.elasticsearch.ElasticSearchable;
+import play.modules.elasticsearch.annotations.ElasticSearchable;
 
 @Entity
 @ElasticSearchable
@@ -27,7 +27,6 @@ public class Post extends Model {
     
     @Lob
     public String html_content;
-    
     
     @Required
     @ManyToOne
