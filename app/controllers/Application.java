@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.List;
 
+import models.Info;
 import models.Post;
 import models.Site;
 import models.User;
@@ -29,6 +30,7 @@ public class Application extends Controller {
 	static void addDefaults() {
 		renderArgs.put("blogTitle", Play.configuration.getProperty("blog.title"));
 		renderArgs.put("blogBaseline", Play.configuration.getProperty("blog.baseline"));
+		renderArgs.put("info", new Info());
 	}
 	
 	public static void facebookLogin() {
