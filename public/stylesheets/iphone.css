@@ -1,0 +1,14 @@
+/** iPhone Main layout **/
+
+html, body {
+	background: #364B66 !important;
+	font-family: Helvetica, Arial, Sans !important;
+}
+img {
+	border: 0;
+}
+body {
+	width: 100%;
+	padding: 0 30px;
+	margin: auto;
+}
