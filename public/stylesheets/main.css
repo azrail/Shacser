@@ -608,3 +608,9 @@ tr.odd {
 	font-weight: bold;
 	text-decoration: underline;
 }
+
+code {
+	height:300px;
+	width:500px;
+	overflow:scroll;
+}
