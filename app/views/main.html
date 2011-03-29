@@ -18,7 +18,6 @@
 		<meta name="ICBM" content="50.99, 7.41" />
 		
         <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/main.css'}" />
-        <link rel="stylesheet" type="text/css" href="@{'/public/syntaxhighlighter/styles/shCoreDefault.css'}"/> 
         <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/iphone.css'}" media="only screen and (max-device-width: 480px)" />
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}" />
         
@@ -62,26 +61,12 @@
         <div id="main">
             #{doLayout /}
         </div>
-		
-		
-		
+
         <p id="footer">
             <a href="http://www.playframework.org" hreflang="en" title="The Play framework makes it easier to build Web applications with Java"><img width="88" height="32" src="@{'/public/images/powered_by_play_framework.png'}" alt="Powered by play framework" /></a>
 			<a href="http://www.cherokee-project.com" hreflang="en" title="Cherokee is a very fast, flexible and easy to configure Web Server."><img width="88" height="32" src="@{'/public/images/powered_by_cherokee.png'}" alt="Powered by Cherokee" /></a>
 			<a href="http://www.ubuntu.com" hreflang="en" title="Secure, fast and powerful, Ubuntu Server based on Debian"><img width="88" height="32" src="@{'/public/images/powered_by_debian.png'}" alt="Powered by Debian" /></a>
         </p>
-        
-		<script src="@{'/public/syntaxhighlighter/scripts/shCore.js'}"></script>
-		<script src="@{'/public/syntaxhighlighter/scripts/shBrushJScript.js'}"></script>
-		<script src="@{'/public/syntaxhighlighter/scripts/shAutoloader.js'}"></script> 
-		<script src="@{'/public/syntaxhighlighter/scripts/shBrushXml.js'}"></script> 
-		<script src="@{'/public/syntaxhighlighter/scripts/shBrushJScript.js'}"></script> 
-		<script src="@{'/public/syntaxhighlighter/scripts/shBrushCss.js'}"></script>
-		<script src="@{'/public/syntaxhighlighter/scripts/shBrushJava.js'}"></script>  
-
-		<script>
-			SyntaxHighlighter.all();
-		</script>
         
         <!-- Facebook -->
 			<div id="fb-root"></div>
