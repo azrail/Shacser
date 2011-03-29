@@ -39,8 +39,8 @@ public class Application extends Controller {
 	static void addDefaults() {
 		renderArgs.put("blogTitle", Play.configuration.getProperty("blog.title"));
 		renderArgs.put("blogBaseline", Play.configuration.getProperty("blog.baseline"));
-		renderArgs.put("description", Play.configuration.getProperty("description"));
-		renderArgs.put("autor", Play.configuration.getProperty("autor"));
+		renderArgs.put("description", Play.configuration.getProperty("blog.description"));
+		renderArgs.put("autor", Play.configuration.getProperty("blog.autor"));
 		renderArgs.put("info", new Info());
 	}
 	
