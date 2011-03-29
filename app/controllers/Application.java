@@ -4,12 +4,21 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
+import javax.xml.ws.handler.MessageContext.Scope;
 
 import models.Info;
 import models.Post;
 import models.Site;
 import models.User;
+
+import org.joda.time.LocalDateTime;
+
 import play.Play;
 import play.cache.Cache;
 import play.data.validation.Required;
@@ -30,7 +39,15 @@ public class Application extends Controller {
 	static void addDefaults() {
 		renderArgs.put("blogTitle", Play.configuration.getProperty("blog.title"));
 		renderArgs.put("blogBaseline", Play.configuration.getProperty("blog.baseline"));
+		renderArgs.put("description", Play.configuration.getProperty("description"));
+		renderArgs.put("autor", Play.configuration.getProperty("autor"));
 		renderArgs.put("info", new Info());
+	}
+	
+	public static void rssFeedPosts() {
+		List<Post> posts = Post.find("order by postedAt desc").fetch();
+		response.contentType = "application/rss+xml; charset=utf-8";
+		render("feeds/FeedPosts.rss", posts);
 	}
 	
 	public static void facebookLogin() {
@@ -83,14 +100,13 @@ public class Application extends Controller {
 		
 		try {
 			JsonObject user = FbGraph.getObject("me");
-			System.out.println(user );
+			System.out.println(user);
 		} catch (FbGraphException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (NullPointerException  e) {
+		} catch (NullPointerException e) {
 			// TODO: handle exception
 		}
-		
 		
 		Post frontPost = Post.find("order by postedAt desc").first();
 		List<Post> olderPosts = Post.find("order by postedAt desc").from(1).fetch(10);
@@ -103,13 +119,11 @@ public class Application extends Controller {
 		render(post, randomID);
 	}
 	
-	
 	public static void site(Long id) {
 		Site site = Site.findById(id);
 		String randomID = Codec.UUID();
 		render(site, randomID);
 	}
-	
 	
 	public static void postComment(Long postId, @Required(message = "Author is required") String author, @Required(message = "A message is required") String content, @Required(message = "Please type the code") String code, String randomID) {
 		Post post = Post.findById(postId);
@@ -146,7 +160,7 @@ public class Application extends Controller {
 		response.direct = is;
 	}
 	
-	public static void markdowPreview() {		
+	public static void markdowPreview() {
 		String content = Application.request.params.get("data").toString();
 		MarkdownProcessor m = new MarkdownProcessor();
 		String html_content = m.markdown(content);

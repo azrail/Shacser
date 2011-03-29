@@ -3,10 +3,12 @@
 # ~~~~
 
 # Home page
-GET	/                                      		Application.index
+GET		/                                      	Application.index
 GET     /posts/{<[0-9]+>id}                     Application.show
 GET     /posts/{tag}                            Application.listTagged
 POST    /posts/{<[0-9]+>postId}/comments        Application.postComment
+GET		/posts.rss								Application.rssFeedPosts
+GET		/sites.rss								Application.sitefeed
 GET     /captcha                                Application.captcha
 GET     /site/{<[0-9]+>id}                     	Application.site
 GET		/impressum								Application.site(id:'1')

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>yab. Das Technik Blog</title>
+		<link>@@{Application.index()}</link>
+		<description>${description}</description>
+		<language>de-de</language>
+		<copyright>${autor}</copyright>
+		<pubDate>${new Date().format("EEE, dd MMM yyyy HH:mm:ss Z", 'en')}</pubDate>
+		<atom:link href="@@{Application.rssFeedPosts()}" rel="self" type="application/rss+xml" />
+		#{list items:posts, as:'post'}
+		<item>
+			<title>${post.title.escapeXml()}</title>
+			<description>${post.html_content.escapeXml()}</description>
+			<link>@@{Application.show(post.id)}</link>
+			<author>${post.author.email.escapeXml()} (${post.author.fullname.escapeXml()})</author>
+			<guid>@@{Application.show(post.id)}</guid>
+			<pubDate>${post.postedAt.format("EEE, dd MMM yyyy HH:mm:ss Z", 'en')}</pubDate>
+		</item>
+		#{/list}
+	</channel>
+</rss>
