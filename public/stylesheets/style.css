@@ -586,3 +586,6 @@ li.bg, .bg {
 	background:none;
 	list-style:none;
 }
+.piwik {
+	display: none;
+}
