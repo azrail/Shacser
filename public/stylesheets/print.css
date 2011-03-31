@@ -1,0 +1,32 @@
+* {
+	font-family:"times new roman",times,serif;
+	text-align:justify;
+}
+.blok_header {
+	display: none;
+}
+.menu_resize_bg {
+	display: none;
+}
+.right {
+	display: none;
+}
+.form {
+	display: none;
+}
+.mittel-menu {
+	display: none;
+}
+.footer {
+	display: none;
+}
+.mittel-menu_resize {
+	display: none;
+}
+.rescent {
+	display: none;
+}
+.resent2 {
+	display: none;
+}
+
