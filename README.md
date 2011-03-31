@@ -1,1 +1,2 @@
-### Shacser - Blog und Movieverwaltung
+### Shacser - Blog Engine, basiert auf Yabe (Playframework Tutorial)
+
