@@ -1,66 +1,64 @@
 #{extends 'main.html' /}
 #{set title:post.title /}
 
-<ul id="pagination">
-    #{if post.previous()}
-        <li id="previous">
-            <a href="@{Application.show(post.previous().id)}">${post.previous().title}</a>
-        </li>
-    #{/if}
-    #{if post.next()}
-        <li id="next">
-            <a href="@{Application.show(post.next().id)}">${post.next().title}</a>
-        </li>
-    #{/if}
-</ul>
-
 #{if flash.success}
-    <p class="success">${flash.success}</p>
+<p class="success">
+	${flash.success}
+</p>
 #{/if}
- 
+
 #{display post:post, as:'full' /}
 
-<h3>Post a comment</h3>
- 
-#{form @Application.postComment(post.id)}
- 
-    #{ifErrors}
-        <p class="error">
-            ${errors[0]}
-        </p>
-    #{/ifErrors}
- 
-    <p>
-        <label for="author">Your name: </label>
-        <input type="text" name="author" id="author" value="${params.author}" />
-    </p>
-    <p>
-        <label for="content">Your message: </label>
-        <textarea name="content" id="content">${params.content}</textarea>
-    </p>
-    <p>
-        <label for="code">Please type the code below: </label>
-        <img width="150" height="50" src="@{Application.captcha(randomID)}" />
-        <br />
-        <input type="text" name="code" id="code" size="18" value="" />
-        <input type="hidden" name="randomID" value="${randomID}" />
-    </p>
-    <p>
-        <input type="submit" value="Submit your comment" />
-    </p>
-#{/form}
+<h3>Schreibe einen Kommentar</h3>
+<div class="form">
 
+	<form action="@{Application.postComment(post.id)}" method="post" id="contactform">
+
+		#{ifErrors}
+		<p class="error">
+			${errors[0]}
+		</p>
+		#{/ifErrors}
+
+		<ol>
+			<li>
+				<label for="author">
+					Dein Name
+					<span class="red">*</span>
+				</label>
+				<input type="text" class="text" name="author" id="author" value="${params.author}" />
+			</li>
+			<li>
+				<label for="content">
+					Deine Nachricht
+					<span class="red">*</span>
+				</label>
+				<textarea name="content" rows="6" cols="50" id="content">${params.content}</textarea>
+			</li>
+			<li>
+				<img width="150" height="50" alt="Captcha" src="@{Application.captcha(randomID)}" />
+				<br />
+				<input type="text" name="code" id="code" class="text" size="18" value="" />
+				<input type="hidden" name="randomID" value="${randomID}" />
+			</li>
+			<li class="buttons">
+				<input type="image" name="imageField" id="imageField" src="@{'/public/images/send.gif'}" class="send">
+				<div class="clr">
+				</div>
+			</li>
+		</ol>
+	</form>
+</div>
 <script type="text/javascript" charset="utf-8">
-    $(function() {         
-        // Expose the form 
-        $('form').click(function() { 
-            $('form').expose({api: true}).load(); 
-        }); 
-        
-        // If there is an error, focus to form
-        if($('form .error').size()) {
-            $('form').expose({api: true, loadSpeed: 0}).load(); 
-            $('form input[type=text]').get(0).focus();
-        }
-    });
+	$( function() {
+		// Expose the form
+		$('form').click( function() {
+			$('form').expose({api: true}).load();
+		});
+		// If there is an error, focus to form
+		if($('form .error').size()) {
+			$('form').expose({api: true, loadSpeed: 0}).load();
+			$('form input[type=text]').get(0).focus();
+		}
+	});
 </script>

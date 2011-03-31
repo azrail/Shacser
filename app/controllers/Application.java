@@ -40,8 +40,13 @@ public class Application extends Controller {
 		renderArgs.put("blogTitle", Play.configuration.getProperty("blog.title"));
 		renderArgs.put("blogBaseline", Play.configuration.getProperty("blog.baseline"));
 		renderArgs.put("description", Play.configuration.getProperty("blog.description"));
+		renderArgs.put("keywords", Play.configuration.getProperty("blog.keywords"));
 		renderArgs.put("autor", Play.configuration.getProperty("blog.autor"));
-		renderArgs.put("info", new Info());
+		renderArgs.put("twitter", Play.configuration.getProperty("blog.twitter"));
+		
+//		Info info = new Info();
+//		System.out.println(info.posts);
+//		renderArgs.put("info", info);
 	}
 	
 	public static void rssFeedPosts() {
@@ -110,19 +115,22 @@ public class Application extends Controller {
 		
 		Post frontPost = Post.find("order by postedAt desc").first();
 		List<Post> olderPosts = Post.find("order by postedAt desc").from(1).fetch(10);
-		render(frontPost, olderPosts);
+		Info info = new Info();
+		render(frontPost, olderPosts, info);
 	}
 	
 	public static void show(Long id) {
 		Post post = Post.findById(id);
 		String randomID = Codec.UUID();
-		render(post, randomID);
+		Info info = new Info();
+		render(post, randomID, info);
 	}
 	
 	public static void site(Long id) {
 		Site site = Site.findById(id);
 		String randomID = Codec.UUID();
-		render(site, randomID);
+		Info info = new Info();
+		render(site, randomID, info);
 	}
 	
 	public static void postComment(Long postId, @Required(message = "Author is required") String author, @Required(message = "A message is required") String content, @Required(message = "Please type the code") String code, String randomID) {
@@ -141,14 +149,15 @@ public class Application extends Controller {
 	
 	public static void captcha(String id) {
 		Images.Captcha captcha = Images.captcha();
-		String code = captcha.getText("#E4EAFD");
+		String code = captcha.getText("#000000");
 		Cache.set(id, code, "30mn");
 		renderBinary(captcha);
 	}
 	
 	public static void listTagged(String tag) {
 		List<Post> posts = Post.findTaggedWith(tag);
-		render(tag, posts);
+		Info info = new Info();
+		render(tag, posts, info);
 	}
 	
 	public static void robots() throws FileNotFoundException {

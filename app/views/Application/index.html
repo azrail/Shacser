@@ -1,22 +1,19 @@
 #{extends 'main.html' /}
-#{set title:'Home' /}
+#{set title:frontPost.title /}
  
 #{if frontPost}
-    
     #{display post:frontPost, as:'home' /}
-    
+    <!--
     #{if olderPosts.size()}
-    
         <div class="older-posts">    
             <h3>Older posts <span class="from">from this blog</span></h3>
-        
             #{list items:olderPosts, as:'oldPost'}
                 #{display post:oldPost, as:'teaser' /}
             #{/list}            
         </div>
         
     #{/if}
-    
+    -->
 #{/if}
  
 #{else}

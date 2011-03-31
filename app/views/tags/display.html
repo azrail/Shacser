@@ -1,44 +1,51 @@
 *{ Display a post in one of these modes: 'full', 'home' or 'teaser' }*
- 
-<div class="post ${_as == 'teaser' ? 'teaser' : ''}">
-    <h2 class="post-title">
-        <a href="@{Application.show(_post.id)}">${_post.title}</a>
-    </h2>
-    <div class="post-metadata">
-        <span class="post-author">by ${_post.author.fullname}</span>,
-        <span class="post-date">${_post.postedAt.format('dd MMM yy')}</span>
-        #{if _as != 'full'}
-            <span class="post-comments">
-                &nbsp;|&nbsp; ${_post.comments.size() ?: 'no'} comment${_post.comments.size().pluralize()}
-                #{if _post.comments}
-                    , latest by ${_post.comments[-1].author}
-                #{/if}
-            </span>
-        #{/if}
-        #{elseif _post.tags}
-            <span class="post-tags">
-                - Tagged 
-                #{list items:_post.tags, as:'tag'}
-                    <a href="@{Application.listTagged(tag.name)}">${tag}</a>${tag_isLast ? '' : ', '}
-                #{/list}
-            </span>
-        #{/elseif}
-    </div>
+    <h1>
+        <a href="@{Application.show(_post.id)}">${_post.title}</a><br />
+        <span>von ${_post.author.fullname} am ${_post.postedAt.format('dd MMM yyyy', 'de')}</span>
+    </h1>
+
     #{if _as != 'teaser'}
-        <div class="post-content">
-            <div class="about">Detail: </div>
-            ${_post.html_content.raw()}
-        </div>
+    ${_post.html_content.raw()}
     #{/if}
-</div>
- 
+
+	#{if _post.tags}
+	<div class="artikel-footer">
+	<span class="right">
+    <strong>Thema:</strong> 
+    #{list items:_post.tags, as:'tag'}
+    	<a class="tags" href="@{Application.listTagged(tag.name)}"><strong>${tag}</strong></a>${tag_isLast ? '' : ', '}
+    #{/list}
+	#{/if} ◦ <a href="@{Application.show(_post.id)}#kommentare">${_post.comments.size() ?: 'Keine'} Komentar${_post.comments.size().pluralize('','e')}</a>#{if _post.comments}, letzter von <a href="@{Application.show(_post.id)}#autor-${_post.comments[-1].author.urlEncode()}">${_post.comments[-1].author}</a>#{/if} ◦ <a href="@{Application.show(_post.id)}">zum Artikel</a>
+    </span>
+    </div>
+    
+    
 #{if _as == 'full'}
+
+<br /><br />
+<ul id="pagination">
+	#{if _post.previous()}
+	<li id="previous">
+		<a href="@{Application.show(_post.previous().id)}">${_post.previous().title}</a>
+	</li>
+	#{/if}
+	#{if _post.next()}
+	<li id="next">
+		<a href="@{Application.show(_post.next().id)}">${_post.next().title}</a>
+	</li>
+	#{/if}
+</ul>
+
+<br /><br />
+<h2>${_post.comments.size() ?: 'Kein'} Kommentar${_post.comments.size().pluralize('','e')}</h2>
+<a name="kommentare"></a>
+
+
     <div class="comments">
-        <h3>${_post.comments.size() ?: 'no'} comment${_post.comments.size().pluralize()}</h3>
-        
         #{list items:_post.comments, as:'comment'}
             <div class="comment">
                 <div class="comment-metadata">
+                	<a name="autor-${comment.author.urlEncode()}"></a>
                     <span class="comment-author">by ${comment.author},</span>
                     <span class="comment-date">${comment.postedAt.format('dd MMM yy')}</span>
                 </div>

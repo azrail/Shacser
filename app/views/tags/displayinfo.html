@@ -1,13 +1,20 @@
-<div class="info ${_as == 'teaser' ? 'teaser' : ''}">
-	<h2 class="info-title">${_info.title}</h2>
-	<div class="info-content">
-		<ul class="side-nav">
-			<li>
-				<a href="/impressum">Impressum</a>
-			</li>
-			<li>
-				<a href="/datenschutz">Datenschutz</a>
-			</li>
-		</ul>
-	</div>
+<img src="/public/images/klemmbrett.gif" width="38" height="47" alt="Klemmbret" title="Aktuelle Artikel" class="floated">
+<p>
+	<strong>Aktuelle Artikel</strong>
+</p>
+<ul class="rechte-navigation">
+	#{list items:_info.posts, as:'post'}
+	<li>
+		<a href="@{Application.show(post.id)}">${post.title}</a>
+	</li>
+	#{/list}
+</ul>
+<div class="bg">
 </div>
+<img src="/public/images/uhr.gif" width="41" height="41" alt="Uhr" title="Archiv" class="floated">
+<p>
+	<strong>Archiv</strong>
+	<br>
+	Noch nichts.
+	<br>
+</p>
