@@ -42,14 +42,14 @@
 				<input type="hidden" name="randomID" value="${randomID}" />
 			</li>
 			<li class="buttons">
-				<input type="image" name="imageField" id="imageField" src="@{'/public/images/send.gif'}" class="send">
+				<input type="image" name="imageField" alt="Formular Absenden" title="Kommentar Senden" id="imageField" src="@{'/public/images/send.gif'}" class="send">
 				<div class="clr">
 				</div>
 			</li>
 		</ol>
 	</form>
 </div>
-<script type="text/javascript" charset="utf-8">
+<script>
 	$( function() {
 		// Expose the form
 		$('form').click( function() {

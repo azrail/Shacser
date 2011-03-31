@@ -38,14 +38,10 @@
 
 <br /><br />
 <h2>${_post.comments.size() ?: 'Kein'} Kommentar${_post.comments.size().pluralize('','e')}</h2>
-<a name="kommentare"></a>
-
-
-    <div class="comments">
+    <div class="comments" id="kommentare">
         #{list items:_post.comments, as:'comment'}
             <div class="comment">
-                <div class="comment-metadata">
-                	<a name="autor-${comment.author.urlEncode()}"></a>
+                <div class="comment-metadata" id="autor-${comment.author.urlEncode()}">
                     <span class="comment-author">by ${comment.author},</span>
                     <span class="comment-date">${comment.postedAt.format('dd MMM yy')}</span>
                 </div>
