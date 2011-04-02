@@ -102,6 +102,7 @@ ${_post.html_content.raw()}
 			<a href="${comment.url}" target="_blank">${comment.author}</a>#{/if}#{else}${comment.author}#{/else}
 		</span>
 		<blockquote>
+			<img class="gravatar" src="@{Application.gravatar(comment.id)}" width="30" height="30" align="right" title="${comment.author} schreibt" alt="Bild von ${comment.author}" />
 			${comment.content.raw().nl2br()}
 		</blockquote>
 		<em>${comment.postedAt.format('dd.MM.yyyy','de')} um ${comment.postedAt.format('HH:mm','de')}</em>

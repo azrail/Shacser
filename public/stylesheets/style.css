@@ -614,7 +614,7 @@ img {
 #contactform label {
 	float:left;
 	margin:0;
-	width:100px;
+	width:200px;
 	padding:5px 0;
 	font:normal 12px Arial, Helvetica, sans-serif;
 	color:#222;
@@ -690,6 +690,12 @@ li.bg, .bg {
 .kommentar blockquote {
 	text-align: justify;
 }
+.kommentar blockquote img {
+	margin-top: 0px;
+	margin-left: 15px;
+}
+
+
 .kommentar-numer {
 	float: left;
 	padding:5px;

@@ -11,6 +11,7 @@ POST    /posts/{<[0-9]+>postId}/comments        Application.postComment
 GET		/posts.rss								Application.rssFeedPosts
 GET		/sites.rss								Application.sitefeed
 GET     /captcha                                Application.captcha
+GET     /gravatar/{<[0-9]+>id}	                Application.gravatar
 GET     /site/{<[0-9]+>id}                     	Application.site
 GET		/impressum								Application.site(id:'1')
 GET		/datenschutz							Application.site(id:'2')

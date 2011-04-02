@@ -3,10 +3,19 @@ package controllers;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+import models.Comment;
 import models.Info;
 import models.Post;
 import models.Site;
@@ -16,6 +25,9 @@ import play.cache.Cache;
 import play.data.validation.Required;
 import play.libs.Codec;
 import play.libs.Images;
+import play.libs.WS;
+import play.libs.WS.HttpResponse;
+import play.libs.WS.WSRequest;
 import play.modules.facebook.FbGraph;
 import play.modules.facebook.FbGraphException;
 import play.modules.fbconnect.FBConnectPlugin;
@@ -24,6 +36,7 @@ import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.Scope.Session;
 import tags.fbconnect.FBConnectTags;
+import utils.StringUtils;
 
 import com.google.gson.JsonObject;
 import com.petebevin.markdown.MarkdownProcessor;
@@ -45,8 +58,8 @@ public class Application extends Controller {
 		response.contentType = "application/rss+xml; charset=utf-8";
 		render("feeds/FeedPosts.rss", posts);
 	}
-
-	public static void index() {		
+	
+	public static void index() {
 		Post frontPost = Post.find("order by postedAt desc").first();
 		List<Post> olderPosts = Post.find("order by postedAt desc").from(1).fetch(10);
 		Info info = new Info();
@@ -56,7 +69,7 @@ public class Application extends Controller {
 	public static void show(Long id) {
 		Post post = Post.findById(id);
 		String randomID = Codec.UUID();
-		Info info = new Info();		
+		Info info = new Info();
 		render(post, randomID, info);
 	}
 	
@@ -69,9 +82,10 @@ public class Application extends Controller {
 	
 	public static void postComment(Long postId, @Required(message = "Author is required") String author, @Required(message = "A message is required") String content, String email, String url, String randomID) {
 		Post post = Post.findById(postId);
-//		if (!Play.id.equals("test")) {
-//			validation.equals(code, Cache.get(randomID)).message("Invalid code. Please type it again");
-//		}
+		// if (!Play.id.equals("test")) {
+		// validation.equals(code,
+		// Cache.get(randomID)).message("Invalid code. Please type it again");
+		// }
 		if (validation.hasErrors()) {
 			render("Application/show.html", post, randomID);
 		}
@@ -87,6 +101,106 @@ public class Application extends Controller {
 		Cache.set(id, code, "30mn");
 		renderBinary(captcha);
 	}
+	
+	public static void gravatar(Long id) throws FileNotFoundException {
+		Comment comment = Comment.findById(id);
+		if (comment.email == null) {
+			File gravatar = play.Play.getFile("public/images/gravatar.jpg");
+			renderBinary(gravatar);
+		} else {
+			
+			String email = comment.email.trim().toLowerCase();
+			String gravatar = StringUtils.md5Hash(email);
+			
+			Map<String, File> files = new HashMap<String, File>();
+			Map<String, Boolean> test = new HashMap<String, Boolean>();
+			
+			File jpegDir = new File(Play.tmpDir + File.separator + "gravatar" + File.separator + "jpg");
+			File pngDir = new File(Play.tmpDir + File.separator + "gravatar" + File.separator + "png");
+			File gifDir = new File(Play.tmpDir + File.separator + "gravatar" + File.separator + "gif");
+			
+			jpegDir.mkdirs();
+			pngDir.mkdirs();
+			gifDir.mkdirs();
+			
+			files.put("jpeg", new File(jpegDir.getAbsoluteFile() + File.separator + gravatar));
+			files.put("png", new File(pngDir.getAbsoluteFile() + File.separator + gravatar));
+			files.put("gif", new File(gifDir.getAbsoluteFile() + File.separator + gravatar));
+			
+			Set<String> set = files.keySet();
+			for (String type : set) {
+				File file = files.get(type);
+				if (file.exists()) {
+					test.put(type, true);
+				} else {
+					test.put(type, false);
+				}
+			}
+			
+			if (!test.containsValue(true) && gravatar != null) {
+				WSRequest wsr = WS.url("http://www.gravatar.com/avatar/" + gravatar + "?s=50");
+				HttpResponse hr = wsr.get();
+				File file = files.get(hr.getContentType().substring(6));
+				
+				try {
+					InputStream inputStream = hr.getStream();
+					OutputStream out = new FileOutputStream(file);
+					
+					byte buf[] = new byte[1024];
+					int len;
+					while ((len = inputStream.read(buf)) > 0)
+						out.write(buf, 0, len);
+					out.close();
+					inputStream.close();
+					test.put(hr.getContentType().substring(6), true);
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			String basepath = Play.tmpDir + File.separator + "gravatar" + File.separator;
+			
+			ArrayList<File> sfile = searchFile(new File(Play.tmpDir + File.separator + "gravatar" + File.separator), gravatar);
+			
+			String gravpath = sfile.get(0).getAbsoluteFile().toString().replace(basepath, "");
+			String[] type = gravpath.split("\\" + File.separator);
+
+			renderBinary(sfile.get(0));
+			
+//			InputStream is = new FileInputStream(sfile.get(0));
+//			response.setHeader("Content-Length", sfile.get(0) + "");
+//			response.cacheFor("72h");
+//			response.contentType = "image/" + type[0];
+//			response.direct = is;
+//			response.reset();
+			
+		}
+		
+	}
+	
+	
+	public static ArrayList<File> searchFile(File dir, String find) {
+
+		File[] files = dir.listFiles();
+		ArrayList<File> matches = new ArrayList<File> ();
+		if (files != null) {
+			for (int i = 0; i < files.length; i++) {
+				if (files[i].getName().equalsIgnoreCase(find)) { // überprüft ob der Dateiname mit dem Suchstring
+										 // übereinstimmt. Groß-/Kleinschreibung wird
+										 // ignoriert.
+					matches.add(files[i]);
+				}
+				if (files[i].isDirectory()) {
+					matches.addAll(searchFile(files[i], find)); // fügt der ArrayList die ArrayList mit den
+										    // Treffern aus dem Unterordner hinzu
+				}
+			}
+		}
+		return matches;
+	}
+	
 	
 	public static void listTagged(String tag) {
 		List<Post> posts = Post.findTaggedWith(tag);
