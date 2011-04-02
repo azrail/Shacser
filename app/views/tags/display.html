@@ -80,7 +80,7 @@ ${_post.html_content.raw()}
 		${comment_index.format('00')}
 	</div>
 	<div class="kommentar">
-		<span id="autor-${comment.author.urlEncode()}">
+		<span id="autor-${comment.author.urlEncode()}-${comment_index.format('00')}">
 			#{if comment.hasURL()}
 			<a href="${comment.url}" target="_blank">${comment.author}</a>#{/if}#{else}${comment.author}#{/else}
 		</span>

@@ -11,15 +11,12 @@
 
 <h3>Schreibe einen Kommentar</h3>
 <div class="form">
-
 	<form action="@{Application.postComment(post.id)}" method="post" id="contactform">
-
 		#{ifErrors}
 		<p class="error">
 			${errors[0]}
 		</p>
 		#{/ifErrors}
-
 		<ol>
 			<li>
 				<label for="author">
@@ -45,12 +42,12 @@
 					Deine Nachricht
 					<span class="red">*</span>
 				</label>
-				
-				<textarea name="content" rows="6" cols="50" id="content">${params.content}</textarea>
-			</li>
+				<textarea name="content" rows="6" cols="50" id="content">
+					${params.content}
+				</textarea>
 				<span class="left">Html ist erlaubt (b, em, i, strong, u)</span>
 				<input type="hidden" name="randomID" value="${randomID}" />
-
+			</li>
 			<li class="buttons">
 				<input type="image" name="imageField" alt="Formular Absenden" title="Kommentar Senden" id="imageField" src="@{'/public/images/send.gif'}" class="send">
 				<div class="clr">
