@@ -17,6 +17,9 @@
 .mittel-menu {
 	display: none;
 }
+.left {
+	width: 950px;
+}
 .footer {
 	display: none;
 }

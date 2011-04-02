@@ -3,7 +3,7 @@
 	<strong>Aktuelle Artikel</strong>
 </p>
 <ul class="rechte-navigation">
-	#{list items:_info.posts, as:'post'}
+	#{list items:_info?.posts, as:'post'}
 	<li>
 		<a href="@{Application.show(post.id)}">${post.title}</a>
 	</li>

@@ -1,15 +1,14 @@
 package models;
  
-import java.util.*;
-import javax.persistence.*;
+import javax.persistence.Entity;
+
+import play.Logger;
+import play.data.validation.Email;
+import play.data.validation.Required;
+import play.db.jpa.Model;
+import play.mvc.Scope.Session;
 
 import com.google.gson.JsonObject;
- 
-import play.db.jpa.*;
-import play.data.validation.*;
-import play.modules.facebook.FbGraph;
-import play.modules.facebook.FbGraphException;
-import play.mvc.Scope.Session;
  
 @Entity
 public class User extends Model {
@@ -27,7 +26,6 @@ public class User extends Model {
     
     public String fullname;
     
-    
     public boolean isAdmin;
     public boolean canPost;
     
@@ -44,8 +42,30 @@ public class User extends Model {
         this.fullname = firstName + " " + lastName;
         this.gender = gender;
     }
-        
-    public static User findByEmail(String email) {
+    
+    public static void facebookOAuthCallback(JsonObject data){
+    	
+    	String email = data.get("email").getAsString();    	
+    	String firstName = data.get("first_name").getAsString();
+    	String lastName = data.get("last_name").getAsString();
+    	String gender = data.get("gender").getAsString();
+
+    	
+    	System.out.println(data);
+    	
+    	Logger.debug("Facebook: %s", email + " -- " + firstName + " " + lastName + " -- " + gender);
+    	
+    	User finguser = findByEmail(email);
+    	if(finguser == null){
+    		User user = new User(firstName, lastName, email, gender);
+    		user.save();
+    		Session.current().put("user", user.email);
+    	} else {
+    		Session.current().put("user", finguser.email);
+		}
+    }
+    
+	public static User findByEmail(String email) {
     	return find("byEmail", email).first();
 	}
 

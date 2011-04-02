@@ -29,18 +29,28 @@
 				<input type="text" class="text" name="author" id="author" value="${params.author}" />
 			</li>
 			<li>
+				<label for="email">
+					Deine E-Mail
+				</label>
+				<input type="text" class="text" name="email" id="email" value="${params.email}" />
+			</li>
+			<li>
+				<label for="url">
+					Deine Webseite
+				</label>
+				<input type="text" class="text" name="url" id="url" value="${params.url}" />
+			</li>
+			<li>
 				<label for="content">
 					Deine Nachricht
 					<span class="red">*</span>
 				</label>
+				
 				<textarea name="content" rows="6" cols="50" id="content">${params.content}</textarea>
 			</li>
-			<li>
-				<img width="150" height="50" alt="Captcha" src="@{Application.captcha(randomID)}" />
-				<br />
-				<input type="text" name="code" id="code" class="text" size="18" value="" />
+				<span class="left">Html ist erlaubt (b, em, i, strong, u)</span>
 				<input type="hidden" name="randomID" value="${randomID}" />
-			</li>
+
 			<li class="buttons">
 				<input type="image" name="imageField" alt="Formular Absenden" title="Kommentar Senden" id="imageField" src="@{'/public/images/send.gif'}" class="send">
 				<div class="clr">

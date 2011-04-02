@@ -150,7 +150,7 @@
 }*
 <div class="footer">
 	<div class="footer_resize">
-		<p class="left">© ${autor}. <a href="@{Application.index()}">Home</a> | <a href="/impressum">Kontakt</a> | <a href="http://feeds.feedburner.com/YabDasTechnikBlog">RSS </a></p>
+		<p class="left">© ${autor}. <a href="@{Application.index()}">Home</a> | <a href="/impressum">Kontakt</a> | <a href="http://feeds.feedburner.com/YabDasTechnikBlog">RSS Feed</a> | #{fbconnect.button label:'Login',scope:'email,user_about_me' /}</p>
 		<p class="right">
 			<a href="http://www.playframework.org" hreflang="en" title="The Play framework makes it easier to build Web applications with Java"><img width="88" height="32" src="@{'/public/images/powered_by_play_framework.png'}" alt="Powered by play framework" /></a>
 			<a href="http://www.cherokee-project.com" hreflang="en" title="Cherokee is a very fast, flexible and easy to configure Web Server."><img width="88" height="32" src="@{'/public/images/powered_by_cherokee.png'}" alt="Powered by Cherokee" /></a>

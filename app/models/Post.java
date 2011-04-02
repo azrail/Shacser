@@ -1,23 +1,32 @@
 package models;
  
-import java.util.*;
-import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import play.data.validation.MaxSize;
+import play.data.validation.Required;
+import play.db.jpa.Model;
 
 import com.petebevin.markdown.MarkdownProcessor;
 
-import play.data.binding.*;
-import play.data.validation.*;
-import play.db.jpa.Model;
-import play.modules.elasticsearch.annotations.ElasticSearchable;
-
+//@ElasticSearchable
 @Entity
-@ElasticSearchable
 public class Post extends Model {
  
     @Required
     public String title;
     
-    @Required @As("yyyy-MM-dd")
+    @Required
     public Date postedAt;
     
     @Lob
@@ -50,8 +59,8 @@ public class Post extends Model {
         html_content = m.markdown(content);
     }
     
-    public Post addComment(String author, String content) {
-        Comment newComment = new Comment(this, author, content);
+    public Post addComment(String author, String content, String email, String url) {
+        Comment newComment = new Comment(this, author, content, email, url);
         this.comments.add(newComment);
         this.save();
         return this;
