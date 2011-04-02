@@ -36,6 +36,12 @@ public class Site extends Model {
     public String content;
     
     @Lob
+    @MaxSize(10000)
+    public String description;
+    
+    public String keywords;
+    
+    @Lob
     public String html_content;
     
     @Required

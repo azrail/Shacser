@@ -4,13 +4,13 @@
 *{********* Title ********* }*
  
 #{if posts.size() > 1}
-   <h3>There are ${posts.size()} posts tagged '${tag}'</h3>  
+   <h3>${posts.size()} Artikel zum Thema '${tag}' gefunden</h3>  
 #{/if} 
 #{elseif posts}
-    <h3>There is 1 post tagged '${tag}'</h3>  
+    <h3>${posts.size()} Artikel zum Thema '${tag}' gefunden</h3>  
 #{/elseif}
 #{else}
-    <h3>No post tagged '${tag}'</h3>
+    <h3>Kein Artikel zum Thema '${tag}' gefunden</h3>
 #{/else}
  
 *{********* Posts list *********}*

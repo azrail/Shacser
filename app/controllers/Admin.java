@@ -35,7 +35,7 @@ public class Admin extends Controller {
         render();
     }
     
-    public static void save(Long id, String title, String content, String tags) {
+    public static void save(Long id, String title, String content, String description, String tags) {
         Post post;
         if(id == null) {
             // Create post
@@ -46,6 +46,7 @@ public class Admin extends Controller {
             post = Post.findById(id);
             post.title = title;
             post.content = content;
+            post.description = description;
             
             MarkdownProcessor m = new MarkdownProcessor();
             post.html_content = m.markdown(content);

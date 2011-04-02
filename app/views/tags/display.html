@@ -9,9 +9,13 @@
 	<div class="clr">
 	</div>
 </div>
+
+#{if _as == 'teaser'}
+${_post?.description.raw()}
+#{/if}
+
 #{if _as != 'teaser'}
 ${_post.html_content.raw()}
-#{/if}
 
 <div class="shr-publisher-1224 shareaholic-show-on-load" style="height: 52px; overflow-x: hidden; overflow-y: hidden; display: block; ">
 	<div class="shr-bookmarks">
@@ -46,6 +50,7 @@ ${_post.html_content.raw()}
 		</ul>
 	</div>
 </div>
+#{/if}
 #{if _post.tags}
 <div class="artikel-footer">
 	<strong>Thema:</strong>

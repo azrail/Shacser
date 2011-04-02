@@ -30,7 +30,13 @@
             class="${field.errorClass}">${post?.content}</textarea>
         #{/field}
     </p>
- 
+    <p>
+        #{field 'description'}
+        <label>Write here:</label>
+        <textarea id="markdown" name="${field.name}" 
+            class="${field.errorClass}">${post?.description}</textarea>
+        #{/field}
+    </p>
     <p>
         #{field 'tags'}
         <label>Enter some tags:</label>

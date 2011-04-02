@@ -35,6 +35,14 @@ public class Post extends Model {
     public String content;
     
     @Lob
+    @MaxSize(10000)
+    public String description;
+    
+    public String keywords;
+    
+    
+    @Lob
+    @MaxSize(15000)
     public String html_content;
     
     @Required

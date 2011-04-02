@@ -1,6 +1,17 @@
 #{extends 'main.html' /}
 #{set title:post.title /}
-
+#{if post.description != null}
+	#{set description:post.description /}
+#{/if}
+#{else}
+	#{set description:description /}
+#{/else}
+#{if post.keywords != null}
+	#{set keywords:post.keywords /}
+#{/if}
+#{else}
+	#{set keywords:keywords /}
+#{/else}
 #{if flash.success}
 <p class="success">
 	${flash.success}
