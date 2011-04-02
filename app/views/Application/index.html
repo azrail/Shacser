@@ -1,6 +1,17 @@
 #{extends 'main.html' /}
 #{set title:frontPost.title /}
- 
+#{if frontPost.description != null}
+	#{set description:frontPost.description /}
+#{/if}
+#{else}
+	#{set description:description /}
+#{/else}
+#{if frontPost.keywords != null}
+	#{set keywords:frontPost.keywords /}
+#{/if}
+#{else}
+	#{set keywords:keywords /}
+#{/else}
 #{if frontPost}
     #{display post:frontPost, as:'home' /}
     *{
