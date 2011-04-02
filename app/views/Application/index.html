@@ -3,7 +3,7 @@
  
 #{if frontPost}
     #{display post:frontPost, as:'home' /}
-    <!--
+    *{
     #{if olderPosts.size()}
         <div class="older-posts">    
             <h3>Older posts <span class="from">from this blog</span></h3>
@@ -13,7 +13,7 @@
         </div>
         
     #{/if}
-    -->
+    }*
 #{/if}
  
 #{else}

@@ -1,184 +1,304 @@
 <!DOCTYPE html>
 <html xml:lang="de" lang="de">
-<head>
-<title>yab. #{get 'title' /} - Das Technik Blog</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="description" content="${description}">
-<meta name="keywords" content="${keywords}">
-<meta name="author" content="${autor}">
-<meta name="robots" content="all">
-<meta name="geo.region" content="DE-NW" />
-<meta name="geo.placename" content="Engelskirchen" />
-<meta name="geo.position" content="50.99;7.41" />
-<meta name="ICBM" content="50.99, 7.41" />
-<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/style.css'}" />
-<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/print.css'}" media="print" />
-*{<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/iphone.css'}" media="only screen and (max-device-width: 480px)" />}*
-<link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}" />
-<link rel="alternate" type="application/rss+xml" title="RSS-Feed von yab. Das Technik Blog" href="http://feeds.feedburner.com/YabDasTechnikBlog" />
-<script src="@{'/public/javascripts/jquery-1.3.2.min.js'}"></script>
-<script src="@{'/public/javascripts/jquery.tools.min.js'}"></script>
-</head>
-<body>
-<div class="main">
-  <div class="blok_header">
-    <div class="header">
-      <div class="logo"><a href="@{Application.index()}"><img src="/public/images/aheron_logo_yab.png" width="349" height="98" title="zur Startseite" alt="Aheron Logo | yab. das technik blog." class="one"></a></div>
-      <div class="socialbox">
-        <p><a href="${twitter}" target="_blank" class="twitter"><img src="/public/images/platzhalter.gif" title="Folge mir auf Twitter" alt="Twitter Icon" width="24" height="23"></a> <a href="#" class="facebook"><img src="/public/images/platzhalter.gif" alt="Facebook Icon" title="Werde ein Facebook Fan" width="24" height="23"></a> <a href="http://feeds.feedburner.com/YabDasTechnikBlog" class="rss-feed"><img src="/public/images/platzhalter.gif" title="Aboniere den RSS-Feed von yab. Das Technik Blog" alt="RSS Icon" width="24" height="23"></a> </p>
-      </div>
-    </div>
-    <div class="clr"></div>
-  </div>
-  <div class="menu_resize_bg">
-    <div class="menu_resize">
-      <div class="menu">
-        <ul>
-          <li><a href="/home" class="${request.action == 'Application.index' ? 'active' : ''}"><span>Home Page</span></a></li>
-          <li><a href="/impressum" class="${request.path == '/impressum' ? 'active' : ''}"><span>Impressum</span></a></li>
-          <li><a href="/datenschutz" class="${request.path == '/datenschutz' ? 'active' : ''}"><span>Datenschutz</span></a></li>
-        </ul>
-      </div>
-      <div class="search">
-        <form id="form1" name="form1" method="post" action="/search">
-          <label><span>
-            <input name="q" type="text" class="keywords" id="textfield" maxlength="50" value="Suche...">
-            </span></label>
-            <input name="b" type="image" title="Suche" alt="Lupe" src="/public/images/suche.gif" class="button">
-          
-        </form>
-      </div>
-      <div class="clr"></div>
-    </div>
-    <div class="clr"></div>
-  </div>
-  <div class="clr"></div>
-  <div class="header_text_bg">
-    <div class="header_text"><!-- <a href="#"><img src="/public/images/click.gif" alt="picture" width="224" height="44"></a> -->
-      <h2>${blogTitle}<br>
-        <span>${blogBaseline}</span><span class=right>Du bist hier: <a href="${request.path}">${request.path}</a></span></h2>
-      <div class="clr"></div>
-    </div>
-    <div class="clr"></div>
-  </div>
-  <div class="body_resize">
-    <div class="body">
-    	<div class="right">
-			#{displayinfo info:info, as:'full' /}
+	<head>
+		<title>yab. #{get 'title' /} - Das Technik Blog</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta name="description" content="${description}"><meta name="keywords" content="${keywords}"><meta name="author" content="${autor}"><meta name="robots" content="all"><meta name="geo.region" content="DE-NW" /><meta name="geo.placename" content="Engelskirchen" /><meta name="geo.position" content="50.99;7.41" /><meta name="ICBM" content="50.99, 7.41" />
+		<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/style.css'}" />
+		<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/print.css'}" media="print" />
+		*{
+		<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/iphone.css'}" media="only screen and (max-device-width: 480px)" />
+		}*
+		<link rel="stylesheet" type="text/css" href="@{'/public/fancybox/jquery.fancybox-1.3.4.css'}" media="screen" />
+		<link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}" />
+		<link rel="alternate" type="application/rss+xml" title="RSS-Feed von yab. Das Technik Blog" href="http://feeds.feedburner.com/YabDasTechnikBlog" />
+		<script src="@{'/public/javascripts/jquery-1.3.2.min.js'}">
+		</script>
+		<script src="@{'/public/javascripts/jquery.tools.min.js'}">
+		</script>
+		<script src="@{'/public/fancybox/jquery.mousewheel-3.0.4.pack.js'}">
+		</script>
+		<script src="@{'/public/fancybox/jquery.fancybox-1.3.4.pack.js'}">
+		</script>
+		<!-- Start Facebook iframe -->
+		<script>
+	$(document).ready( function() {
+
+		$("#facebookconnect").fancybox({
+			'width'				: '75%',
+			'height'			: '75%',
+			'autoScale'			: false,
+			'transitionIn'		: 'none',
+			'transitionOut'		: 'none',
+			'type'				: 'iframe'		});
+	});
+		</script>
+		<!-- Ende Facebook iframe -->
+	</head>
+	<body>
+		<div class="main">
+			<div class="blok_header">
+				<div class="header">
+					<div class="logo">
+						<a href="@{Application.index()}">
+						<img src="/public/images/aheron_logo_yab.png" width="349" height="98" title="zur Startseite" alt="Aheron Logo | yab. das technik blog." class="one">
+						</a>
+					</div>
+					<div class="socialbox">
+						<p>
+							<a href="${twitter}" target="_blank" class="twitter">
+							<img src="/public/images/platzhalter.gif" title="Folge mir auf Twitter" alt="Twitter Icon" width="24" height="23">
+							</a>
+							<a href="#" class="facebook">
+							<img src="/public/images/platzhalter.gif" alt="Facebook Icon" title="Werde ein Facebook Fan" width="24" height="23">
+							</a>
+							<a href="http://feeds.feedburner.com/YabDasTechnikBlog" class="rss-feed">
+							<img src="/public/images/platzhalter.gif" title="Aboniere den RSS-Feed von yab. Das Technik Blog" alt="RSS Icon" width="24" height="23">
+							</a>
+						</p>
+					</div>
+				</div>
+				<div class="clr">
+				</div>
+			</div>
+			<div class="menu_resize_bg">
+				<div class="menu_resize">
+					<div class="menu">
+						<ul>
+							<li>
+								<a href="/home" class="${request.action == 'Application.index' ? 'active' : ''}">
+								<span>Home Page</span>
+								</a>
+							</li>
+							<li>
+								<a href="/impressum" class="${request.path == '/impressum' ? 'active' : ''}">
+								<span>Impressum</span>
+								</a>
+							</li>
+							<li>
+								<a href="/datenschutz" class="${request.path == '/datenschutz' ? 'active' : ''}">
+								<span>Datenschutz</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="search">
+						<form id="form1" name="form1" method="post" action="/search">
+							<label>
+								<span>
+									<input name="q" type="text" class="keywords" id="textfield" maxlength="50" value="Suche...">
+								</span>
+							</label>
+							<input name="b" type="image" title="Suche" alt="Lupe" src="/public/images/suche.gif" class="button">
+						</form>
+					</div>
+					<div class="clr">
+					</div>
+				</div>
+				<div class="clr">
+				</div>
+			</div>
+			<div class="clr">
+			</div>
+			<div class="header_text_bg">
+				<div class="header_text">
+					<!-- <a href="#"><img src="/public/images/click.gif" alt="picture" width="224" height="44"></a> -->
+					<h2>
+					${blogTitle}
+					<br>
+					<span>${blogBaseline}</span>
+					<span class=right>
+						Du bist hier:
+						<a href="${request.path}">${request.path}</a>
+					</span>
+					</h2>
+					<div class="clr">
+					</div>
+				</div>
+				<div class="clr">
+				</div>
+			</div>
+			<div class="body_resize">
+				<div class="body">
+					<div class="right">
+						#{displayinfo info:info, as:'full' /}
+					</div>
+					<div class="left">
+						#{doLayout /}
+					</div>
+					<div class="clr">
+					</div>
+				</div>
+				<div class="clr">
+				</div>
+			</div>
+			<div class="mittel-menue">
+				<div class="mittel-menue_resize">
+					<a href="@{Application.index()}">
+					<img src="/public/images/logo_ahero.png" title="zur Startseite" alt="Aheron Logo" width="144" height="62">
+					</a>
+					<div class="recent">
+						<h2>Yet another blog.</h2>
+					</div>
+					<div class="recent2">
+						<p>
+							Phantasie ist wichtiger als Wissen, denn Wissen ist begrenzt.
+						</p>
+					</div>
+					<div class="clr">
+					</div>
+				</div>
+				<div class="clr">
+				</div>
+			</div>
 		</div>
-    
-      <div class="left"> 
-        #{doLayout /}
-      </div>
-
-      <div class="clr"></div>
-    </div>
-    <div class="clr"></div>
-  </div>
-  <div class="mittel-menue">
-    <div class="mittel-menue_resize"><a href="@{Application.index()}"><img src="/public/images/logo_ahero.png" title="zur Startseite" alt="Aheron Logo" width="144" height="62"></a>
-      <div class="recent">
-        <h2>Yet another blog.</h2>
-      </div>
-      <div class="recent2">
-        <p>Phantasie ist wichtiger als Wissen, denn Wissen ist begrenzt.</p>
-      </div>
-      <div class="clr"></div>
-    </div>
-    <div class="clr"></div>
-  </div>
-</div>
-*{
-<div class="footer-navigation">
-  <div class="footer-navigation_resize"
-    <div class="left">
-      <h2>About </h2>
-      <ul>
-        <li><a href="#">Overview</a></li>
-        <li><a href="#">Another Link</a></li>
-        <li><a href="#">Our Staff</a></li>
-        <li><a href="#">Mission </a></li>
-        <li><a href="#">Statement</a></li>
-      </ul>
-    </div>
-    <div class="left">
-      <h2>Sonstiges</h2>
-      <ul>
-        <li><a href="#">First Sonstiges</a></li>
-        <li><a href="#">Second Sonstiges</a></li>
-        <li><a href="#">Another Sonstiges</a></li>
-        <li><a href="#">A Fourth Sonstiges</a></li>
-      </ul>
-    </div>
-    <div class="left">
-      <h2>Media</h2>
-      <ul>
-        <li><a href="#">Image Gallery</a></li>
-        <li><a href="#">Video Gallery</a></li>
-      </ul>
-    </div>
-    <div class="left">
-      <h2>Blog</h2>
-      <ul>
-        <li><a href="#">Category One</a></li>
-        <li><a href="#">Category 2</a></li>
-        <li><a href="#">Another Category</a></li>
-        <li><a href="#">Category</a></li>
-        <li><a href="#">A Fifth Category</a></li>
-      </ul>
-    </div>
-    <div class="left">
-      <h2>More Links</h2>
-      <ul>
-        <li><a href="#">Mach Mit</a></li>
-        <li><a href="/impressum">Impressum</a></li>
-        <li><a href="/datenschutz">Datenschutz</a></li>
-      </ul>
-    </div>
-    <div class="left">
-      <h2>Contact Us</h2>
-      <ul>
-        <li><a href="#">s.hanke@aheron.de</a></li>
-        <li><a href="#">Phone: 000000000</a></li>
-        <li><a href="#">Feedback</a></li>
-      </ul>
-    </div>
-    <div class="clr"></div>
-  </div>
-  <div class="clr"></div>
-</div>
-}*
-<div class="footer">
-	<div class="footer_resize">
-		<p class="left">© ${autor}. <a href="@{Application.index()}">Home</a> | <a href="/impressum">Kontakt</a> | <a href="http://feeds.feedburner.com/YabDasTechnikBlog">RSS Feed</a> | #{fbconnect.button label:'Login',scope:'email,user_about_me' /}</p>
-		<p class="right">
-			<a href="http://www.playframework.org" hreflang="en" title="The Play framework makes it easier to build Web applications with Java"><img width="88" height="32" src="@{'/public/images/powered_by_play_framework.png'}" alt="Powered by play framework" /></a>
-			<a href="http://www.cherokee-project.com" hreflang="en" title="Cherokee is a very fast, flexible and easy to configure Web Server."><img width="88" height="32" src="@{'/public/images/powered_by_cherokee.png'}" alt="Powered by Cherokee" /></a>
-			<a href="http://www.ubuntu.com" hreflang="en" title="Secure, fast and powerful, Ubuntu Server based on Debian"><img width="88" height="32" src="@{'/public/images/powered_by_debian.png'}" alt="Powered by Debian" /></a></p>
-		<div class="clr"></div>
-	</div>
-	<div class="clr"></div>
-</div>
-
-
-		<!-- Piwik --> 
-			<script>
-				var pkBaseURL = (("https:" == document.location.protocol) ? "https://bumblebee.aheron.de/stats/" : "http://bumblebee.aheron.de/stats/");
-				document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
-			</script>
-			<script>
-				try {
-					var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
-					piwikTracker.trackPageView();
-					piwikTracker.enableLinkTracking();
-				} catch( err ) {}
-			</script>
-			<noscript>
-				<p class="piwik">
-					<img src="http://bumblebee.aheron.de/stats/piwik.php?idsite=1" width="1" height="1" alt="piwik pixel, ignore it" />
+		*{
+		<div class="footer-navigation">
+			<div class="footer-navigation_resize">
+			<div class="left">
+				<h2>About</h2>
+				<ul>
+					<li>
+						<a href="#">Overview</a>
+					</li>
+					<li>
+						<a href="#">Another Link</a>
+					</li>
+					<li>
+						<a href="#">Our Staff</a>
+					</li>
+					<li>
+						<a href="#">Mission</a>
+					</li>
+					<li>
+						<a href="#">Statement</a>
+					</li>
+				</ul>
+			</div>
+			<div class="left">
+				<h2>Sonstiges</h2>
+				<ul>
+					<li>
+						<a href="#">First Sonstiges</a>
+					</li>
+					<li>
+						<a href="#">Second Sonstiges</a>
+					</li>
+					<li>
+						<a href="#">Another Sonstiges</a>
+					</li>
+					<li>
+						<a href="#">A Fourth Sonstiges</a>
+					</li>
+				</ul>
+			</div>
+			<div class="left">
+				<h2>Media</h2>
+				<ul>
+					<li>
+						<a href="#">Image Gallery</a>
+					</li>
+					<li>
+						<a href="#">Video Gallery</a>
+					</li>
+				</ul>
+			</div>
+			<div class="left">
+				<h2>Blog</h2>
+				<ul>
+					<li>
+						<a href="#">Category One</a>
+					</li>
+					<li>
+						<a href="#">Category 2</a>
+					</li>
+					<li>
+						<a href="#">Another Category</a>
+					</li>
+					<li>
+						<a href="#">Category</a>
+					</li>
+					<li>
+						<a href="#">A Fifth Category</a>
+					</li>
+				</ul>
+			</div>
+			<div class="left">
+				<h2>More Links</h2>
+				<ul>
+					<li>
+						<a href="#">Mach Mit</a>
+					</li>
+					<li>
+						<a href="/impressum">Impressum</a>
+					</li>
+					<li>
+						<a href="/datenschutz">Datenschutz</a>
+					</li>
+				</ul>
+			</div>
+			<div class="left">
+				<h2>Contact Us</h2>
+				<ul>
+					<li>
+						<a href="#">s.hanke@aheron.de</a>
+					</li>
+					<li>
+						<a href="#">Phone: 000000000</a>
+					</li>
+					<li>
+						<a href="#">Feedback</a>
+					</li>
+				</ul>
+			</div>
+			<div class="clr">
+			</div>
+		</div>
+		<div class="clr">
+		</div>
+		</div>
+		}*
+		<div class="footer">
+			<div class="footer_resize">
+				<p class="left">
+					© ${autor}.
+					<a href="@{Application.index()}">Home</a> |
+					<a id="facebookconnect" href="/impressum">Kontakt</a> |
+					<a href="http://feeds.feedburner.com/YabDasTechnikBlog">RSS Feed</a> | #{fbconnect.button label:'Login',scope:'email,user_about_me' /}
 				</p>
-			</noscript>
-		<!-- End Piwik Tracking Code -->
-
-</body>
+				<p class="right">
+					<a href="http://www.playframework.org" hreflang="en" title="The Play framework makes it easier to build Web applications with Java">
+					<img width="88" height="32" src="@{'/public/images/powered_by_play_framework.png'}" alt="Powered by play framework" />
+					</a>
+					<a href="http://www.cherokee-project.com" hreflang="en" title="Cherokee is a very fast, flexible and easy to configure Web Server.">
+					<img width="88" height="32" src="@{'/public/images/powered_by_cherokee.png'}" alt="Powered by Cherokee" />
+					</a>
+					<a href="http://www.ubuntu.com" hreflang="en" title="Secure, fast and powerful, Ubuntu Server based on Debian">
+					<img width="88" height="32" src="@{'/public/images/powered_by_debian.png'}" alt="Powered by Debian" />
+					</a>
+				</p>
+				<div class="clr">
+				</div>
+			</div>
+			<div class="clr">
+			</div>
+		</div>
+		<!-- Start Piwik -->
+		<script>
+	var pkBaseURL = (("https:" == document.location.protocol) ? "https://bumblebee.aheron.de/stats/" : "http://bumblebee.aheron.de/stats/");
+	document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+		<script>
+	try {
+		var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
+		piwikTracker.trackPageView();
+		piwikTracker.enableLinkTracking();
+	} catch( err ) {
+	}
+		</script>
+		<noscript>
+			<p class="piwik">
+				<img src="http://bumblebee.aheron.de/stats/piwik.php?idsite=1" width="1" height="1" alt="piwik pixel, ignore it" />
+			</p>
+		</noscript>
+		<!-- Ende Piwik Tracking Code -->
+	</body>
 </html>
