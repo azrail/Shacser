@@ -58,6 +58,7 @@ ${_post.html_content.raw()}
 	<span>${_post.author.fullname} | ${_post.postedAt.format('dd.MM.yyyy','de')} um ${_post.postedAt.format('HH:mm','de')}</span>
 </div>
 #{if _as == 'full'}
+#{if _post.previous() && _post.next()}
 <div class="artikel-pagination">
 	#{if _post.previous()}
 	<div class="previous">
@@ -73,6 +74,17 @@ ${_post.html_content.raw()}
 	<div class="clr">
 	</div>
 </div>
+#{/if}
+#{if _post.previous() && !_post.next()}
+<div class="artikel-previous">
+	<span><a href="@{Application.show(_post.previous().id)}">${_post.previous().title}</a></span>
+</div>
+#{/if}
+#{if !_post.previous() && _post.next()}
+<div class="artikel-next">
+	<span><a href="@{Application.show(_post.next().id)}">${_post.next().title}</a></span>
+</div>
+#{/if}
 <h3>${_post.comments.size() ?: 'Kein'} Kommentar${_post.comments.size().pluralize('','e')}</h3>
 <div class="kommentare" id="kommentare">
 	#{list items:_post.comments, as:'comment'}
