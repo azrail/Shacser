@@ -10,7 +10,7 @@
 	</div>
 </div>
 
-#{if _as == 'teaser'}
+#{if _as == 'teaser' && _post.description != null}
 ${_post?.description.raw()}
 #{/if}
 
@@ -120,4 +120,7 @@ ${_post.html_content.raw()}
 	</div>}*
 	#{/list}
 </div>
+#{/if}
+#{if _as == 'teaser'} 
+<br /><br />
 #{/if}
