@@ -1,6 +1,7 @@
 package jobs;
 
 import java.util.List;
+import java.util.regex.*;
 
 import models.Tweet;
 import play.Logger;
@@ -24,7 +25,6 @@ public class TweetJob extends Job {
 			List<Status> statuses = twitter.getUserTimeline();
 			
 			for (Status status : statuses) {
-				
 				Tweet checktweet = Tweet.find("tweetId", status.getId()).first();
 				
 				if (checktweet == null) {

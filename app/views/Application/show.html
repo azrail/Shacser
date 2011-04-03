@@ -53,9 +53,21 @@
 					Deine Nachricht
 					<span class="red">*</span>
 				</label>
-				<textarea name="content" rows="6" cols="50" id="content">
-					${params.content}
-				</textarea>
+				<textarea name="content" rows="6" cols="50" id="content">${params.content}</textarea>
+				<span class="left">
+					*{<!-- :heart: :grumpy: :happy: :sad: :tongue: :grin: :gasp: :wink: :unsure: :confuse: :glasses: -->}*
+					<img onclick="addSmilie(' :heart: ');" src="/public/images/emoticons/blacy/black_heart.png" alt="Heart" title="Heart" class="emoticon" height="16" width="16"> 
+					<img onclick="addSmilie(' :grumpy: ');" src="/public/images/emoticons/blacy/scorn.png" alt="Grumpy" title="Grumpy" class="emoticon" height="16" width="16"> 
+					<img onclick="addSmilie(' :happy: ');" src="/public/images/emoticons/blacy/big_smile.png" alt="Smile/Happy" title="Smile/Happy" class="emoticon" height="16" width="16"> 
+					<img onclick="addSmilie(' :sad: ');" src="/public/images/emoticons/blacy/unhappy.png" alt="Frown/Sad" title="Frown/Sad" class="emoticon" height="16" width="16"> 
+					<img onclick="addSmilie(' :tongue: ');" src="/public/images/emoticons/blacy/grimace.png" alt="Tongue" title="Tongue" class="emoticon" height="16" width="16"> 
+					<img onclick="addSmilie(' :grin: ');" src="/public/images/emoticons/blacy/exciting.png" alt="Grin" title="Grin" class="emoticon" height="16" width="16"> 
+					<img onclick="addSmilie(' :gasp: ');" src="/public/images/emoticons/blacy/shocked.png" alt="Gasp" title="Gasp" class="emoticon" height="16" width="16"> 
+					<img onclick="addSmilie(' :wink: ');" src="/public/images/emoticons/blacy/secret_smile.png" alt="Wink" title="Wink" class="emoticon" height="16" width="16"> 
+					<img onclick="addSmilie(' :unsure: ');" src="/public/images/emoticons/blacy/what.png" alt="Unsure" title="Unsure" class="emoticon" height="16" width="16"> 
+					<img onclick="addSmilie(' :confuse: ');" src="/public/images/emoticons/blacy/shocked.png" alt="Confuse" title="Confuse" class="emoticon" height="16" width="16"> 
+					<img onclick="addSmilie(' :glasses: ');" src="/public/images/emoticons/blacy/secret_smile.png" alt="Glasses" title="Glasses" class="emoticon" height="16" width="16">
+				</span>
 				<span class="left">Html ist erlaubt (b, em, i, strong, u)</span>
 				<input type="hidden" name="randomID" value="${randomID}" />
 			</li>
@@ -68,7 +80,7 @@
 	</form>
 </div>
 <script>
-	$( function() {
+	*{ $( function() {
 		// Expose the form
 		$('form').click( function() {
 			$('form').expose({api: true}).load();
@@ -79,5 +91,45 @@
 			$('form').expose({api: true, loadSpeed: 0}).load();
 			$('form input[type=text]').get(0).focus();
 		}
-	});
+	}); }*
+	var tVal = $('#content').val();
+	$.fn.appendVal = function(txt) {
+   		return this.each(function(){
+       		this.value += txt;
+   		});
+	};
+	
+jQuery.fn.extend({
+    insertAtCaret: function(valueToInsertAtCaret){
+        return this.each( function(i) {
+            if ( document.selection ) {
+                this.focus();
+                selection = document.selection.createRange();
+                selection.text = valueToInsertAtCaret;
+                this.focus();
+            } else if ( this.selectionStart || this.selectionStart == "0" ) {
+                var startPosition = this.selectionStart;
+                var endPosition = this.selectionEnd;
+                var scrollTop = this.scrollTop;
+                this.value = this.value.substring(0, startPosition) + valueToInsertAtCaret + this.value.substring(endPosition, this.value.length);
+                this.focus();
+                this.selectionStart = startPosition + valueToInsertAtCaret.length;
+                this.selectionEnd = startPosition + valueToInsertAtCaret.length;
+                this.scrollTop = scrollTop;
+            } else {
+                this.value += valueToInsertAtCaret;
+                this.focus();
+            }
+        })
+    }
+});
+
+function addSmilie(smilie) {
+    $("#content").insertAtCaret(smilie);
+    return true;
+}
+	
+	*{function addSmilie(smilie){
+		$('#content').appendVal(smilie);
+	};}*
 </script>

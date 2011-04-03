@@ -11,10 +11,35 @@
 </ul>
 <div class="bg">
 </div>
+
+<div class="tweets">
+<img src="/public/images/kommentare.png" width="41" height="41" alt="Sprechblase" title="Letzte Tweets" class="floated">
+<p>
+	<strong>Letzte Tweets</strong>
+	<br />
+	<a href="https://twitter.com/#!/aheronde" target="_blank" class="follow-me">
+	Folge mir auf Twitter
+	</a>
+	#{if _info.tweets.size() == 0}
+	<br />
+	Keine Tweets
+	<br />
+	#{/if}
+</p>
+	#{list items:_info?.tweets, as:'tweet'}
+		<div class="tweet">
+		<blockquote>${tweet.text.raw()}</blockquote>
+		</div>
+		<div class="clr"></div>
+	#{/list}
+</div>
+<div class="bg">
+</div>
+
 <img src="/public/images/uhr.gif" width="41" height="41" alt="Uhr" title="Archiv" class="floated">
 <p>
 	<strong>Archiv</strong>
-	<br>
+	<br />
 	Noch nichts.
-	<br>
+	<br />
 </p>

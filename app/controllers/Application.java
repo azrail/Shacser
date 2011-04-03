@@ -168,14 +168,6 @@ public class Application extends Controller {
 			String[] type = gravpath.split("\\" + File.separator);
 
 			renderBinary(sfile.get(0));
-			
-//			InputStream is = new FileInputStream(sfile.get(0));
-//			response.setHeader("Content-Length", sfile.get(0) + "");
-//			response.cacheFor("72h");
-//			response.contentType = "image/" + type[0];
-//			response.direct = is;
-//			response.reset();
-			
 		}
 		
 	}
@@ -187,14 +179,11 @@ public class Application extends Controller {
 		ArrayList<File> matches = new ArrayList<File> ();
 		if (files != null) {
 			for (int i = 0; i < files.length; i++) {
-				if (files[i].getName().equalsIgnoreCase(find)) { // überprüft ob der Dateiname mit dem Suchstring
-										 // übereinstimmt. Groß-/Kleinschreibung wird
-										 // ignoriert.
+				if (files[i].getName().equalsIgnoreCase(find)) {
 					matches.add(files[i]);
 				}
 				if (files[i].isDirectory()) {
-					matches.addAll(searchFile(files[i], find)); // fügt der ArrayList die ArrayList mit den
-										    // Treffern aus dem Unterordner hinzu
+					matches.addAll(searchFile(files[i], find));
 				}
 			}
 		}

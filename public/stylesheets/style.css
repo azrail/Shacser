@@ -742,6 +742,38 @@ li.bg, .bg {
 	margin-top: -10px;
 	line-height:1.8em;
 }
+.kommentar blockquote img.emoticon {
+	margin: 0;
+	padding: 0;
+}
+
+.tweet {
+	background: top left no-repeat;
+	background-position-x: 5px;
+	background-position-y: 5px;
+	background-image: url('/public/images/quote.png');
+	margin-bottom:5px;
+	margin-left:70px;
+	margin-top:5px;
+	margin-right:5px;
+	width: 268px;
+	border:1px solid #dedede;
+	float: left;
+	background-color: #FFFFFF;
+}
+.tweet blockquote {
+	margin-bottom:10px;
+	margin-left:20px;
+	margin-top:10px;
+	margin-right:10px;
+}
+.tweets {
+	background: top no-repeat;
+	background-position-x: 220px;
+	background-position-y: -7px;
+	background-image: url('/public/images/twitter-follow-me.png');
+}
+
 
 ul.socials li.shareaholic {
 	background-image: url('/public/images/sharebuttons.png');
