@@ -689,6 +689,7 @@ li.bg, .bg {
 }
 .kommentar blockquote {
 	text-align: justify;
+	min-height:40px;
 }
 .kommentar blockquote img {
 	margin-top: 0px;
