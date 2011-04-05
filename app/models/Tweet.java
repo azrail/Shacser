@@ -30,12 +30,12 @@ public class Tweet extends Model {
 	
 	public Tweet(long tweetId, String text, Date createdAt, String user) {
 		this.tweetId = tweetId;
-		//this.text = text;
 		this.createdAt = createdAt;
 		this.user = user;
-		
-		Logger.debug("-------------------------Tweet %s Start--------------------------------", tweetId);
-		System.out.println(text);
+		this.text = parseTweed(text);
+	}
+
+	private String parseTweed(String text) {
 		String[] chunks = text.split(" ");
 		String newText = "";
 		for (int j = 0; j < chunks.length; j++) {
@@ -60,17 +60,7 @@ public class Tweet extends Model {
 			}
 			newText += " " + chunks[j];
 		}
-		this.text = newText;
-		Logger.debug("-------------------------%s--------------------------------","Tweet End");
-		
-	}
-	
-	public Tweet previous() {
-		return Tweet.find("createdAt < ? order by createdAt desc", createdAt).first();
-	}
-	
-	public Tweet next() {
-		return Tweet.find("createdAt > ? order by createdAt asc", createdAt).first();
+		return newText;
 	}
 	
 	private String checkEndsWith(String string) {
@@ -88,6 +78,4 @@ public class Tweet extends Model {
 			return string;
 		}
 	}
-	
-	
 }
