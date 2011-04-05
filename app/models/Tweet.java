@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 
+import play.Logger;
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
 import play.db.jpa.Model;
@@ -32,7 +33,9 @@ public class Tweet extends Model {
 		//this.text = text;
 		this.createdAt = createdAt;
 		this.user = user;
-
+		
+		Logger.debug("-------------------------Tweet %s Start--------------------------------", tweetId);
+		System.out.println(text);
 		String[] chunks = text.split(" ");
 		String newText = "";
 		for (int j = 0; j < chunks.length; j++) {
@@ -58,7 +61,7 @@ public class Tweet extends Model {
 			newText += " " + chunks[j];
 		}
 		this.text = newText;
-		
+		Logger.debug("-------------------------%s--------------------------------","Tweet End");
 		
 	}
 	
@@ -71,6 +74,9 @@ public class Tweet extends Model {
 	}
 	
 	private String checkEndsWith(String string) {
+		if (string.length() == 1) {
+			return string;
+		}
 		String ends = string.substring(string.length() - 1, string.length());
 		if (ends.matches("\\W")) {
 			if (ends.equals("_")) {

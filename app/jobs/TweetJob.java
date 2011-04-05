@@ -23,10 +23,8 @@ public class TweetJob extends Job {
 			Twitter twitter = tf.getInstance();
 			
 			List<Status> statuses = twitter.getUserTimeline();
-			
 			for (Status status : statuses) {
 				Tweet checktweet = Tweet.find("tweetId", status.getId()).first();
-				
 				if (checktweet == null) {
 					Tweet tweet = new Tweet(status.getId(), status.getText(), status.getCreatedAt(), status.getUser().getName());
 					Logger.debug("Tweet: %s", tweet.text + " -- " + tweet.tweetId + " --- " + tweet.createdAt + " --- " + tweet.user);
