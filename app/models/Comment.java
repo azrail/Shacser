@@ -1,9 +1,5 @@
 package models;
 
-import java.math.BigInteger;
-import java.net.URL;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,9 +15,6 @@ import play.Play;
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
 import play.db.jpa.Model;
-import play.libs.WS;
-import play.libs.WS.HttpResponse;
-import play.libs.WS.WSRequest;
 import play.mvc.Http.Request;
 import play.mvc.Router;
 import plugins.Akismet;
@@ -56,13 +49,8 @@ public class Comment extends Model {
 		this.author = author;
 		this.url = url;
 		this.email = email;
-		
 
-		
 		//>:-( :-) :-( :-P :-D :-O ;-) :-/ o.O 8-) <3 :heart:
-		
-		
-		
 		Whitelist whitelist = Whitelist.simpleText();
 		whitelist.addTags("img");
 		whitelist.addAttributes("img", "src", "title", "alt", "class", "height", "width"); 

@@ -5,12 +5,11 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
 
-import play.Logger;
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
 import play.db.jpa.Model;
 
-//@ElasticSearchable
+// @ElasticSearchable
 @Entity
 public class Tweet extends Model {
 	
@@ -34,13 +33,12 @@ public class Tweet extends Model {
 		this.user = user;
 		this.text = parseTweed(text);
 	}
-
+	
 	private String parseTweed(String text) {
 		String[] chunks = text.split(" ");
 		String newText = "";
 		for (int j = 0; j < chunks.length; j++) {
 			String string = chunks[j];
-			System.out.println(string);
 			if (string.startsWith("@")) {
 				
 				String displayname = checkEndsWith(string);
@@ -53,10 +51,10 @@ public class Tweet extends Model {
 				chunks[j] = "<a href=\"http://twitter.com/#!/search?q=%23" + hash + "\" target=\"_blank\">" + displayhash + "</a>";
 			}
 			if (string.startsWith("http")) {
-				chunks[j] = "<a href=\""+string+"\" target=\"_blank\">" + string + "</a>";
+				chunks[j] = "<a href=\"" + string + "\" target=\"_blank\">" + string + "</a>";
 			}
 			if (string.startsWith("www")) {
-				chunks[j] = "<a href=\"http://"+string+"\" target=\"_blank\">" + string + "</a>";
+				chunks[j] = "<a href=\"http://" + string + "\" target=\"_blank\">" + string + "</a>";
 			}
 			newText += " " + chunks[j];
 		}

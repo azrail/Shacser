@@ -1,16 +1,10 @@
 package utils;
 
 import java.math.BigInteger;
-import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
-
-import sun.misc.BASE64Encoder;
 
 /**
  * @author azrail

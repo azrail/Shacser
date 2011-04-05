@@ -1,7 +1,6 @@
 package jobs;
 
 import java.util.List;
-import java.util.regex.*;
 
 import models.Tweet;
 import play.Logger;
