@@ -95,7 +95,7 @@ public class Akismet {
 	 * Usage:
 	 * <p/>
 	 * Akismet akismet = new Akismet("Your API key", "http://your.blog.com/");
-	 * System.out.println("Testing comment spam: " + akismet.commentCheck("x.y.z.w", "XXX", "", "", "", "", "", "", "VIAGRA! LOTS OF VIAGRA!", null));
+	 * System.out.println("Testing comment spam: " + akismet.commentCheck("x.y.z.w", "XX", "", "", "", "", "", "", "VIAGRA! LOTS OF VIAGRA!", null));
 	 * </pre>
 	 * <p>
 	 * You <strong>do not</strong> need to call {@link #verifyAPIKey()} before

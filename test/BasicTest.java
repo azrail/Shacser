@@ -40,7 +40,7 @@ public class BasicTest extends UnitTest {
         User bob = new User("bob@gmail.com", "secret", "Bob").save();
 
         // Create a new post
-        new Post(bob, "My first post", "Hello world").save();
+        new Post(bob, "My first post", "Hello world", null).save();
 
         // Test that the post has been created
         assertEquals(1, Post.count());
@@ -64,11 +64,11 @@ public class BasicTest extends UnitTest {
         User bob = new User("bob@gmail.com", "secret", "Bob").save();
 
         // Create a new post
-        Post bobPost = new Post(bob, "My first post", "Hello world").save();
+        Post bobPost = new Post(bob, "My first post", "Hello world", null).save();
 
         // Post a first comment
-        new Comment(bobPost, "Jeff", "Nice post").save();
-        new Comment(bobPost, "Tom", "I knew that !").save();
+        new Comment(bobPost, "Jeff", "Nice post", null, null).save();
+        new Comment(bobPost, "Tom", "I knew that !", null, null).save();
 
         // Retrieve all comments
         List<Comment> bobPostComments = Comment.find("byPost", bobPost).fetch();
@@ -95,11 +95,11 @@ public class BasicTest extends UnitTest {
         User bob = new User("bob@gmail.com", "secret", "Bob").save();
 
         // Create a new post
-        Post bobPost = new Post(bob, "My first post", "Hello world").save();
+        Post bobPost = new Post(bob, "My first post", "Hello world", null).save();
 
         // Post a first comment
-        bobPost.addComment("Jeff", "Nice post");
-        bobPost.addComment("Tom", "I knew that !");
+        bobPost.addComment("Jeff", "Nice post", null, null);
+        bobPost.addComment("Tom", "I knew that !", null, null);
 
         // Count things
         assertEquals(1, User.count());
@@ -155,7 +155,7 @@ public class BasicTest extends UnitTest {
         assertEquals(2, frontPost.comments.size());
 
         // Post a new comment
-        frontPost.addComment("Jim", "Hello guys");
+        frontPost.addComment("Jim", "Hello guys", null, null);
         assertEquals(3, frontPost.comments.size());
         assertEquals(4, Comment.count());
     }
@@ -166,8 +166,8 @@ public class BasicTest extends UnitTest {
         User bob = new User("bob@gmail.com", "secret", "Bob").save();
 
         // Create a new post
-        Post bobPost = new Post(bob, "My first post", "Hello world").save();
-        Post anotherBobPost = new Post(bob, "My second post post", "Hello world").save();
+        Post bobPost = new Post(bob, "My first post", "Hello world", null).save();
+        Post anotherBobPost = new Post(bob, "My second post post", "Hello world", null).save();
         
         // Well
         assertEquals(0, Post.findTaggedWith("Red").size());

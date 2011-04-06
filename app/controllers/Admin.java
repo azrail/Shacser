@@ -81,7 +81,8 @@ public class Admin extends Controller {
 				JsonObject jo = je.getAsJsonObject();
 				JsonElement gist = jo.getAsJsonArray("gists").getAsJsonArray().get(0);
 				JsonArray files = gist.getAsJsonObject().getAsJsonArray("files");
-				JsonArray comments = gist.getAsJsonObject().getAsJsonArray("comments");
+				//TODO add comments
+				//JsonArray comments = gist.getAsJsonObject().getAsJsonArray("comments");
 				
 				for (JsonElement jsonElement : files) {
 					String file = removeFirstLastChar(jsonElement.toString());
