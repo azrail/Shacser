@@ -7,7 +7,7 @@
 	#{set description:description /}
 #{/else}
 #{if post.keywords != null}
-	#{set keywords:post.keywords /}
+	#{set keywords:post.keywords.join(', ') /}
 #{/if}
 #{else}
 	#{set keywords:keywords /}

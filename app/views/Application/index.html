@@ -7,7 +7,8 @@
 	#{set description:description /}
 #{/else}
 #{if frontPost.keywords != null}
-	#{set keywords:frontPost.keywords /}
+	#{set keywords:frontPost.keywords.join(', ') /}
+	*{ #{set keywords:frontPost.keywords.toString().substring(1,frontPost.keywords.toString().length() -1) /} }*
 #{/if}
 #{else}
 	#{set keywords:keywords /}

@@ -1,9 +1,8 @@
 package controllers;
 
-import play.*;
-import play.mvc.*;
+import play.mvc.With;
 
 @Check("admin")
 @With(Secure.class)
-public class Posts extends CRUD {    
+public class Posts extends CRUD {
 }

@@ -49,16 +49,16 @@ public class Comment extends Model {
 		this.author = author;
 		this.url = url;
 		this.email = email;
-
-		//>:-( :-) :-( :-P :-D :-O ;-) :-/ o.O 8-) <3 :heart:
+		
+		// >:-( :-) :-( :-P :-D :-O ;-) :-/ o.O 8-) <3 :heart:
 		Whitelist whitelist = Whitelist.simpleText();
 		whitelist.addTags("img");
-		whitelist.addAttributes("img", "src", "title", "alt", "class", "height", "width"); 
+		whitelist.addAttributes("img", "src", "title", "alt", "class", "height", "width");
 		content = Jsoup.clean(content, whitelist);
 		content = StringUtils.replaceSmilies(content, "/public/images/emoticons/blacy/", "emoticon", "height=\"16\" width=\"16\"");
 		this.content = content;
 		this.postedAt = new Date();
-
+		
 		Akismet akismet = new Akismet("8ef0252ed762", Play.configuration.getProperty("blog.url"));
 		
 		String ipAddress = Request.current().remoteAddress;

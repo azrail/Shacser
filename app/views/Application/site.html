@@ -7,7 +7,7 @@
 	#{set description:description /}
 #{/else}
 #{if site.keywords != null}
-	#{set keywords:site.keywords /}
+	#{set keywords:site.keywords.join(', ') /}
 #{/if}
 #{else}
 	#{set keywords:keywords /}

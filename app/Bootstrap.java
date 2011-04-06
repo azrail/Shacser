@@ -1,10 +1,7 @@
-import play.*;
-import play.jobs.*;
-import play.mvc.Router;
-import play.test.*;
-import plugins.Akismet;
-
-import models.*;
+import models.User;
+import play.jobs.Job;
+import play.jobs.OnApplicationStart;
+import play.test.Fixtures;
 
 @OnApplicationStart
 public class Bootstrap extends Job {
@@ -13,7 +10,7 @@ public class Bootstrap extends Job {
 		// Check if the database is empty
 		if (User.count() == 0) {
 			Fixtures.load("initial-data.yml");
-		}		
+		}
 	}
 	
 }

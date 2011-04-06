@@ -26,15 +26,22 @@
     <p>
         #{field 'content'}
         <label>Write here:</label>
-        <textarea id="markdown" name="${field.name}" 
+        <textarea id="object_content" name="${field.name}" 
             class="${field.errorClass}">${post?.content}</textarea>
         #{/field}
     </p>
     <p>
         #{field 'description'}
         <label>Write here:</label>
-        <textarea id="markdown" name="${field.name}" 
+        <textarea id="object_description" name="${field.name}" 
             class="${field.errorClass}">${post?.description}</textarea>
+        #{/field}
+    </p>
+    <p>
+        #{field 'gistId'}
+        <label>Gist (Github) Number:</label>
+        <input type="text" size="50" 
+            name="${field.name}" value="${post?.gistId}" />
         #{/field}
     </p>
     <p>
@@ -44,7 +51,14 @@
             name="${field.name}" value="${post?.tags?.join(' ')}" />
         #{/field}
     </p>
-    
+    <p>
+        #{field 'keywords'}
+        <label>Enter some keywords:</label>
+        <input type="text" size="50" 
+            name="${field.name}" value="${post?.keywords?.join(' ')}" />
+        #{/field}
+        ${keywords}
+    </p>
     <p>
         <input type="submit" value="Publish this post to the blog" />
     </p>

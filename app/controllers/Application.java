@@ -7,10 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -19,7 +17,6 @@ import models.Comment;
 import models.Info;
 import models.Post;
 import models.Site;
-import models.User;
 import play.Play;
 import play.cache.Cache;
 import play.data.validation.Required;
@@ -28,17 +25,10 @@ import play.libs.Images;
 import play.libs.WS;
 import play.libs.WS.HttpResponse;
 import play.libs.WS.WSRequest;
-import play.modules.facebook.FbGraph;
-import play.modules.facebook.FbGraphException;
-import play.modules.fbconnect.FBConnectPlugin;
-import play.modules.fbconnect.FBConnectSession;
 import play.mvc.Before;
 import play.mvc.Controller;
-import play.mvc.Scope.Session;
-import tags.fbconnect.FBConnectTags;
 import utils.StringUtils;
 
-import com.google.gson.JsonObject;
 import com.petebevin.markdown.MarkdownProcessor;
 
 public class Application extends Controller {
@@ -160,23 +150,24 @@ public class Application extends Controller {
 				}
 			}
 			
-			String basepath = Play.tmpDir + File.separator + "gravatar" + File.separator;
+			// String basepath = Play.tmpDir + File.separator + "gravatar" +
+			// File.separator;
 			
 			ArrayList<File> sfile = searchFile(new File(Play.tmpDir + File.separator + "gravatar" + File.separator), gravatar);
 			
-			String gravpath = sfile.get(0).getAbsoluteFile().toString().replace(basepath, "");
-			String[] type = gravpath.split("\\" + File.separator);
-
+			// String gravpath =
+			// sfile.get(0).getAbsoluteFile().toString().replace(basepath, "");
+			// String[] type = gravpath.split("\\" + File.separator);
+			
 			renderBinary(sfile.get(0));
 		}
 		
 	}
 	
-	
 	public static ArrayList<File> searchFile(File dir, String find) {
-
+		
 		File[] files = dir.listFiles();
-		ArrayList<File> matches = new ArrayList<File> ();
+		ArrayList<File> matches = new ArrayList<File>();
 		if (files != null) {
 			for (int i = 0; i < files.length; i++) {
 				if (files[i].getName().equalsIgnoreCase(find)) {
@@ -189,7 +180,6 @@ public class Application extends Controller {
 		}
 		return matches;
 	}
-	
 	
 	public static void listTagged(String tag) {
 		List<Post> posts = Post.findTaggedWith(tag);

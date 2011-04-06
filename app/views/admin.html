@@ -16,8 +16,10 @@
         <script src="@{'/public/markitup/sets/markdown/set.js'}"></script>
 		<script language="javascript">
 			$(document).ready(function()	{
-				$('#markdown').markItUp(mySettings);
+				$('#content').markItUp(mySettings);
+				$('#description').markItUp(mySettings);
 				$('#object_content').markItUp(mySettings);
+				$('#object_description').markItUp(mySettings);
 			});
 		</script>
     </head>
