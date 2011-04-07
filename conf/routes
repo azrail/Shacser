@@ -35,6 +35,8 @@ POST    /admin/newSite                          AdminSites.save
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
 GET 	/robots.txt  							Application.robots
+GET 	/BingSiteAuth.xml						Application.rootFile(file:'BingSiteAuth.xml')
+GET 	/y_key_da8c3295baa76f5c.html			Application.rootFile(file:'YahoSiteAuth.html')
 
 POST 	/markdowPreview 						Application.markdowPreview
 

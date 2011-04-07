@@ -196,6 +196,11 @@ public class Application extends Controller {
 		response.direct = is;
 	}
 	
+	public static void rootFile(String file) throws FileNotFoundException {
+		File rootFile = play.Play.getFile("public/files/"+file);
+		renderBinary(rootFile);
+	}
+	
 	public static void markdowPreview() {
 		String content = Application.request.params.get("data").toString();
 		MarkdownProcessor m = new MarkdownProcessor();
