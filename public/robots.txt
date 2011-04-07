@@ -1,3 +1,7 @@
-User-agent: *
-Allow: /
+# alle URLs mit enthaltenem Fragezeichen werden verboten (webmastertools spam)
+User-agent: Googlebot
+Disallow: /*?
 
+# alle bots duerfen alles indizieren bis auf Temp
+User-agent: *
+Disallow: /tmp/

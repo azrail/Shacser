@@ -15,12 +15,13 @@ import play.Play;
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
 import play.db.jpa.Model;
+import play.modules.elasticsearch.annotations.ElasticSearchable;
 import play.mvc.Http.Request;
 import play.mvc.Router;
 import plugins.Akismet;
 import utils.StringUtils;
 
-// @ElasticSearchable
+@ElasticSearchable
 @Entity
 public class Comment extends Model {
 	
