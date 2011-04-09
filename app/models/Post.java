@@ -16,11 +16,9 @@ import javax.persistence.OneToMany;
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
 import play.db.jpa.Model;
-import play.modules.elasticsearch.annotations.ElasticSearchable;
 
 import com.petebevin.markdown.MarkdownProcessor;
 
-@ElasticSearchable
 @Entity
 public class Post extends Model {
 	

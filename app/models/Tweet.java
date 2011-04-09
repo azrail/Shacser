@@ -8,9 +8,7 @@ import javax.persistence.Lob;
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
 import play.db.jpa.Model;
-import play.modules.elasticsearch.annotations.ElasticSearchable;
 
-@ElasticSearchable
 @Entity
 public class Tweet extends Model {
 	
