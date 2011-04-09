@@ -230,7 +230,7 @@ public class Application extends Controller {
 				Tweet checktweet = Tweet.find("tweetId", status.getId()).first();
 				if (checktweet == null) {
 					Tweet tweet = new Tweet(status.getId(), status.getText(), status.getCreatedAt(), status.getUser().getName());
-					Logger.debug("Tweet: %s", tweet.text + " -- " + tweet.tweetId + " --- " + tweet.createdAt + " --- " + tweet.user);
+					Logger.debug("Tweet: %s", tweet.content + " -- " + tweet.tweetId + " --- " + tweet.createdAt + " --- " + tweet.user);
 					tweet.save();
 				}
 			}

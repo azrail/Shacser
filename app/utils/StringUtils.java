@@ -11,7 +11,20 @@ import java.util.Map;
  * 
  */
 public class StringUtils {
-	
+	/**
+	 * Überprüft ob ein String null ist oder keinen Text enthält
+	 * 
+	 * @param string Der zu überprüfende String
+	 * @return true wenn der String nichts enthält oder false wenn er etwas enthält
+	 */
+	public static boolean nullCheck(String string) {
+		if (string == null || string.length() == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public static String md5Hash(String text) {
 		MessageDigest md;
 		try {

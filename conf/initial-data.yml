@@ -90,39 +90,7 @@ Post(Post_3):
 Keyword(Keyword_11):
     name: WYSIWYG
 
-Comment(Comment_1):
-    author: Arne
-    postedAt: '2011-03-30'
-    content: Zeilenumbrüche... :-)
-    post: Post_4
-    spam: 'false'
 
-Comment(Comment_2):
-    author: Sascha Hanke
-    postedAt: '2011-03-30'
-    content: "pfft, Zeilenumbrüche kann doch jeder! Im Code kommt das immer doof, mal\
-  \ schauen ob ich ein div mit scrolling drumherum basteln kann :)\r\n\r\nNaja am\
-  \ Design muss ich eh noch einiges machen."
-    post: Post_4
-    url: http://blog.aheron.de
-    email: s.hanke@aheron.de
-    spam: 'false'
-
-Comment(Comment_3):
-    author: Ich
-    postedAt: '2011-04-01'
-    content: doof hier alles... ich hau wieder ab!
-    post: Post_4
-    spam: 'false'
-
-Comment(Comment_4):
-    author: Sascha Hanke
-    postedAt: '2011-04-03'
-    content: So, &quot;umbruch&quot; klappt und Gravatar hoffentlich auch.
-    post: Post_4
-    url: http://blog.aheron.de
-    email: s.hanke@aheron.de
-    spam: 'false'
 
 Post(Post_4):
     title: RSS Feeds mit dem Playframework
@@ -411,14 +379,14 @@ Keyword(Keyword_20):
 
 Tweet(Tweet_2369):
     tweetId: '55151958759182336'
-    text: ' <a href="http://twitter.com/Manscha" target="_blank">@Manscha</a> das lässt
+    content: ' <a href="http://twitter.com/Manscha" target="_blank">@Manscha</a> das lässt
   sich doch kombinieren!'
     createdAt: '2011-04-05'
     user: Sascha Hanke
 
 Tweet(Tweet_2368):
     tweetId: '55192132964712448'
-    text: ' RT <a href="http://twitter.com/RobGreen" target="_blank">@RobGreen</a> "Einführung
+    content: ' RT <a href="http://twitter.com/RobGreen" target="_blank">@RobGreen</a> "Einführung
   in Suchmaschinenoptimierung", ein Leitfaden von Google <a href="http://goo.gl/vrNTU"
   target="_blank">http://goo.gl/vrNTU</a> | via <a href="http://twitter.com/frischkopp"
   target="_blank">@frischkopp</a>'
@@ -427,7 +395,7 @@ Tweet(Tweet_2368):
 
 Tweet(Tweet_14):
     tweetId: '53911477899362304'
-    text: ' RT <a href="http://twitter.com/googlechrome" target="_blank">@googlechrome</a>
+    content: ' RT <a href="http://twitter.com/googlechrome" target="_blank">@googlechrome</a>
   No joke. Our Bounce Ball! game is FWA site of the day <a href="http://t11.me/JRR-WG"
   target="_blank">http://t11.me/JRR-WG</a>'
     createdAt: '2011-04-01'
@@ -435,7 +403,7 @@ Tweet(Tweet_14):
 
 Tweet(Tweet_13):
     tweetId: '53911855458033664'
-    text: ' RT <a href="http://twitter.com/Vaiper" target="_blank">@Vaiper</a> Vergleich
+    content: ' RT <a href="http://twitter.com/Vaiper" target="_blank">@Vaiper</a> Vergleich
   von VMware Server, VMware Player und VMware Workstation <a href="http://networkedblogs.com/fwUB2"
   target="_blank">http://networkedblogs.com/fwUB2</a>'
     createdAt: '2011-04-01'
@@ -443,7 +411,7 @@ Tweet(Tweet_13):
 
 Tweet(Tweet_16):
     tweetId: '53891107284717568'
-    text: ' Markdown WYSIWYG mit markItUp! <a href="http://twitter.com/#!/search?q=%23playframework"
+    content: ' Markdown WYSIWYG mit markItUp! <a href="http://twitter.com/#!/search?q=%23playframework"
   target="_blank">#playframework</a> <a href="http://twitter.com/#!/search?q=%23tutorial"
   target="_blank">#tutorial</a> <a href="http://bit.ly/play_markitup" target="_blank">http://bit.ly/play_markitup</a>'
     createdAt: '2011-04-01'
@@ -451,7 +419,7 @@ Tweet(Tweet_16):
 
 Tweet(Tweet_15):
     tweetId: '53892376481116160'
-    text: ' So, heute mal die Kommentar Funktion des Blogs überarbeiten, sieht ja schrecklich
+    content: ' So, heute mal die Kommentar Funktion des Blogs überarbeiten, sieht ja schrecklich
   aus. <a href="http://twitter.com/#!/search?q=%23css" target="_blank">#css</a> <a
   href="http://twitter.com/#!/search?q=%23webdesign" target="_blank">#webdesign</a>
   aber erst gibt es was zu futtern ;)'
@@ -460,13 +428,13 @@ Tweet(Tweet_15):
 
 Tweet(Tweet_18):
     tweetId: '54801659364245504'
-    text: ' Kaffe, Kippe und Perl.... ihhh Perl!'
+    content: ' Kaffe, Kippe und Perl.... ihhh Perl!'
     createdAt: '2011-04-04'
     user: Sascha Hanke
 
 Tweet(Tweet_17):
     tweetId: '53890071950143488'
-    text: ' Adminbereich schützen <a href="http://twitter.com/#!/search?q=%23guteidee"
+    content: ' Adminbereich schützen <a href="http://twitter.com/#!/search?q=%23guteidee"
   target="_blank">#guteidee</a> Trackingcode gleich mit dahinter <a href="http://twitter.com/#!/search?q=%23schlechteidee"
   target="_blank">#schlechteidee</a> <a href="http://bit.ly/gNY5aY" target="_blank">http://bit.ly/gNY5aY</a>'
     createdAt: '2011-04-01'
@@ -474,7 +442,7 @@ Tweet(Tweet_17):
 
 Tweet(Tweet_19):
     tweetId: '54802344478650368'
-    text: ' RT <a href="http://twitter.com/waldeis" target="_blank">@waldeis</a> Great
+    content: ' RT <a href="http://twitter.com/waldeis" target="_blank">@waldeis</a> Great
   free application Static HTML to manage nice looking Facebook iFrames for your fan
   page: <a href="http://ow.ly/4q7rk" target="_blank">http://ow.ly/4q7rk</a> <a href="http://twitter.com/#!/search?q=%23staticHTM"
   target="_blank">#staticHTM</a> ...'
@@ -483,13 +451,13 @@ Tweet(Tweet_19):
 
 Tweet(Tweet_10):
     tweetId: '54137846293987328'
-    text: ' hört Tron: Legacy OST und hübscht die Kommentare im Blog auf.'
+    content: ' hört Tron: Legacy OST und hübscht die Kommentare im Blog auf.'
     createdAt: '2011-04-02'
     user: Sascha Hanke
 
 Tweet(Tweet_11):
     tweetId: '54128118025297920'
-    text: ' Kaffee alle, also frisch ans Werk. Kleines Problem mit <a href="http://twitter.com/#!/search?q=%23elasticsearch"
+    content: ' Kaffee alle, also frisch ans Werk. Kleines Problem mit <a href="http://twitter.com/#!/search?q=%23elasticsearch"
   target="_blank">#elasticsearch</a> und <a href="http://twitter.com/#!/search?q=%23playframework"
   target="_blank">#playframework</a> -> <a href="http://bit.ly/h0JrpS" target="_blank">http://bit.ly/h0JrpS</a>
   für Ideen dankbar'
@@ -498,7 +466,7 @@ Tweet(Tweet_11):
 
 Tweet(Tweet_12):
     tweetId: '53915167477600256'
-    text: ' <3 <a href="http://twitter4j.org" target="_blank">http://twitter4j.org</a>
+    content: ' <3 <a href="http://twitter4j.org" target="_blank">http://twitter4j.org</a>
   großartige Twitter <a href="http://twitter.com/#!/search?q=%23java" target="_blank">#java</a>
   lib <a href="http://bit.ly/aheronde" target="_blank">http://bit.ly/aheronde</a>'
     createdAt: '2011-04-01'
@@ -755,28 +723,28 @@ Keyword(Keyword_9):
 
 Tweet(Tweet_2377):
     tweetId: '56414861227331584'
-    text: ' <a href="http://twitter.com/Manscha" target="_blank">@Manscha</a> das sind
+    content: ' <a href="http://twitter.com/Manscha" target="_blank">@Manscha</a> das sind
   ganz spezielle Taschenlampen, normales Licht würde doch den Tatort verschmutzen!'
     createdAt: '2011-04-08'
     user: Sascha Hanke
 
 Tweet(Tweet_2376):
     tweetId: '56392372233306112'
-    text: ' <a href="http://twitter.com/_felipera" target="_blank">@_felipera</a> <a href="http://bumblebee.aheron.de/code/twitter.zip"
+    content: ' <a href="http://twitter.com/_felipera" target="_blank">@_felipera</a> <a href="http://bumblebee.aheron.de/code/twitter.zip"
   target="_blank">http://bumblebee.aheron.de/code/twitter.zip</a>'
     createdAt: '2011-04-08'
     user: Sascha Hanke
 
 Tweet(Tweet_1):
     tweetId: '54593065775673344'
-    text: ' <a href="http://twitter.com/_felipera" target="_blank">@_felipera</a> next
+    content: ' <a href="http://twitter.com/_felipera" target="_blank">@_felipera</a> next
   weekend I build you a sample app and thank you for the bug notice'
     createdAt: '2011-04-03'
     user: Sascha Hanke
 
 Tweet(Tweet_2375):
     tweetId: '56322398391242753'
-    text: ' <a href="http://twitter.com/_felipera" target="_blank">@_felipera</a> I dont
+    content: ' <a href="http://twitter.com/_felipera" target="_blank">@_felipera</a> I dont
   think the problem is the database, but the job. the code runs in the controller
   but not in the job. any idea?'
     createdAt: '2011-04-08'
@@ -784,7 +752,7 @@ Tweet(Tweet_2375):
 
 Tweet(Tweet_2374):
     tweetId: '56310054919471104'
-    text: ' <a href="http://twitter.com/_felipera" target="_blank">@_felipera</a> update:
+    content: ' <a href="http://twitter.com/_felipera" target="_blank">@_felipera</a> update:
   i just build the example app, db=mem no problems, with db=mysql:prime@prime_yab_dev,
   the problem occurs'
     createdAt: '2011-04-08'
@@ -792,7 +760,7 @@ Tweet(Tweet_2374):
 
 Tweet(Tweet_4):
     tweetId: '54343924084506624'
-    text: ' RT <a href="http://twitter.com/waldeis" target="_blank">@waldeis</a> Wer es
+    content: ' RT <a href="http://twitter.com/waldeis" target="_blank">@waldeis</a> Wer es
   verpasst hat: Googles SEO Guide jetzt auch auf deutsch verfügbar: <a href="http://bit.ly/i1PKeU"
   target="_blank">http://bit.ly/i1PKeU</a> <a href="http://twitter.com/#!/search?q=%23seo"
   target="_blank">#seo</a>'
@@ -801,14 +769,14 @@ Tweet(Tweet_4):
 
 Tweet(Tweet_2373):
     tweetId: '56286635679170560'
-    text: ' Juhu, werde es mir direkt zulegen     - Atari''s Greatest Hits     - <a href="http://itun.es/i6d6HG"
+    content: ' Juhu, werde es mir direkt zulegen     - Atari''s Greatest Hits     - <a href="http://itun.es/i6d6HG"
   target="_blank">http://itun.es/i6d6HG</a>'
     createdAt: '2011-04-08'
     user: Sascha Hanke
 
 Tweet(Tweet_5):
     tweetId: '54328046848716801'
-    text: ' <a href="http://twitter.com/Vaiper" target="_blank">@Vaiper</a> lohnt das
+    content: ' <a href="http://twitter.com/Vaiper" target="_blank">@Vaiper</a> lohnt das
   mit den <a href="http://twitter.com/#!/search?q=%23networkedblogs" target="_blank">#networkedblogs</a>
   ?'
     createdAt: '2011-04-03'
@@ -816,14 +784,14 @@ Tweet(Tweet_5):
 
 Tweet(Tweet_2372):
     tweetId: '56104937385492480'
-    text: ' Ben the Bodyguard. Bin gespannt, die Seite sieht gut aus <a href="http://bit.ly/i8k3Hb"
+    content: ' Ben the Bodyguard. Bin gespannt, die Seite sieht gut aus <a href="http://bit.ly/i8k3Hb"
   target="_blank">http://bit.ly/i8k3Hb</a>'
     createdAt: '2011-04-07'
     user: Sascha Hanke
 
 Tweet(Tweet_2):
     tweetId: '54347829778460672'
-    text: ' RT <a href="http://twitter.com/grindcrank" target="_blank">@grindcrank</a>
+    content: ' RT <a href="http://twitter.com/grindcrank" target="_blank">@grindcrank</a>
   Schenke Oma zum Geburtstag mit Sourcecode bedrucktes Porzellan     - "Software as a
   Service".'
     createdAt: '2011-04-03'
@@ -831,7 +799,7 @@ Tweet(Tweet_2):
 
 Tweet(Tweet_2371):
     tweetId: '56018992824991745'
-    text: ' RT <a href="http://twitter.com/webserver" target="_blank">@webserver</a> Dynamic
+    content: ' RT <a href="http://twitter.com/webserver" target="_blank">@webserver</a> Dynamic
   Hosting on Cherokee: “Cherokee vs Apache Benchmarks” ➭ <a href="http://blog.dynamichosting.biz/?p=369"
   target="_blank">http://blog.dynamichosting.biz/?p=369</a>'
     createdAt: '2011-04-07'
@@ -839,7 +807,7 @@ Tweet(Tweet_2371):
 
 Tweet(Tweet_3):
     tweetId: '54346309871730688'
-    text: ' <a href="http://twitter.com/#!/search?q=%23Futurama" target="_blank">#Futurama</a>
+    content: ' <a href="http://twitter.com/#!/search?q=%23Futurama" target="_blank">#Futurama</a>
   der letzte <a href="http://twitter.com/#!/search?q=%23Trekki" target="_blank">#Trekki</a>
   yeha!'
     createdAt: '2011-04-03'
@@ -847,7 +815,7 @@ Tweet(Tweet_3):
 
 Tweet(Tweet_2370):
     tweetId: '55151368473804800'
-    text: ' RT <a href="http://twitter.com/lmcalpin" target="_blank">@lmcalpin</a> <a
+    content: ' RT <a href="http://twitter.com/lmcalpin" target="_blank">@lmcalpin</a> <a
   href="http://twitter.com/#!/search?q=%23playframework" target="_blank">#playframework</a>
   1.2RC1 dropped <a href="http://twitter.com/" target="_blank">@</a> <a href="http://bit.ly/efc431"
   target="_blank">http://bit.ly/efc431</a> and it''s dead sexy.'
@@ -856,21 +824,21 @@ Tweet(Tweet_2370):
 
 Tweet(Tweet_8):
     tweetId: '54240513116737536'
-    text: ' <a href="http://twitter.com/_felipera" target="_blank">@_felipera</a> thx
+    content: ' <a href="http://twitter.com/_felipera" target="_blank">@_felipera</a> thx
   a lot!'
     createdAt: '2011-04-02'
     user: Sascha Hanke
 
 Tweet(Tweet_9):
     tweetId: '54139222172512256'
-    text: ' <a href="http://twitter.com/_felipera" target="_blank">@_felipera</a> any
+    content: ' <a href="http://twitter.com/_felipera" target="_blank">@_felipera</a> any
   idea? <a href="https://gist.github.com/899005" target="_blank">https://gist.github.com/899005</a>'
     createdAt: '2011-04-02'
     user: Sascha Hanke
 
 Tweet(Tweet_6):
     tweetId: '54283092432654336'
-    text: ' RT <a href="http://twitter.com/sixtus" target="_blank">@sixtus</a> "Würde
+    content: ' RT <a href="http://twitter.com/sixtus" target="_blank">@sixtus</a> "Würde
   man das geltende Datenschutzrecht eng und konsequent anwenden, dann müsste Deutschland
   offline gehen." <a href="http://bit.ly/" target="_blank">http://bit.ly/</a> ...'
     createdAt: '2011-04-02'
@@ -878,21 +846,21 @@ Tweet(Tweet_6):
 
 Tweet(Tweet_7):
     tweetId: '54282545512185856'
-    text: ' Erster Part des Redesigns abgeschlossen     - Blogengine based on <a href="http://twitter.com/#!/search?q=%23playwramework"
+    content: ' Erster Part des Redesigns abgeschlossen     - Blogengine based on <a href="http://twitter.com/#!/search?q=%23playwramework"
   target="_blank">#playwramework</a>     - <a href="http://bit.ly/ih40LU" target="_blank">http://bit.ly/ih40LU</a>'
     createdAt: '2011-04-02'
     user: Sascha Hanke
 
 Tweet(Tweet_22):
     tweetId: '55011863888543744'
-    text: ' STFU schützen lassen, T-Shirt Shops abmahnen ... Profit??? Sind WTF und RTFM
+    content: ' STFU schützen lassen, T-Shirt Shops abmahnen ... Profit??? Sind WTF und RTFM
   noch als Marke frei? <a href="http://bit.ly/gWLs97" target="_blank">http://bit.ly/gWLs97</a>'
     createdAt: '2011-04-04'
     user: Sascha Hanke
 
 Tweet(Tweet_20):
     tweetId: '54901772875071488'
-    text: ' RT <a href="http://twitter.com/addyosmani" target="_blank">@addyosmani</a>
+    content: ' RT <a href="http://twitter.com/addyosmani" target="_blank">@addyosmani</a>
   CSS3 Animation With jQuery Fallbacks <a href="http://bit.ly/ifPZnw" target="_blank">http://bit.ly/ifPZnw</a>
   <a href="http://twitter.com/#!/search?q=%23jquery" target="_blank">#jquery</a> <a
   href="http://twitter.com/#!/search?q=%23css3" target="_blank">#css3</a> <a href="http://twitter.com/#!/search?q=%23animation"
@@ -902,6 +870,40 @@ Tweet(Tweet_20):
 
 Tweet(Tweet_21):
     tweetId: '54944078604926976'
-    text: ' Schick: "Aristo" for jQuery UI <a href="http://bit.ly/fKhxqs" target="_blank">http://bit.ly/fKhxqs</a>'
+    content: ' Schick: "Aristo" for jQuery UI <a href="http://bit.ly/fKhxqs" target="_blank">http://bit.ly/fKhxqs</a>'
     createdAt: '2011-04-04'
     user: Sascha Hanke
+
+Comment(Comment_1):
+    author: Arne
+    postedAt: '2011-03-30'
+    content: Zeilenumbrüche... :-)
+    post: Post_4
+    spam: 'false'
+
+Comment(Comment_2):
+    author: Sascha Hanke
+    postedAt: '2011-03-30'
+    content: "pfft, Zeilenumbrüche kann doch jeder! Im Code kommt das immer doof, mal\
+  \ schauen ob ich ein div mit scrolling drumherum basteln kann :)\r\n\r\nNaja am\
+  \ Design muss ich eh noch einiges machen."
+    post: Post_4
+    url: http://blog.aheron.de
+    email: s.hanke@aheron.de
+    spam: 'false'
+
+Comment(Comment_3):
+    author: Ich
+    postedAt: '2011-04-01'
+    content: doof hier alles... ich hau wieder ab!
+    post: Post_4
+    spam: 'false'
+
+Comment(Comment_4):
+    author: Sascha Hanke
+    postedAt: '2011-04-03'
+    content: So, &quot;umbruch&quot; klappt und Gravatar hoffentlich auch.
+    post: Post_4
+    url: http://blog.aheron.de
+    email: s.hanke@aheron.de
+    spam: 'false'

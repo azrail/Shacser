@@ -20,7 +20,7 @@ public class Tweet extends Model {
 	@Lob
 	@Required
 	@MaxSize(2000)
-	public String	text;
+	public String	content;
 	
 	@Required
 	public Date		createdAt;
@@ -28,15 +28,15 @@ public class Tweet extends Model {
 	@Required
 	public String	user;
 	
-	public Tweet(long tweetId, String text, Date createdAt, String user) {
+	public Tweet(long tweetId, String content, Date createdAt, String user) {
 		this.tweetId = tweetId;
 		this.createdAt = createdAt;
 		this.user = user;
-		this.text = parseTweed(text);
+		this.content = parseTweed(content);
 	}
 	
-	private String parseTweed(String text) {
-		String[] chunks = text.split(" ");
+	private String parseTweed(String content) {
+		String[] chunks = content.split(" ");
 		String newText = "";
 		for (int j = 0; j < chunks.length; j++) {
 			String string = chunks[j];

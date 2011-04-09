@@ -1,27 +1,59 @@
 <!DOCTYPE html>
 <html xml:lang="de" lang="de">
 	<head>
-		<title>yab. #{get 'title' /} - Das Technik Blog</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="description" content="#{get 'description' /}">
-		<meta name="keywords" content="#{get 'keywords' /}">
-		<meta name="author" content="${autor}">
-		<meta name="robots" content="all">
-		<meta name="geo.region" content="DE-NW" />
-		<meta name="geo.placename" content="Engelskirchen" />
-		<meta name="geo.position" content="50.99;7.41" />
-		<meta name="ICBM" content="50.99, 7.41" />
+		<title>yab. #{get 'title' /} - Das Technik Blog</title><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta name="description" content="#{get 'description' /}"><meta name="keywords" content="#{get 'keywords' /}"><meta name="author" content="${autor}"><meta name="robots" content="all"><meta name="geo.region" content="DE-NW" /><meta name="geo.placename" content="Engelskirchen" /><meta name="geo.position" content="50.99;7.41" /><meta name="ICBM" content="50.99, 7.41" />
 		<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/style.css'}" />
+		<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/jquery-ui-1.8.11.custom.css'}" />
 		<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/print.css'}" media="print" />
 		*{
 		<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/iphone.css'}" media="only screen and (max-device-width: 480px)" />
 		}*
 		<link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}" />
 		<link rel="alternate" type="application/rss+xml" title="RSS-Feed von yab. Das Technik Blog" href="http://feeds.feedburner.com/YabDasTechnikBlog" />
-		<script src="@{'/public/javascripts/jquery-1.3.2.min.js'}">
+		<script src="@{'/public/javascripts/jquery-1.5.1.min.js'}"></script>
+		<script src="@{'/public/javascripts/jquery-ui-1.8.11.custom.min.js'}"></script>
+		<script src="@{'/public/javascripts/jquery.tools.min.js'}"></script>
+		<!-- Search Autocomplete -->
+		<script>
+$(function() {
+  $( "#search" ).autocomplete({
+    source: function( request, response ) {
+      var wildcard = { "content": "*"+request.term+"*" };
+      var postData = {	"fields": ["id","title","_type"],
+						"query": {"wildcard": wildcard}};
+      var data = JSON.stringify(postData);
+      $.ajax({
+        url: "http://localhost:9200/_search",
+        type: "POST",
+        dataType: "json",
+        data: data,
+        success: function( data) {
+          response( $.map( data.hits.hits, function( item ) {
+            return {
+              label: item.fields.title,
+              id: item.fields.id,
+              model: item._type
+            }
+          }));
+        }
+      });
+    },
+    minLength: 1,
+    select: function( event, ui ) {
+      $("#search_id").val(ui.item.id);
+      $("#search_model").val(ui.item.model);
+      $('#searchSubmit').trigger('click');
+    },
+    open: function() {
+      $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+    },
+    close: function() {
+          $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+    }
+  })
+});
 		</script>
-		<script src="@{'/public/javascripts/jquery.tools.min.js'}">
-		</script>
+		<!-- End Autocomplete -->
 	</head>
 	<body>
 		<div class="main">
@@ -74,10 +106,12 @@
 						<form id="form1" name="form1" method="post" action="/search">
 							<label>
 								<span>
-									<input name="q" type="text" class="keywords" id="textfield" maxlength="50" value="Suche...">
+									<input name="suchString" onFocus="if (this.value == this.defaultValue) this.value='';" onBlur="if (this.value == '') this.value=this.defaultValue;" type="text" class="keywords" id="search" maxlength="50" value="Suche...">
+									<input name="autoCompleteId" type="hidden" id="search_id" value="">
+									<input name="autoCompleteModel" type="hidden" id="search_model" value="">
 								</span>
 							</label>
-							<input name="b" type="image" title="Suche" alt="Lupe" src="/public/images/suche.gif" class="button">
+							<input name="b" type="image" id="searchSubmit" title="Suche" alt="Lupe" src="/public/images/suche.gif" class="button">
 						</form>
 					</div>
 					<div class="clr">
@@ -143,107 +177,107 @@
 		*{
 		<div class="footer-navigation">
 			<div class="footer-navigation_resize">
-			<div class="left">
-				<h2>About</h2>
-				<ul>
-					<li>
-						<a href="#">Overview</a>
-					</li>
-					<li>
-						<a href="#">Another Link</a>
-					</li>
-					<li>
-						<a href="#">Our Staff</a>
-					</li>
-					<li>
-						<a href="#">Mission</a>
-					</li>
-					<li>
-						<a href="#">Statement</a>
-					</li>
-				</ul>
-			</div>
-			<div class="left">
-				<h2>Sonstiges</h2>
-				<ul>
-					<li>
-						<a href="#">First Sonstiges</a>
-					</li>
-					<li>
-						<a href="#">Second Sonstiges</a>
-					</li>
-					<li>
-						<a href="#">Another Sonstiges</a>
-					</li>
-					<li>
-						<a href="#">A Fourth Sonstiges</a>
-					</li>
-				</ul>
-			</div>
-			<div class="left">
-				<h2>Media</h2>
-				<ul>
-					<li>
-						<a href="#">Image Gallery</a>
-					</li>
-					<li>
-						<a href="#">Video Gallery</a>
-					</li>
-				</ul>
-			</div>
-			<div class="left">
-				<h2>Blog</h2>
-				<ul>
-					<li>
-						<a href="#">Category One</a>
-					</li>
-					<li>
-						<a href="#">Category 2</a>
-					</li>
-					<li>
-						<a href="#">Another Category</a>
-					</li>
-					<li>
-						<a href="#">Category</a>
-					</li>
-					<li>
-						<a href="#">A Fifth Category</a>
-					</li>
-				</ul>
-			</div>
-			<div class="left">
-				<h2>More Links</h2>
-				<ul>
-					<li>
-						<a href="#">Mach Mit</a>
-					</li>
-					<li>
-						<a href="/impressum">Impressum</a>
-					</li>
-					<li>
-						<a href="/datenschutz">Datenschutz</a>
-					</li>
-				</ul>
-			</div>
-			<div class="left">
-				<h2>Contact Us</h2>
-				<ul>
-					<li>
-						<a href="#">s.hanke@aheron.de</a>
-					</li>
-					<li>
-						<a href="#">Phone: 000000000</a>
-					</li>
-					<li>
-						<a href="#">Feedback</a>
-					</li>
-				</ul>
+				<div class="left">
+					<h2>About</h2>
+					<ul>
+						<li>
+							<a href="#">Overview</a>
+						</li>
+						<li>
+							<a href="#">Another Link</a>
+						</li>
+						<li>
+							<a href="#">Our Staff</a>
+						</li>
+						<li>
+							<a href="#">Mission</a>
+						</li>
+						<li>
+							<a href="#">Statement</a>
+						</li>
+					</ul>
+				</div>
+				<div class="left">
+					<h2>Sonstiges</h2>
+					<ul>
+						<li>
+							<a href="#">First Sonstiges</a>
+						</li>
+						<li>
+							<a href="#">Second Sonstiges</a>
+						</li>
+						<li>
+							<a href="#">Another Sonstiges</a>
+						</li>
+						<li>
+							<a href="#">A Fourth Sonstiges</a>
+						</li>
+					</ul>
+				</div>
+				<div class="left">
+					<h2>Media</h2>
+					<ul>
+						<li>
+							<a href="#">Image Gallery</a>
+						</li>
+						<li>
+							<a href="#">Video Gallery</a>
+						</li>
+					</ul>
+				</div>
+				<div class="left">
+					<h2>Blog</h2>
+					<ul>
+						<li>
+							<a href="#">Category One</a>
+						</li>
+						<li>
+							<a href="#">Category 2</a>
+						</li>
+						<li>
+							<a href="#">Another Category</a>
+						</li>
+						<li>
+							<a href="#">Category</a>
+						</li>
+						<li>
+							<a href="#">A Fifth Category</a>
+						</li>
+					</ul>
+				</div>
+				<div class="left">
+					<h2>More Links</h2>
+					<ul>
+						<li>
+							<a href="#">Mach Mit</a>
+						</li>
+						<li>
+							<a href="/impressum">Impressum</a>
+						</li>
+						<li>
+							<a href="/datenschutz">Datenschutz</a>
+						</li>
+					</ul>
+				</div>
+				<div class="left">
+					<h2>Contact Us</h2>
+					<ul>
+						<li>
+							<a href="#">s.hanke@aheron.de</a>
+						</li>
+						<li>
+							<a href="#">Phone: 000000000</a>
+						</li>
+						<li>
+							<a href="#">Feedback</a>
+						</li>
+					</ul>
+				</div>
+				<div class="clr">
+				</div>
 			</div>
 			<div class="clr">
 			</div>
-		</div>
-		<div class="clr">
-		</div>
 		</div>
 		}*
 		<div class="footer">

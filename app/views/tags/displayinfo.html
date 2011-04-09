@@ -28,7 +28,7 @@
 </p>
 	#{list items:_info?.tweets, as:'tweet'}
 		<div class="tweet">
-		<blockquote>${tweet.text.raw()}</blockquote>
+		<blockquote>${tweet.content.raw()}</blockquote>
 		</div>
 		<div class="clr"></div>
 	#{/list}

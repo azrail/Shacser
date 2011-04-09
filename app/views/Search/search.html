@@ -1,0 +1,25 @@
+#{extends 'main.html' /}
+#{set title:'Suchergebnisse für: ' + suchString /}
+#{set description:description /}
+#{set keywords:keywords /}
+
+ 
+*{********* Title ********* }*
+ 
+#{if posts.size() > 1}
+   <h3>${posts.size()} Artikel zu Ihrer Suche nach '${suchString}' gefunden</h3>  
+#{/if} 
+#{elseif posts}
+    <h3>${posts.size()} Artikel zu Ihrer Suche nach'${suchString}' gefunden</h3>  
+#{/elseif}
+#{else}
+    <h3>Kein Artikel zu Ihrer Suche nach '${suchString}' gefunden</h3>
+#{/else}
+ 
+*{********* Posts list *********}*
+ 
+<div class="older-posts">    
+    #{list items:posts, as:'post'}
+        #{display post:post, as:'teaser' /}
+    #{/list}
+</div>

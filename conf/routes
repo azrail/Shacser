@@ -29,6 +29,10 @@ GET     /admin/newSite                          AdminSites.form
 POST    /admin/newSite                          AdminSites.save
 *       /admin                                  module:crud
 
+#Suche
+POST	/search									Search.search
+GET		/search/{suchString}					Search.search
+
 #Updates
 GET		/update/tweets							Application.getTweets
 
