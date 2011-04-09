@@ -29,6 +29,9 @@ GET     /admin/newSite                          AdminSites.form
 POST    /admin/newSite                          AdminSites.save
 *       /admin                                  module:crud
 
+#Updates
+GET		/update/tweets							Application.getTweets
+
 # Import Secure routes
 *       /                                       module:secure
 

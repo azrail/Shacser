@@ -13,6 +13,7 @@ import play.data.binding.As;
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
 import play.db.jpa.Model;
+import play.modules.elasticsearch.annotations.ElasticSearchable;
 
 import com.petebevin.markdown.MarkdownProcessor;
 
@@ -20,7 +21,7 @@ import com.petebevin.markdown.MarkdownProcessor;
  * @author azrail
  * 
  */
-// @ElasticSearchable
+@ElasticSearchable
 @Entity
 public class Site extends Model {
 	

@@ -17,6 +17,8 @@ import models.Comment;
 import models.Info;
 import models.Post;
 import models.Site;
+import models.Tweet;
+import play.Logger;
 import play.Play;
 import play.cache.Cache;
 import play.data.validation.Required;
@@ -27,6 +29,11 @@ import play.libs.WS.HttpResponse;
 import play.libs.WS.WSRequest;
 import play.mvc.Before;
 import play.mvc.Controller;
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.conf.ConfigurationBuilder;
 import utils.StringUtils;
 
 import com.petebevin.markdown.MarkdownProcessor;
@@ -207,4 +214,30 @@ public class Application extends Controller {
 		String html_content = m.markdown(content);
 		render("Application/markdowPreview.html", html_content);
 	}
+	
+	//Workarround für die Probleme mit Elastic Search
+	//job ruft nun diese Funktion auf 
+	//TODO warte auf update von felipera
+	public static void getTweets() {
+		try {
+			ConfigurationBuilder cb = new ConfigurationBuilder();
+			cb.setDebugEnabled(true).setOAuthConsumerKey("plVnDxmytdmW4HJUZwQ03A").setOAuthConsumerSecret("JRirWTmypNeiWciylMefkdUszIatXQLqfJAbwSgVo").setOAuthAccessToken("275617481-A0N7Sb6HUhj8nXxko75fFDP6HxETSylROaYXvZ9z").setOAuthAccessTokenSecret("WE6MoRSD30eR96z7eLHyoPflJsK1tDTZl1ms5PxAA");
+			TwitterFactory tf = new TwitterFactory(cb.build());
+			Twitter twitter = tf.getInstance();
+			
+			List<Status> statuses = twitter.getUserTimeline();
+			for (Status status : statuses) {
+				Tweet checktweet = Tweet.find("tweetId", status.getId()).first();
+				if (checktweet == null) {
+					Tweet tweet = new Tweet(status.getId(), status.getText(), status.getCreatedAt(), status.getUser().getName());
+					Logger.debug("Tweet: %s", tweet.text + " -- " + tweet.tweetId + " --- " + tweet.createdAt + " --- " + tweet.user);
+					tweet.save();
+				}
+			}
+		} catch (TwitterException e) {
+			Logger.error(e, "TwitterException: %s", e.getLocalizedMessage());
+		}
+	}
+	
+	
 }
