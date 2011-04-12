@@ -18,12 +18,10 @@
 $(function() {
   $( "#search" ).autocomplete({
     source: function( request, response ) {
-      var wildcard = { "content": "*"+request.term+"*" };
-      var postData = {	"fields": ["id","title","_type"],
-						"query": {"wildcard": wildcard}};
-      var data = JSON.stringify(postData);
+      var wildcard = request.term;
+      var data = JSON.stringify(wildcard);
       $.ajax({
-        url: "http://localhost:9200/_search",
+        url: "@@{Search.searchPostsJson()}",
         type: "POST",
         dataType: "json",
         data: data,

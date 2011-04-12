@@ -16,23 +16,31 @@ import javax.persistence.OneToMany;
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
 import play.db.jpa.Model;
+import play.modules.search.Field;
+import play.modules.search.Indexed;
 
+import com.google.gson.annotations.Expose;
 import com.petebevin.markdown.MarkdownProcessor;
 
+@Indexed
 @Entity
 public class Post extends Model {
 	
+	@Field
 	@Required
 	public String			title;
 	
+	@Field
 	@Required
 	public Date				postedAt;
 	
+	@Field
 	@Lob
 	@Required
 	@MaxSize(10000)
 	public String			content;
 	
+	@Field
 	@Lob
 	@MaxSize(10000)
 	public String			description;
@@ -43,6 +51,7 @@ public class Post extends Model {
 	@MaxSize(15000)
 	public String			html_content;
 	
+	@Field
 	@Required
 	@ManyToOne
 	public User				author;
@@ -53,10 +62,11 @@ public class Post extends Model {
 	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
 	public List<GistFile>	gistFiles;
 	
-	
+	@Field
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	public Set<Tag>			tags;
 	
+	@Field
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	public Set<Keyword>		keywords;
 	

@@ -24,6 +24,17 @@ public class StringUtils {
 			return false;
 		}
 	}
+	
+	/**
+	 * Entfernt die erste und letzte stelle vom String
+	 * 
+	 * @param string Der zu überprüfende String
+	 * @return chopped String
+	 */
+	public static String chopFirstLast(String string) {
+		return string = string.substring(1, string.length() -1);
+	}
+	
 
 	public static String md5Hash(String text) {
 		MessageDigest md;

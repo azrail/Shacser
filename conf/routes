@@ -31,6 +31,7 @@ POST    /admin/newSite                          AdminSites.save
 
 #Suche
 POST	/search									Search.search
+POST	/searchPosts.json						Search.searchPostsJson
 GET		/search/{suchString}					Search.search
 
 #Updates

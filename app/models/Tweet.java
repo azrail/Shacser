@@ -8,18 +8,23 @@ import javax.persistence.Lob;
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
 import play.db.jpa.Model;
+import play.modules.search.Field;
+import play.modules.search.Indexed;
 
+@Indexed
 @Entity
 public class Tweet extends Model {
 	
 	@Required
 	public long		tweetId;
 	
+	@Field
 	@Lob
 	@Required
 	@MaxSize(2000)
 	public String	content;
 	
+	@Field
 	@Required
 	public Date		createdAt;
 	
