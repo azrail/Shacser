@@ -18,18 +18,21 @@
 $(function() {
   $( "#search" ).autocomplete({
     source: function( request, response ) {
-      var wildcard = request.term;
-      var data = JSON.stringify(wildcard);
+      var wildcard = { "content": "*"+request.term+"*" };
+      var postData = {	"fields": ["id","title","_type"],
+						"query": {"wildcard": wildcard}};
+      var data = JSON.stringify(postData);
       $.ajax({
-        url: "@@{Search.searchPostsJson()}",
+        url: "${searchurl}",
         type: "POST",
         dataType: "json",
         data: data,
         success: function( data) {
-          response( $.map( data , function( item ) {
+          response( $.map( data.hits.hits, function( item ) {
             return {
-              label: item.title,
-              id: item.id
+              label: item.fields.title,
+              id: item.fields.id,
+              model: item._type
             }
           }));
         }
@@ -38,6 +41,7 @@ $(function() {
     minLength: 1,
     select: function( event, ui ) {
       $("#search_id").val(ui.item.id);
+      $("#search_model").val(ui.item.model);
       $('#searchSubmit').trigger('click');
     },
     open: function() {
@@ -104,6 +108,7 @@ $(function() {
 								<span>
 									<input name="suchString" onFocus="if (this.value == this.defaultValue) this.value='';" onBlur="if (this.value == '') this.value=this.defaultValue;" type="text" class="keywords" id="search" maxlength="50" value="Suche...">
 									<input name="autoCompleteId" type="hidden" id="search_id" value="">
+									<input name="autoCompleteModel" type="hidden" id="search_model" value="">
 								</span>
 							</label>
 							<input name="b" type="image" id="searchSubmit" title="Suche" alt="Lupe" src="/public/images/suche.gif" class="button">

@@ -15,26 +15,22 @@ import play.Play;
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
 import play.db.jpa.Model;
-import play.modules.search.Field;
-import play.modules.search.Indexed;
+import play.modules.elasticsearch.annotations.ElasticSearchable;
 import play.mvc.Http.Request;
 import play.mvc.Router;
 import plugins.Akismet;
 import utils.StringUtils;
 
-@Indexed
 @Entity
+@ElasticSearchable
 public class Comment extends Model {
-	
-	@Field
+
 	@Required
 	public String	author;
-	
-	@Field
+
 	@Required
 	public Date		postedAt;
-	
-	@Field
+
 	@Lob
 	@Required
 	@MaxSize(10000)

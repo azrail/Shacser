@@ -34,9 +34,6 @@ POST	/search									Search.search
 POST	/searchPosts.json						Search.searchPostsJson
 GET		/search/{suchString}					Search.search
 
-#Updates
-GET		/update/tweets							Application.getTweets
-
 # Import Secure routes
 *       /                                       module:secure
 

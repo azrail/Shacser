@@ -8,3 +8,4 @@ logs
 server.pid
 tmp
 data
+modules
