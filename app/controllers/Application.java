@@ -17,8 +17,6 @@ import models.Comment;
 import models.Info;
 import models.Post;
 import models.Site;
-import models.Tweet;
-import play.Logger;
 import play.Play;
 import play.cache.Cache;
 import play.data.validation.Required;
@@ -29,17 +27,18 @@ import play.libs.WS.HttpResponse;
 import play.libs.WS.WSRequest;
 import play.mvc.Before;
 import play.mvc.Controller;
-import twitter4j.Status;
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
-import twitter4j.TwitterFactory;
-import twitter4j.conf.ConfigurationBuilder;
+import play.mvc.Http.Request;
+import play.mvc.Router;
+import play.mvc.Router.Route;
 import utils.StringUtils;
+import utils.UAgentInfo;
 
 import com.petebevin.markdown.MarkdownProcessor;
 
 public class Application extends Controller {
-	
+
+	static boolean	isIphone	= false;
+
 	@Before
 	static void addDefaults() {
 		renderArgs.put("blogTitle", Play.configuration.getProperty("blog.title"));
@@ -49,35 +48,51 @@ public class Application extends Controller {
 		renderArgs.put("autor", Play.configuration.getProperty("blog.autor"));
 		renderArgs.put("twitter", Play.configuration.getProperty("blog.twitter"));
 		renderArgs.put("searchurl", Play.configuration.getProperty("elasticsearch.url"));
+
+		String useragent = Request.current().headers.get("user-agent").value();
+		String accept = Request.current().headers.get("accept").value();
+
+		renderArgs.put("header.user-agent", useragent);
+		renderArgs.put("header.accept", accept);
+
+		UAgentInfo uai = new UAgentInfo(useragent, accept);
+		renderArgs.put("isIphone", uai.isTierIphone);
+
+		Application.isIphone = uai.isTierGenericMobile;
+
+//		if (isIphone && !Request.current().path.startsWith("/mobile")) {
+//			redirect("/mobile" + Request.current().path);
+//		}
+
 	}
-	
+
 	public static void rssFeedPosts() {
 		List<Post> posts = Post.find("order by postedAt desc").fetch();
 		response.contentType = "application/rss+xml; charset=utf-8";
 		render("feeds/FeedPosts.rss", posts);
 	}
-	
+
 	public static void index() {
 		Post frontPost = Post.find("order by postedAt desc").first();
 		List<Post> olderPosts = Post.find("order by postedAt desc").from(1).fetch(10);
 		Info info = new Info();
 		render(frontPost, olderPosts, info);
 	}
-	
+
 	public static void show(Long id) {
 		Post post = Post.findById(id);
 		String randomID = Codec.UUID();
 		Info info = new Info();
 		render(post, randomID, info);
 	}
-	
+
 	public static void site(Long id) {
 		Site site = Site.findById(id);
 		String randomID = Codec.UUID();
 		Info info = new Info();
 		render(site, randomID, info);
 	}
-	
+
 	public static void postComment(Long postId, @Required(message = "Author is required") String author, @Required(message = "A message is required") String content, String email, String url, String randomID) {
 		Post post = Post.findById(postId);
 		// if (!Play.id.equals("test")) {
@@ -92,6 +107,10 @@ public class Application extends Controller {
 		Cache.delete(randomID);
 		show(postId);
 	}
+
+	public static void elasticSearchBeispiel() {
+		render("Beispiele/elasticSearch.html");
+	}
 	
 	public static void captcha(String id) {
 		Images.Captcha captcha = Images.captcha();
@@ -99,32 +118,32 @@ public class Application extends Controller {
 		Cache.set(id, code, "30mn");
 		renderBinary(captcha);
 	}
-	
+
 	public static void gravatar(Long id) throws FileNotFoundException {
 		Comment comment = Comment.findById(id);
 		if (comment.email == null) {
 			File gravatar = play.Play.getFile("public/images/gravatar.jpg");
 			renderBinary(gravatar);
 		} else {
-			
+
 			String email = comment.email.trim().toLowerCase();
 			String gravatar = StringUtils.md5Hash(email);
-			
+
 			Map<String, File> files = new HashMap<String, File>();
 			Map<String, Boolean> test = new HashMap<String, Boolean>();
-			
+
 			File jpegDir = new File(Play.tmpDir + File.separator + "gravatar" + File.separator + "jpg");
 			File pngDir = new File(Play.tmpDir + File.separator + "gravatar" + File.separator + "png");
 			File gifDir = new File(Play.tmpDir + File.separator + "gravatar" + File.separator + "gif");
-			
+
 			jpegDir.mkdirs();
 			pngDir.mkdirs();
 			gifDir.mkdirs();
-			
+
 			files.put("jpeg", new File(jpegDir.getAbsoluteFile() + File.separator + gravatar));
 			files.put("png", new File(pngDir.getAbsoluteFile() + File.separator + gravatar));
 			files.put("gif", new File(gifDir.getAbsoluteFile() + File.separator + gravatar));
-			
+
 			Set<String> set = files.keySet();
 			for (String type : set) {
 				File file = files.get(type);
@@ -134,16 +153,16 @@ public class Application extends Controller {
 					test.put(type, false);
 				}
 			}
-			
+
 			if (!test.containsValue(true) && gravatar != null) {
 				WSRequest wsr = WS.url("http://www.gravatar.com/avatar/" + gravatar + "?s=50");
 				HttpResponse hr = wsr.get();
 				File file = files.get(hr.getContentType().substring(6));
-				
+
 				try {
 					InputStream inputStream = hr.getStream();
 					OutputStream out = new FileOutputStream(file);
-					
+
 					byte buf[] = new byte[1024];
 					int len;
 					while ((len = inputStream.read(buf)) > 0)
@@ -157,23 +176,23 @@ public class Application extends Controller {
 					e.printStackTrace();
 				}
 			}
-			
+
 			// String basepath = Play.tmpDir + File.separator + "gravatar" +
 			// File.separator;
-			
+
 			ArrayList<File> sfile = searchFile(new File(Play.tmpDir + File.separator + "gravatar" + File.separator), gravatar);
-			
+
 			// String gravpath =
 			// sfile.get(0).getAbsoluteFile().toString().replace(basepath, "");
 			// String[] type = gravpath.split("\\" + File.separator);
-			
+
 			renderBinary(sfile.get(0));
 		}
-		
+
 	}
-	
+
 	public static ArrayList<File> searchFile(File dir, String find) {
-		
+
 		File[] files = dir.listFiles();
 		ArrayList<File> matches = new ArrayList<File>();
 		if (files != null) {
@@ -188,13 +207,13 @@ public class Application extends Controller {
 		}
 		return matches;
 	}
-	
+
 	public static void listTagged(String tag) {
 		List<Post> posts = Post.findTaggedWith(tag);
 		Info info = new Info();
 		render(tag, posts, info);
 	}
-	
+
 	public static void robots() throws FileNotFoundException {
 		File robots = play.Play.getFile("public/robots.txt");
 		InputStream is = new FileInputStream(robots);
@@ -203,12 +222,12 @@ public class Application extends Controller {
 		response.contentType = "text/html";
 		response.direct = is;
 	}
-	
+
 	public static void rootFile(String file) throws FileNotFoundException {
-		File rootFile = play.Play.getFile("public/files/"+file);
+		File rootFile = play.Play.getFile("public/files/" + file);
 		renderBinary(rootFile);
 	}
-	
+
 	public static void markdowPreview() {
 		String content = Application.request.params.get("data").toString();
 		MarkdownProcessor m = new MarkdownProcessor();

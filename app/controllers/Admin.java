@@ -1,16 +1,20 @@
 package controllers;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.TreeSet;
 
 import models.GistFile;
+import models.Image;
 import models.Keyword;
 import models.Post;
 import models.Tag;
 import models.User;
 import play.Play;
+import play.db.jpa.Blob;
+import play.libs.Images;
 import play.libs.WS;
 import play.libs.WS.HttpResponse;
 import play.libs.WS.WSRequest;
@@ -48,15 +52,69 @@ public class Admin extends Controller {
 	@Check("posteroradmin")
 	public static void index() {
 		List<Post> posts = Post.find("author.email", Security.connected()).fetch();
-		render(posts);
+		List<Image> images = Image.findAll();
+		render(posts,images);
 	}
 	
+	@Check("posteroradmin")
+	public static void media() { 
+		List<Image> images = Image.findAll();
+		render(images);
+	} 
+	
+	public static void renderImage(Long id){ 
+		Image f = Image.findById(id); 
+	    renderBinary(f.file.get()); 
+	} 
+	public static void formImage(Long id) {
+		if (id != null) {
+			Image image = Image.findById(id);
+			render(image);
+		}
+		render();
+	}
 	public static void form(Long id) {
 		if (id != null) {
 			Post post = Post.findById(id);
 			render(post);
 		}
 		render();
+	}
+	
+	public static void saveImage(Long id, String title, String keywords, String description, Blob file) {
+		Image image;
+		
+		System.out.println(keywords);
+		System.out.println(description);
+		System.out.println(file);
+		if (id == null) {
+			User user = User.find("byEmail", Security.connected()).first();
+			image = new Image(user, title, description, file);
+		} else {
+			image = Image.findById(id);
+			image.title = title;
+			image.description = description;
+			if (file != null) {
+				image.file = file;
+			}
+			image.keywords.clear();
+		}
+
+		for (String keyword : keywords.split("\\s+")) {
+			if (keyword.trim().length() > 0) {
+				image.keywords.add(Keyword.findOrCreateByName(keyword));
+			}
+		}
+		
+		// Validate
+		validation.valid(image);
+		if (validation.hasErrors()) {
+			System.out.println(validation.errorsMap());
+			render("@formImage", image);
+		}
+		// Save
+		image.save();
+		media();
 	}
 	
 	public static void save(Long id, String title, String content, String description, String tags, String keywords, String gistId) {
@@ -143,6 +201,20 @@ public class Admin extends Controller {
 		
 		return fileContent;
 	}
+	
+//	public static void fileUpload(String title, Blob file, String keywords, String description) {
+//		User user = User.find("byEmail", Security.connected()).first();
+//
+//		Image img = new Image(user, title, description, file);
+//		
+//		for (String keyword : keywords.split("\\s+")) {
+//			if (keyword.trim().length() > 0) {
+//				img.keywords.add(Keyword.findOrCreateByName(keyword));
+//			}
+//		}
+//		
+//		img.save();
+//	}
 	
 	private static String removeFirstLastChar(String string) {
 		string = string.substring(1, string.length() - 1);

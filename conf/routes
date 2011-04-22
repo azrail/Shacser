@@ -16,6 +16,20 @@ GET     /site/{<[0-9]+>id}                     	Application.site
 GET		/impressum								Application.site(id:'1')
 GET		/datenschutz							Application.site(id:'2')
 
+
+#Demo
+GET		/elasticSearchBeispiel					Application.elasticSearchBeispiel
+
+# Mobile
+GET		/mobile/home                                   Mobile.index                                      	
+GET     /mobile/posts/{<[0-9]+>id}	            		Mobile.show
+GET     /mobile/posts/{tag}                            Application.listTagged
+POST    /mobile/posts/{<[0-9]+>postId}/comments        Application.postComment
+GET		/mobile/impressum								Mobile.site(id:'1')
+GET		/mobile/datenschutz							Mobile.site(id:'2')
+GET		/mobile									Mobile.index
+GET		/mobile/									Mobile.index
+
 # Adminstration
 GET     /admin/?                                Admin.index
 GET     /admin/myPosts/{id}                     Admin.form

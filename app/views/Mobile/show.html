@@ -1,0 +1,105 @@
+#{extends 'mobile.html' /}
+#{set title:post.title /}
+#{if post.description != null}
+	#{set description:post.description /}
+#{/if}
+#{else}
+	#{set description:description /}
+#{/else}
+#{if post.keywords != null}
+	#{set keywords:post.keywords.join(', ') /}
+#{/if}
+#{else}
+	#{set keywords:keywords /}
+#{/else}
+#{if flash.success}
+<p class="success">
+	${flash.success}
+</p>
+#{/if}
+
+<div data-role="page"> 
+ 
+	<div data-role="header" data-back-btn-text="Zurück"> 
+		<h1>${post.title}</h1> 
+		<a href="@{Mobile.index()}" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a> 
+	</div>
+ 
+	<div data-role="content">
+		
+			${post.html_content.raw()}	
+ 
+ 
+
+<div class="artikel-footer">
+	<strong>Thema:</strong>
+	#{list items:post.tags, as:'tag'}
+	<a class="tags" href="@{Application.listTagged(tag.name)}">
+	<strong>${tag}</strong>
+	</a>${tag_isLast ? '' : ', '}
+	#{/list}
+
+	<span>${post.author.fullname} | ${post.postedAt.format('dd.MM.yyyy','de')} um ${post.postedAt.format('HH:mm','de')}</span>
+</div>
+
+#{if post.previous() && post.next()}
+<div class="artikel-pagination">
+	#{if post.previous()}
+	<div class="previous">
+		<a href="@{Application.show(post.previous().id)}">${post.previous().title}</a>
+	</div>
+	#{/if}
+	<span>@</span>
+	#{if post.next()}
+	<div class="next">
+		<a href="@{Application.show(post.next().id)}">${post.next().title}</a>
+	</div>
+	#{/if}
+	<div class="clr">
+	</div>
+</div>
+#{/if}
+#{if post.previous() && !post.next()}
+<div class="artikel-previous">
+	<span><a href="@{Application.show(post.previous().id)}">${post.previous().title}</a></span>
+</div>
+#{/if}
+#{if !post.previous() && post.next()}
+<div class="artikel-next">
+	<span><a href="@{Application.show(post.next().id)}">${post.next().title}</a></span>
+</div>
+#{/if}
+<h3>${post.comments.size() ?: 'Kein'} Kommentar${post.comments.size().pluralize('','e')}</h3>
+<div class="kommentare" id="kommentare">
+	#{list items:post.comments, as:'comment'}
+	<div class="kommentar-numer">
+		${comment_index.format('00')}
+	</div>
+	<div class="kommentar">
+		<span id="autor-${comment.author.urlEncode()}-${comment_index.format('00')}">
+			#{if comment.hasURL()}
+			<a href="${comment.url}" target="_blank">${comment.author}</a>#{/if}#{else}${comment.author}#{/else}
+		</span>
+		<blockquote>
+			<img class="gravatar" src="@{Application.gravatar(comment.id)}" width="30" height="30" align="right" title="${comment.author} schreibt" alt="Bild von ${comment.author}" />
+			${comment.content.raw().nl2br()}
+		</blockquote>
+		<em>${comment.postedAt.format('dd.MM.yyyy','de')} um ${comment.postedAt.format('HH:mm','de')}</em>
+	</div>
+	<div class="clr">
+	</div>
+	*{
+	<div class="comment">
+		<div class="comment-metadata" id="autor-${comment.author.urlEncode()}">
+			<span class="comment-author">by ${comment.author},</span>
+			<span class="comment-date">${comment.postedAt.format('dd MMM yy')}</span>
+		</div>
+		<div class="comment-content">
+		</div>
+	</div>}*
+	#{/list}
+</div>
+ 
+ 
+	</div>
+</div>

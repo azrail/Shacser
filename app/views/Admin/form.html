@@ -1,13 +1,25 @@
 #{extends 'admin.html' /}
  
-#{ifnot post?.id}
-    <h3>Write, <span>a new post</span></h3>
-#{/ifnot}
-#{else}
-    <h3>Edit, <span>this post</span></h3>
-#{/else}
- 
-#{form @save(post?.id)}
+ <div class="header_text_bg">
+	<div class="header_text">
+		<h2>Welcome ${user}<br>
+			#{ifnot post?.id}
+    		<span>Write a new post</span>
+			#{/ifnot}
+			#{else}
+    		<span>Editiere ${post?.title}</span>
+			#{/else}
+		</h2>
+		<div class="clr">
+		</div>
+	</div>
+	<div class="clr">
+	</div>
+</div>
+
+<div class="body">
+<div class="form"> 
+#{form @save(post?.id) }
  
     #{ifErrors}
         <p class="error">
@@ -64,3 +76,6 @@
     </p>
     
 #{/form}
+</div>
+
+</div>

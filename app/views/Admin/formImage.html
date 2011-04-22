@@ -1,0 +1,66 @@
+#{extends 'admin.html' /}
+ 
+ <div class="header_text_bg">
+	<div class="header_text">
+		<h2>Hallo ${user}<br>
+			#{ifnot image?.id}
+    		<span>Lade ein neues Bild hoch</span>
+			#{/ifnot}
+			#{else}
+    		<span>Editiere ${image?.title}</span>
+			#{/else}
+		</h2>
+		<div class="clr">
+		</div>
+	</div>
+	<div class="clr">
+	</div>
+</div>
+
+<div class="body">
+<div class="form"> 
+#{form @saveImage(image?.id), id:'contactform', enctype:'multipart/form-data' }
+        <ol>
+        	#{ifErrors}
+        	<li class="error">
+        		<label for="error">Fehler aufgetreten</label> 
+        	  	<p class="text">Please correct these errors.</p>
+        	  	<ul>
+        	  	#{errors}
+    				<li>${error_index} ${error}</li>
+				#{/errors}
+				</ul>
+        	</li>
+        	#{/ifErrors}
+        	#{field 'title'}
+        	<li>
+        		<label for="${field.name}">Titel <span class="red">*</span></label> 
+        	  	<input type="text" name="${field.name}" id="${field.name}" value="${image?.title}" class="text ${field.errorClass}">
+        	</li>
+        	#{/field}
+        	#{field 'keywords'}
+        	<li>
+        		<label for="${field.name}">Keywords <span class="red">*</span></label> 
+        	  	<input type="text" name="${field.name}" id="${field.name}" value="${image?.keywords?.join(' ')}" class="text ${field.errorClass}">
+        	</li>
+        	#{/field}
+        	#{field 'description'}  
+			<li>
+        		<label for="${field.name}">Beschreibung<span class="red">*</span></label> 
+        	  	<textarea name="${field.name}" rows="6" cols="50" id="Image-${field.name}" class="${field.errorClass}">${image?.description}</textarea>
+        	</li>
+        	#{/field}
+			<li>
+        		<label for="file">Datei<span class="red">*</span></label> 
+        	  	<input type="file" name="file" id="file" value="${image?.file}" class="file">
+        	</li>
+			<li class="buttons"> 
+				<input type="image" name="imageField" alt="Formular Absenden" title="Upload!" id="imageField" src="/public/images/send.gif" class="send"> 
+				<div class="clr"> 
+				</div> 
+			</li>
+		</ol>
+#{/form}
+</div>
+
+</div>

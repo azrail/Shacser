@@ -1,0 +1,97 @@
+<!doctype html>  
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title>Elasticsearch Beispiel: Javascript autocomplete mit Elasticsearch und jQuery UI</title>
+  
+	<meta name="description" content="Elasticsearch ist eine Schemafreie, RESTful und extrem schnelle Suchmaschine die auf Lucine basiert, sie skaliert sehr gut und es gibt ein super Modul von Felipe Oliveira für das Play Framework.">
+	<meta name="keywords" content="Demo,Beispiel,Javascript,Elasticsearch,jQuery-UI,Playframework,jQuery,Tutorial">
+	<meta name="author" content="Sascha Hanke">
+
+	<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/themes/smoothness/jquery-ui.css" />
+
+	<style>
+		#mainElasticSearch {
+			padding: 10px;
+			width: 600px;
+			height: auto;
+			position:absolute;
+			left:25%;
+			top:25%;
+			margin: 0 auto;
+		}
+	</style>
+
+</head>
+
+<body>
+
+  <div id="container">
+    
+    <div id="mainElasticSearch">
+    	<img width="300" height="300" style="float: left; margin-right:20px;" title="Bonsai" alt="Bonsai, Maskottchen von Elasticsearch, einem Aufsatz für Lucene mit Rest/Json Backend" src="/admin/renderimage?id=11">
+		<form id="form1" name="form1" method="post" action="/search">
+			<label>
+				<span>
+					<input name="suchString" onFocus="if (this.value == this.defaultValue) this.value='';" onBlur="if (this.value == '') this.value=this.defaultValue;" type="text" class="keywords" id="search" maxlength="50" value="Suche...">
+					<input name="autoCompleteId" type="hidden" id="search_id" value="">
+					<input name="autoCompleteModel" type="hidden" id="search_model" value="">
+				</span>
+			</label>
+			<input name="b" type="image" id="searchSubmit" title="Suche" alt="Lupe"  width="30" height="20"  src="/public/beispiele/suche.jpg" class="button">
+		</form>
+		<br>
+		<blockquote> 
+			<p><strong><a href="http://www.elasticsearch.org/" title="Elasticsearch">Elasticsearch</a></strong> ist eine Schemafreie, RESTful und extrem schnelle Suchmaschine die auf Lucene basiert, sie skaliert sehr gut und es gibt ein super <a href="http://www.playframework.org/modules/elasticsearch" title="Elasticsearch Modul für das Play Framework">Modul</a> von <a href="http://geeks.aretotally.in/" title="">Felipe Oliveira</a> für das <strong>Play Framework</strong>.</p> 
+		</blockquote> 
+		<p>Um direkt anzufangen sollte Elasticsearch schon laufen und ein paar Dokumente indiziert haben, Beispielcode gibt es von Felipe und mir auf <a href="https://github.com/mashup-fm/play-elasticsearch-twitter-demo" title="play-elasticsearch-twitter-demo">Github</a> oder der <a href="http://geeks.aretotally.in/play-elastic-search-module-new-0-0-5-release-with-screencast" title="play elastic search module new 0.0.5 release with screencast">Screencast</a> zum 0.0.5 Release des Elasticsearch Play Modules.</p>     </div>
+  </div> 
+  
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js"></script>
+  
+		<!-- Search Autocomplete -->
+		<script>
+$(function() {
+  $( "#search" ).autocomplete({
+    source: function( request, response ) {
+      var wildcard = { "content": "*"+request.term+"*" };
+      var postData = {	"fields": ["id","title","_type"],
+						"query": {"wildcard": wildcard}};
+      var data = JSON.stringify(postData);
+      $.ajax({
+        url: "${searchurl}",
+        type: "POST",
+        dataType: "json",
+        data: data,
+        success: function( data) {
+          response( $.map( data.hits.hits, function( item ) {
+            return {
+              label: item.fields.title,
+              id: item.fields.id,
+              model: item._type
+            }
+          }));
+        }
+      });
+    },
+    minLength: 1,
+    select: function( event, ui ) {
+      $("#search_id").val(ui.item.id);
+      $("#search_model").val(ui.item.model);
+      $('#searchSubmit').trigger('click');
+    },
+    open: function() {
+      $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+    },
+    close: function() {
+          $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+    }
+  })
+});
+		</script>
+		<!-- End Autocomplete -->
+
+</body>
+</html>

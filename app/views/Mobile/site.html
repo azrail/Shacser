@@ -1,0 +1,11 @@
+
+<div data-role="page">
+	<div data-role="header"> 
+		<h1>${site.title}</h1> 
+		<a href="@{Mobile.index()}" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Home</a> 
+	</div>
+ 
+	<div data-role="content">
+			${site.html_content.raw()}	
+	</div>
+</div>

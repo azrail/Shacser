@@ -1,0 +1,26 @@
+#{extends 'admin.html' /}
+
+<div class="header_text_bg">
+	<div class="header_text">
+		<h2>Hallo ${user}<br>
+			<span>es stehen dir ${images.size() ?: 'no'} ${images.pluralize('Bilder', 'Bilder')} zur verfügung</span>
+		</h2>
+		<div class="clr">
+		</div>
+	</div>
+	<div class="clr">
+	</div>
+</div>
+
+<div class="body">		
+#{list items:images, as:'image'}
+<p class="image ${image_parity}" style="weight=150px;">
+	<a href="@{formImage(image.id)}"><img width="150" height="150" title="${image.title} - ${image?.description}" alt="${image.title} - ${image?.description}" src="@{Admin.renderImage(image.id)}"></a>
+	<br>
+	<input type="text" value="${image?.getLink()}">
+</p>
+#{/list}
+<p id="newPost" >
+    <a href="@{formImage()}"><span>+</span> upload a new Image</a>
+</p>
+</div>
