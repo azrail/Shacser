@@ -92,6 +92,26 @@ $(function() {
 });
 		</script>
 		<!-- End Autocomplete -->
-
+		
+		
+		<!-- Start Piwik -->
+		<script>
+	var pkBaseURL = (("https:" == document.location.protocol) ? "https://bumblebee.aheron.de/stats/" : "http://bumblebee.aheron.de/stats/");
+	document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+		<script>
+	try {
+		var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
+		piwikTracker.trackPageView();
+		piwikTracker.enableLinkTracking();
+	} catch( err ) {
+	}
+		</script>
+		<noscript>
+			<p class="piwik">
+				<img src="http://bumblebee.aheron.de/stats/piwik.php?idsite=1" width="1" height="1" alt="piwik pixel, ignore it" />
+			</p>
+		</noscript>
+		<!-- Ende Piwik Tracking Code -->
 </body>
 </html>
