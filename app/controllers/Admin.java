@@ -84,9 +84,7 @@ public class Admin extends Controller {
 	public static void saveImage(Long id, String title, String keywords, String description, Blob file) {
 		Image image;
 		
-		System.out.println(keywords);
-		System.out.println(description);
-		System.out.println(file);
+		
 		if (id == null) {
 			User user = User.find("byEmail", Security.connected()).first();
 			image = new Image(user, title, description, file);
@@ -105,6 +103,7 @@ public class Admin extends Controller {
 				image.keywords.add(Keyword.findOrCreateByName(keyword));
 			}
 		}
+
 		
 		// Validate
 		validation.valid(image);

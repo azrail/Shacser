@@ -55,6 +55,7 @@ public abstract class File extends Model {
 		this.author = author;
 		this.title = title;
 		this.type = type;
+		this.description = description;
 		this.file = file;
 		this.postedAt = new Date();
 	}
