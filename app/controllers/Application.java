@@ -49,10 +49,11 @@ public class Application extends Controller {
 		renderArgs.put("twitter", Play.configuration.getProperty("blog.twitter"));
 		renderArgs.put("searchurl", Play.configuration.getProperty("elasticsearch.url"));
 
-		String useragent = Request.current().headers.get("user-agent").value();
+		String useragent = "";
 		String accept = "";
 
 		try {
+			useragent = Request.current().headers.get("user-agent").value();
 			accept = Request.current().headers.get("accept").value();
 		} catch (NullPointerException e) {
 			// TODO: handle exception
