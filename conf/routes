@@ -56,6 +56,7 @@ GET     /public/                                staticDir:public
 GET 	/robots.txt  							Application.robots
 GET 	/BingSiteAuth.xml						Application.rootFile(file:'BingSiteAuth.xml')
 GET 	/y_key_da8c3295baa76f5c.html			Application.rootFile(file:'YahoSiteAuth.html')
+GET 	/google5c19f19d6e2501b6.html			Application.rootFile(file:'GoogleSiteAuth.html')
 
 POST 	/markdowPreview 						Application.markdowPreview
 
