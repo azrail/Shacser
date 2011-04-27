@@ -50,8 +50,15 @@ public class Application extends Controller {
 		renderArgs.put("searchurl", Play.configuration.getProperty("elasticsearch.url"));
 
 		String useragent = Request.current().headers.get("user-agent").value();
-		String accept = Request.current().headers.get("accept").value();
+		String accept = "";
 
+		try {
+			accept = Request.current().headers.get("accept").value();
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+		}
+		
+		
 		renderArgs.put("header.user-agent", useragent);
 		renderArgs.put("header.accept", accept);
 
