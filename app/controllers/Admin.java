@@ -62,6 +62,7 @@ public class Admin extends Controller {
 		render(images);
 	} 
 	
+	@Check("free")
 	public static void renderImage(Long id){ 
 		Image f = Image.findById(id); 
 	    renderBinary(f.file.get()); 
