@@ -66,7 +66,8 @@ public class Admin extends Controller {
 	public static void renderImage(Long id){ 
 		Image f = Image.findById(id); 
 	    renderBinary(f.file.get()); 
-	} 
+	}
+	
 	public static void formImage(Long id) {
 		if (id != null) {
 			Image image = Image.findById(id);

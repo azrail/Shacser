@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Set;
 
 import models.Comment;
+import models.Image;
 import models.Info;
 import models.Post;
 import models.Site;
@@ -74,6 +75,12 @@ public class Application extends Controller {
 
 	}
 
+	public static void renderImage(Long id){ 
+		Image f = Image.findById(id); 
+	    renderBinary(f.file.get()); 
+	}
+	
+	
 	public static void rssFeedPosts() {
 		List<Post> posts = Post.find("order by postedAt desc").fetch();
 		response.contentType = "application/rss+xml; charset=utf-8";
