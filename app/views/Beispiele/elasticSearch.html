@@ -30,7 +30,7 @@
   <div id="container">
     
     <div id="mainElasticSearch">
-    	<img width="300" height="300" style="float: left; margin-right:20px;" title="Bonsai" alt="Bonsai, Maskottchen von Elasticsearch, einem Aufsatz für Lucene mit Rest/Json Backend" src="/admin/renderimage?id=1">
+    	<img width="300" height="300" style="float: left; margin-right:20px;" title="Bonsai" alt="Bonsai, Maskottchen von Elasticsearch, einem Aufsatz für Lucene mit Rest/Json Backend" src="@@{Application.renderImage(1)}">
 		<form id="form1" name="form1" method="post" action="/search">
 			<label>
 				<span>
@@ -45,7 +45,7 @@
 		<blockquote> 
 			<p><strong><a href="http://www.elasticsearch.org/" title="Elasticsearch">Elasticsearch</a></strong> ist eine Schemafreie, RESTful und extrem schnelle Suchmaschine die auf Lucene basiert, sie skaliert sehr gut und es gibt ein super <a href="http://www.playframework.org/modules/elasticsearch" title="Elasticsearch Modul für das Play Framework">Modul</a> von <a href="http://geeks.aretotally.in/" title="">Felipe Oliveira</a> für das <strong>Play Framework</strong>.</p> 
 		</blockquote> 
-		<p>Um direkt anzufangen sollte Elasticsearch schon laufen und ein paar Dokumente indiziert haben, Beispielcode gibt es von Felipe und mir auf <a href="https://github.com/mashup-fm/play-elasticsearch-twitter-demo" title="play-elasticsearch-twitter-demo">Github</a> oder der <a href="http://geeks.aretotally.in/play-elastic-search-module-new-0-0-5-release-with-screencast" title="play elastic search module new 0.0.5 release with screencast">Screencast</a> zum 0.0.5 Release des Elasticsearch Play Modules.</p>     </div>
+		<p>Um direkt anzufangen sollte Elasticsearch schon laufen und ein paar Dokumente indiziert haben, Beispielcode gibt es von Felipe und mir auf <a href="https://github.com/mashup-fm/play-elasticsearch-twitter-demo" title="play-elasticsearch-twitter-demo">Github</a> oder der <a href="http://geeks.aretotally.in/play-elastic-search-module-new-0-0-5-release-with-screencast" title="play elastic search module new 0.0.5 release with screencast">Screencast</a> zum 0.0.5 Release des Elasticsearch Play Modules.</p>  <a href="@@{Application.post(5)}" title="Autocomplete mit Elasticsearch und jQuery UI">[weiter]</a>   </div>
   </div> 
   
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
