@@ -90,7 +90,7 @@ ${_post.html_content.raw()}
 	<span><a href="@{Application.show(_post.next().id)}">${_post.next().title}</a></span>
 </div>
 #{/if}
-<h3>${_post.comments.size() ?: 'Kein'} Kommentar${_post.comments.size().pluralize('','e')}</h3>
+<h3>${_post.getComments().size() ?: 'Kein'} Kommentar${_post.getComments().size().pluralize('','e')}</h3>
 <div class="kommentare" id="kommentare">
 	#{list items:_post.comments, as:'comment'}
 	#{if !comment.spam}

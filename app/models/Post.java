@@ -91,6 +91,10 @@ public class Post extends Model {
 		return this;
 	}
 	
+	public List<Comment> getComments() {
+		return Comment.find("spam = ? and post_id = ? order by postedAt desc", false, this.id).fetch();
+	}
+	
 	public Post previous() {
 		return Post.find("postedAt < ? order by postedAt desc", postedAt).first();
 	}
