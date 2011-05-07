@@ -52,6 +52,8 @@ POST	/search									Search.search
 POST	/searchPosts.json						Search.searchPostsJson
 GET		/search/{suchString}					Search.search
 
+# Import Messagin Plugin routes
+*       /                                       module:messages
 # Import Secure routes
 *       /                                       module:secure
 
