@@ -15,43 +15,43 @@
 		<script src="@{'/public/javascripts/jquery.tools.min.js'}"></script>
 		<!-- Search Autocomplete -->
 		<script>
-$(function() {
-  $( "#search" ).autocomplete({
-    source: function( request, response ) {
-      var wildcard = { "content": "*"+request.term+"*" };
-      var postData = {	"fields": ["id","title","_type"],
-						"query": {"wildcard": wildcard}};
-      var data = JSON.stringify(postData);
-      $.ajax({
-        url: "${searchurl}",
-        type: "POST",
-        dataType: "json",
-        data: data,
-        success: function( data) {
-          response( $.map( data.hits.hits, function( item ) {
-            return {
-              label: item.fields.title,
-              id: item.fields.id,
-              model: item._type
-            }
-          }));
-        }
-      });
-    },
-    minLength: 1,
-    select: function( event, ui ) {
-      $("#search_id").val(ui.item.id);
-      $("#search_model").val(ui.item.model);
-      $('#searchSubmit').trigger('click');
-    },
-    open: function() {
-      $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
-    },
-    close: function() {
-          $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
-    }
-  })
-});
+		$(function() {
+		  $( "#search" ).autocomplete({
+		    source: function( request, response ) {
+		      var wildcard = { "content": "*"+request.term+"*" };
+		      var postData = {	"fields": ["id","title","_type"],
+								"query": {"wildcard": wildcard}};
+		      var data = JSON.stringify(postData);
+		      $.ajax({
+		        url: "${searchurl}",
+		        type: "POST",
+		        dataType: "json",
+		        data: data,
+		        success: function( data) {
+		          response( $.map( data.hits.hits, function( item ) {
+		            return {
+		              label: item.fields.title,
+		              id: item.fields.id,
+		              model: item._type
+		            }
+		          }));
+		        }
+		      });
+		    },
+		    minLength: 1,
+		    select: function( event, ui ) {
+		      $("#search_id").val(ui.item.id);
+		      $("#search_model").val(ui.item.model);
+		      $('#searchSubmit').trigger('click');
+		    },
+		    open: function() {
+		      $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+		    },
+		    close: function() {
+		          $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+		    }
+		  })
+		});
 		</script>
 		<!-- End Autocomplete -->
 	</head>
@@ -103,14 +103,14 @@ $(function() {
 						</ul>
 					</div>
 					<div class="search">
-						<form id="form1" name="form1" method="post" action="/search">
+						<form id="suche" name="Suche" method="post" action="/search">
 							<label>
 								<span>
 									<input name="suchString" onFocus="if (this.value == this.defaultValue) this.value='';" onBlur="if (this.value == '') this.value=this.defaultValue;" type="text" class="keywords" id="search" maxlength="50" value="Suche...">
-									<input name="autoCompleteId" type="hidden" id="search_id" value="">
-									<input name="autoCompleteModel" type="hidden" id="search_model" value="">
 								</span>
 							</label>
+							<input name="autoCompleteId" type="hidden" id="search_id" value="">
+							<input name="autoCompleteModel" type="hidden" id="search_model" value="">
 							<input name="b" type="image" id="searchSubmit" title="Suche" alt="Lupe" src="/public/images/suche.gif" class="button">
 						</form>
 					</div>
@@ -286,7 +286,8 @@ $(function() {
 					© ${autor}.
 					<a href="@{Application.index()}">Home</a> |
 					<a id="facebookconnect" href="/impressum">Kontakt</a> |
-					<a href="http://feeds.feedburner.com/YabDasTechnikBlog">RSS Feed</a> | #{fbconnect.button label:'Login',scope:'email,user_about_me' /}
+					<a href="http://feeds.feedburner.com/YabDasTechnikBlog">RSS Feed</a> | 
+					<a href="https://www.facebook.com/dialog/oauth&amp;client_id=119008341506791&display=page&redirect_uri=http%3A%2F%2Fblog.aheron.de%2Ffbconnect%2Foauth%2Fcallback&scope=email%2Cuser_about_me">Login</a>
 				</p>
 				<p class="right">
 					<a href="http://www.playframework.org" hreflang="en" title="The Play framework makes it easier to build Web applications with Java">

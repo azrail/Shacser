@@ -3,20 +3,23 @@
 # ~~~~
 
 # Home page
-GET		/home                                   Application.index
-GET		/                                      	Application.index
-GET     /posts/{<[0-9]+>id}	            		Application.show
-GET     /posts/{tag}                            Application.listTagged
-POST    /posts/{<[0-9]+>postId}/comments        Application.postComment
-GET		/posts.rss								Application.rssFeedPosts
-GET		/sites.rss								Application.sitefeed
-GET     /captcha                                Application.captcha
-GET     /gravatar/{<[0-9]+>id}	                Application.gravatar
-GET     /site/{<[0-9]+>id}                     	Application.site
-GET		/impressum								Application.site(id:'1')
-GET		/datenschutz							Application.site(id:'2')
-GET     /artikel/bilder/{<[0-9]+>id}/{title}    Application.renderImage
-GET     /artikel/bilder/{<[0-9]+>id}            Application.renderImage
+GET		/home                                   		Application.index
+GET		/                                      			Application.index
+GET     /post/{<[0-9]+>id}	            				Application.show
+GET     /{year}/{month}/{day}/{slugurl}/				Application.show
+#GET    /{seoURL}/{<[0-9]+>id}	        	    		Application.show
+#GET     /posts/{<[0-9]+>id}	            			Application.show
+GET     /tag/{tag}                            			Application.listTagged
+POST    /post/{<[0-9]+>postId}/comments        			Application.postComment
+GET		/posts.rss										Application.rssFeedPosts
+GET		/sites.rss										Application.sitefeed
+GET     /captcha                                		Application.captcha
+GET     /gravatar/{<[0-9]+>id}	                		Application.gravatar
+GET     /site/{<[0-9]+>id}                     			Application.site
+GET		/impressum										Application.site(id:'1')
+GET		/datenschutz									Application.site(id:'2')
+GET     /post/picture/{<[0-9]+>id}/{title}    			Application.renderImage
+GET     /post/picture/{<[0-9]+>id}            			Application.renderImage
 
 
 #Demo

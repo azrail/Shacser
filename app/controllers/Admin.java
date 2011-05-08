@@ -22,6 +22,8 @@ import play.libs.ws.WSAsync.WSAsyncRequest;
 import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.With;
+import play.templates.JavaExtensions;
+import utils.StringUtils;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -131,7 +133,7 @@ public class Admin extends Controller {
 			post.content = content;
 			post.description = description;
 			post.gistId = gistId;
-			
+			post.slugurl = JavaExtensions.slugify(title, true);;
 			if (gistId != null && gistId.length() > 0) {
 				
 				WSRequest wsr = WS.url("https://gist.github.com/api/v1/json/" + gistId);

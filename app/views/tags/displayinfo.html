@@ -5,7 +5,7 @@
 <ul class="rechte-navigation">
 	#{list items:_info?.posts, as:'post'}
 	<li>
-		<a href="@{Application.show(post.id)}">${post.title}</a>
+		<a href="@{Application.show(post.postedAt.format('yyyy'),post.postedAt.format('MM'),post.postedAt.format('dd'),post.title.slugify())}">${post.title}</a>
 	</li>
 	#{/list}
 </ul>

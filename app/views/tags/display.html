@@ -1,9 +1,9 @@
 *{ Display a post in one of these modes: 'full', 'home' or 'teaser' }*
 <div class="artikel-ueberschrift">
 	<h1>
-	<a href="@{Application.show(_post.id)}">${_post.title}</a>
+	<a href="@{Application.show(_post.postedAt.format('yyyy'),_post.postedAt.format('MM'),_post.postedAt.format('dd'),_post.title.slugify())}">${_post.title}</a>
 	</h1>
-	<a class="kommentarlink" href="@{Application.show(_post.id)}#kommentare">
+	<a class="kommentarlink" href="@{Application.show(_post.postedAt.format('yyyy'),_post.postedAt.format('MM'),_post.postedAt.format('dd'),_post.title.slugify())}#kommentare">
 	<span>${_post.comments.size()}</span>
 	</a>
 	<div class="clr">

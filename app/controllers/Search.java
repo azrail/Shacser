@@ -38,7 +38,7 @@ public class Search extends Controller {
 		if (!StringUtils.nullCheck(autoCompleteModel) && !LongUtils.nullCheck(autoCompleteId)) {
 			if (autoCompleteModel.equals("models_post")) {
 				Post post = Post.findById(autoCompleteId);
-				Application.show(post.id);
+				Application.show(post.getYear(), post.getMonth(), post.getDay(), post.slugurl, post.id);
 			}
 		} else {
 			Client client = ElasticSearch.client();
@@ -54,7 +54,7 @@ public class Search extends Controller {
 				Info info = new Info();
 				render(suchString, posts, info);
 			} else {
-				Application.show(posts.get(0).id);
+				Application.show(posts.get(0).getYear(), posts.get(0).getMonth(), posts.get(0).getDay(), posts.get(0).slugurl, posts.get(0).id);
 			}
 		}
 	}

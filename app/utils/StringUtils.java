@@ -55,6 +55,11 @@ public class StringUtils {
 		return null;
 	}
 	
+	public static String seoURL(String string) {
+		string = string.replaceAll(" ", "_");
+		return string;
+	}
+	
 	/**
 	 * Replaces all text Smilies with the Smilie Images
 	 * 

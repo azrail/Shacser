@@ -18,6 +18,8 @@ import play.data.validation.Required;
 import play.db.jpa.Model;
 import play.modules.elasticsearch.annotations.ElasticSearchIgnore;
 import play.modules.elasticsearch.annotations.ElasticSearchable;
+import play.templates.JavaExtensions;
+import utils.StringUtils;
 
 import com.petebevin.markdown.MarkdownProcessor;
 
@@ -27,6 +29,8 @@ public class Post extends Model {
 	
 	@Required
 	public String			title;
+
+	public String			slugurl;
 	
 	@Required
 	public Date				postedAt;
@@ -70,11 +74,24 @@ public class Post extends Model {
 		this.keywords = new TreeSet();
 		this.author = author;
 		this.title = title;
+		this.slugurl = JavaExtensions.slugify(title, true);
 		this.content = content;
 		this.postedAt = new Date();
 		this.gistId = gistId;
 		MarkdownProcessor m = new MarkdownProcessor();
 		html_content = m.markdown(content);
+	}
+	
+	public String getYear() {
+		return Integer.toString(this.postedAt.getYear());
+	}
+	
+	public String getMonth() {
+		return Integer.toString(this.postedAt.getMonth());
+	}
+	
+	public String getDay() {
+		return Integer.toString(this.postedAt.getDay());
 	}
 	
 	public Post addComment(String author, String content, String email, String url) {
