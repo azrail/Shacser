@@ -8,8 +8,9 @@ GET		/                                      			Application.index
 GET     /{year}/{month}/{day}/{slugurl}/				Application.show
 GET     /posts/{<[0-9]+>id}	            				Application.showOld
 #GET    /{seoURL}/{<[0-9]+>id}	        	    		Application.show
-#GET     /posts/{<[0-9]+>id}	            			Application.show
+#GET    /posts/{<[0-9]+>id}	            				Application.show
 GET     /tag/{tag}                            			Application.listTagged
+GET     /posts/{tag}                            		Application.listTaggedOld
 POST    /post/{<[0-9]+>postId}/comments        			Application.postComment
 GET		/posts.rss										Application.rssFeedPosts
 GET		/sites.rss										Application.sitefeed

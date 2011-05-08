@@ -236,6 +236,9 @@ public class Application extends Controller {
 		Info info = new Info();
 		render(tag, posts, info);
 	}
+	public static void listTaggedOld(String tag) {
+		redirect("Application.listTagged", tag);
+	}
 
 	public static void robots() throws FileNotFoundException {
 		File robots = play.Play.getFile("public/robots.txt");
