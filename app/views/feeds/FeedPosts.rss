@@ -12,9 +12,9 @@
 		<item>
 			<title>${post.title.escapeXml()}</title>
 			<description>${post.html_content.escapeXml()}</description>
-			<link>@@{Application.show(post.id)}</link>
+			<link>@@{Application.show(post.postedAt.format('yyyy'),post.postedAt.format('MM'),post.postedAt.format('dd'),post.title.slugify())}</link>
 			<author>${post.author.email.escapeXml()} (${post.author.fullname.escapeXml()})</author>
-			<guid>@@{Application.show(post.id)}</guid>
+			<guid>@@{Application.show(post.postedAt.format('yyyy'),post.postedAt.format('MM'),post.postedAt.format('dd'),post.title.slugify())}</guid>
 			<pubDate>${post.postedAt.format("EEE, dd MMM yyyy HH:mm:ss Z", 'en')}</pubDate>
 		</item>
 		#{/list}
