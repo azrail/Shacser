@@ -103,9 +103,10 @@ public class Application extends Controller {
 	
 	public static void showOld(Long id) {
 		Post post = Post.findById(id);
-		String randomID = Codec.UUID();
-		Info info = new Info();
-		render(post, randomID, info);
+		//String randomID = Codec.UUID();
+		//Info info = new Info();
+		redirect("Application.show", post.getYear(), post.getMonth(), post.getDay(), post.slugurl);
+		//render("Application/show.html", post, randomID, info);
 	}
 	
 	public static void site(Long id) {

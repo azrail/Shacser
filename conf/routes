@@ -6,7 +6,7 @@
 GET		/home                                   		Application.index
 GET		/                                      			Application.index
 GET     /{year}/{month}/{day}/{slugurl}/				Application.show
-GET     /post/{<[0-9]+>id}	            				Application.showOld
+GET     /posts/{<[0-9]+>id}	            				Application.showOld
 #GET    /{seoURL}/{<[0-9]+>id}	        	    		Application.show
 #GET     /posts/{<[0-9]+>id}	            			Application.show
 GET     /tag/{tag}                            			Application.listTagged

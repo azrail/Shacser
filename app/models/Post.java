@@ -13,6 +13,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.elasticsearch.common.joda.Joda;
+
 import play.data.validation.MaxSize;
 import play.data.validation.Required;
 import play.db.jpa.Model;
@@ -83,15 +85,16 @@ public class Post extends Model {
 	}
 	
 	public String getYear() {
-		return Integer.toString(this.postedAt.getYear());
+
+		return JavaExtensions.format(this.postedAt,"yyyy");
 	}
 	
 	public String getMonth() {
-		return Integer.toString(this.postedAt.getMonth());
+		return JavaExtensions.format(this.postedAt,"MM");
 	}
 	
 	public String getDay() {
-		return Integer.toString(this.postedAt.getDay());
+		return JavaExtensions.format(this.postedAt,"dd");
 	}
 	
 	public Post addComment(String author, String content, String email, String url) {
