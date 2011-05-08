@@ -94,8 +94,15 @@ public class Application extends Controller {
 		render(frontPost, olderPosts, info);
 	}
 	
-	public static void show(String year, String month, String day, String slugurl, Long id) {
+	public static void show(String year, String month, String day, String slugurl) {
 		Post post = Post.find("slugurl = ?",slugurl).first();
+		String randomID = Codec.UUID();
+		Info info = new Info();
+		render(post, randomID, info);
+	}
+	
+	public static void showOld(Long id) {
+		Post post = Post.findById(id);
 		String randomID = Codec.UUID();
 		Info info = new Info();
 		render(post, randomID, info);
@@ -120,7 +127,7 @@ public class Application extends Controller {
 		post.addComment(author, content, email, url);
 		flash.success("Thanks for posting %s", author);
 		Cache.delete(randomID);
-		show(post.getYear(), post.getMonth(), post.getDay(), post.slugurl, postId);
+		show(post.getYear(), post.getMonth(), post.getDay(), post.slugurl);
 	}
 
 	public static void elasticSearchBeispiel() {
