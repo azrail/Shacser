@@ -1,0 +1,82 @@
+[
+    {
+        "title":"Elasticsearch Bonsai",
+        "description":"Bonsai, Maskottchen von Elasticsearch, einem Aufsatz für Lucene mit Rest/Json Backend",
+        "postedAt":"22.04.2011 14:59:28",
+        "author":{
+            "email":"lethargicprince@googlemail.com",
+            "password":"8x7def978",
+            "firstName":"Sascha",
+            "lastName":"Hanke",
+            "gender":"male",
+            "fullname":"Sascha Hanke",
+            "isAdmin":true,
+            "canPost":true,
+            "id":1
+        },
+        "type":"image",
+        "file":{
+            "UUID":"ae3623fc-8bde-4a2c-beda-04731d4eec21",
+            "type":"image/png"
+        },
+        "extension":"png",
+        "fullUrl":"http://127.0.0.1:10000/pictures/1/elasticsearch-bonsai.png",
+        "slugUrl":"elasticsearch-bonsai",
+        "keywords":[
+            {
+                "name":"json",
+                "id":23
+            },
+            {
+                "name":"elasticsearch",
+                "id":22
+            },
+            {
+                "name":"rest",
+                "id":25
+            },
+            {
+                "name":"lucene",
+                "id":24
+            }
+        ],
+        "name":"elasticsearch-bonsai.png",
+        "id":1
+    },
+    {
+        "title":"test",
+        "description":"dsfsadfasdfsafd",
+        "postedAt":"08.05.2011 14:41:04",
+        "author":{
+            "email":"lethargicprince@googlemail.com",
+            "password":"8x7def978",
+            "firstName":"Sascha",
+            "lastName":"Hanke",
+            "gender":"male",
+            "fullname":"Sascha Hanke",
+            "isAdmin":true,
+            "canPost":true,
+            "id":1
+        },
+        "type":"image",
+        "file":{
+            "UUID":"8b553507-41a4-4faf-b4cf-2923d0e90525",
+            "type":"image/png"
+        },
+        "extension":"png",
+        "fullUrl":"http://127.0.0.1:10000/pictures/2/test.png",
+        "slugUrl":"test",
+        "keywords":[
+            {
+                "name":"test2",
+                "id":31
+            },
+            {
+                "name":"test",
+                "id":30
+            }
+        ],
+        "name":"test.png",
+        "id":2
+    }
+]
