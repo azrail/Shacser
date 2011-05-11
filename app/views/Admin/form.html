@@ -1,81 +1,67 @@
 #{extends 'admin.html' /}
- 
- <div class="header_text_bg">
-	<div class="header_text">
-		<h2>Welcome ${user}<br>
-			#{ifnot post?.id}
-    		<span>Write a new post</span>
-			#{/ifnot}
-			#{else}
-    		<span>Editiere ${post?.title}</span>
-			#{/else}
-		</h2>
-		<div class="clr">
-		</div>
-	</div>
-	<div class="clr">
-	</div>
-</div>
 
-<div class="body">
-<div class="form"> 
-#{form @save(post?.id) }
- 
-    #{ifErrors}
-        <p class="error">
-            Please correct these errors.
-        </p>
-    #{/ifErrors}
-     
-    <p>
-        #{field 'title'}
-        <label>Post title:</label>
-        <input type="text" name="${field.name}" 
-            value="${post?.title}" class="${field.errorClass}" />
-        #{/field}
-    </p>
- 
-    <p>
-        #{field 'content'}
-        <label>Write here:</label>
-        <textarea id="object_content" name="${field.name}" 
-            class="${field.errorClass}">${post?.content}</textarea>
-        #{/field}
-    </p>
-    <p>
-        #{field 'description'}
-        <label>Write here:</label>
-        <textarea id="object_description" name="${field.name}" 
-            class="${field.errorClass}">${post?.description}</textarea>
-        #{/field}
-    </p>
-    <p>
-        #{field 'gistId'}
-        <label>Gist (Github) Number:</label>
-        <input type="text" size="50" 
-            name="${field.name}" value="${post?.gistId}" />
-        #{/field}
-    </p>
-    <p>
-        #{field 'tags'}
-        <label>Enter some tags:</label>
-        <input type="text" size="50" 
-            name="${field.name}" value="${post?.tags?.join(' ')}" />
-        #{/field}
-    </p>
-    <p>
-        #{field 'keywords'}
-        <label>Enter some keywords:</label>
-        <input type="text" size="50" 
-            name="${field.name}" value="${post?.keywords?.join(' ')}" />
-        #{/field}
-        ${keywords}
-    </p>
-    <p>
-        <input type="submit" value="Publish this post to the blog" />
-    </p>
-    
-#{/form}
+<div class="header_text_bg">
+	<div class="header_text">
+		<h2>
+			Welcome ${user}<br> #{ifnot post?.id} <span>Write a new
+				post</span> #{/ifnot} #{else} <span>Editiere ${post?.title}</span> #{/else}
+		</h2>
+		<div class="clr"></div>
+	</div>
+	<div class="clr"></div>
 </div>
+<div class="body">
+	<div class="form">
+		#{form @save(post?.id) } #{ifErrors}
+		<p class="error">Please correct these errors.</p>
+		#{/ifErrors}
+
+		<p>
+			#{field 'title'} <label>Post title:</label> <input type="text"
+				name="${field.name}" value="${post?.title}"
+				class="${field.errorClass}" /> #{/field}
+		</p>
+
+		<p>
+			#{field 'content'} <label>Write here:</label>
+			<textarea id="object_content" name="${field.name}"
+				class="${field.errorClass}">${post?.content}</textarea>
+			#{/field}
+		</p>
+		<p>
+			#{field 'description'} <label>Write here:</label>
+			<textarea id="object_description" name="${field.name}"
+				class="${field.errorClass}">${post?.description}</textarea>
+			#{/field}
+		</p>
+		<p>
+			#{field 'gistId'} <label>Gist (Github) Number:</label> <input
+				type="text" size="50" name="${field.name}" value="${post?.gistId}" />
+			#{/field}
+		</p>
+		<p>
+			#{field 'tags'} <label>Enter some tags:</label> <input type="text"
+				size="50" name="${field.name}" value="${post?.tags?.join(' ')}" />
+			#{/field}
+		</p>
+		<p>
+			#{field 'keywords'} <label>Enter some keywords:</label> <input
+				type="text" size="50" name="${field.name}"
+				value="${post?.keywords?.join(' ')}" /> #{/field} ${keywords}
+		</p>
+		<p>
+			<input type="submit" value="Publish this post to the blog" />
+		</p>
+
+		<div id="buttons" style="margin: 20px;">
+		
+		</div>
+		
+		<div id="images" style="margin: 20px; width: 600px;">
+		
+		</div>
+
+		#{/form}
+	</div>
 
 </div>

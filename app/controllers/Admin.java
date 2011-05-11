@@ -70,6 +70,11 @@ public class Admin extends Controller {
 	    renderBinary(f.file.get()); 
 	}
 	
+	public static void listImages(String type) {
+		List<Image> images = Image.findAll();
+		renderJSON(images);
+	}
+	
 	public static void formImage(Long id) {
 		if (id != null) {
 			Image image = Image.findById(id);
@@ -96,6 +101,14 @@ public class Admin extends Controller {
 			image = Image.findById(id);
 			image.title = title;
 			image.description = description;
+			
+			image.extension = file.type().substring(6);
+			image.fullUrl = Play.configuration.getProperty("blog.url") + "/pictures/" + image.id + "/" + JavaExtensions.slugify(image.title, true) + "." + file.type().substring(6);
+			image.slugUrl = JavaExtensions.slugify(image.title, true);
+			image.name = JavaExtensions.slugify(image.title, true) + "." + file.type().substring(6);
+			image.thumbUrl = Play.configuration.getProperty("blog.url") + "/pictures/thumb/" + image.id + "/100/" + JavaExtensions.slugify(image.title, true) + "." + file.type().substring(6);
+			
+			
 			if (file != null) {
 				image.file = file;
 			}

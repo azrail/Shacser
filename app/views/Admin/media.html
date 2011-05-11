@@ -15,7 +15,7 @@
 <div class="body">		
 #{list items:images, as:'image'}
 <p class="image ${image_parity}" style="weight=150px;">
-	<a href="@{formImage(image.id)}"><img width="150" height="150" title="${image.title} - ${image?.description}" alt="${image.title} - ${image?.description}" src="@{Admin.renderImage(image.id)}"></a>
+	<a href="@{formImage(image.id)}"><img width="150" height="150" title="${image.title} - ${image?.description}" alt="${image.title} - ${image?.description}" src="${image.getfullUrl()}"></a>
 	<br>
 	<input type="text" value="${image?.getLink()}">
 </p>

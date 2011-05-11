@@ -29,8 +29,7 @@ import play.libs.WS.WSRequest;
 import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.Http.Request;
-import play.mvc.Router;
-import play.mvc.Router.Route;
+import utils.ImageUtils;
 import utils.StringUtils;
 import utils.UAgentInfo;
 
@@ -59,8 +58,7 @@ public class Application extends Controller {
 		} catch (NullPointerException e) {
 			// TODO: handle exception
 		}
-		
-		
+
 		renderArgs.put("header.user-agent", useragent);
 		renderArgs.put("header.accept", accept);
 
@@ -69,18 +67,27 @@ public class Application extends Controller {
 
 		Application.isIphone = uai.isTierGenericMobile;
 
-//		if (isIphone && !Request.current().path.startsWith("/mobile")) {
-//			redirect("/mobile" + Request.current().path);
-//		}
+		// if (isIphone && !Request.current().path.startsWith("/mobile")) {
+		// redirect("/mobile" + Request.current().path);
+		// }
 
 	}
 
-	public static void renderImage(Long id){ 
-		Image f = Image.findById(id); 
-	    renderBinary(f.file.get()); 
+	public static void renderImage(Long id, String name) {
+		Image f = Image.findById(id);
+		response.setHeader("Content-Length", f.file.length() + "");
+		response.cacheFor("378h");
+		response.contentType = f.file.type();
+		renderBinary(f.file.get());
 	}
-	
-	
+
+	public static void renderImageThumb(Long id, int largestDimension, String name) {
+		Image f = Image.findById(id);
+		response.cacheFor("378h");
+		response.contentType = f.file.type();
+		renderBinary(ImageUtils.createImageThumb(largestDimension, f));
+	}
+
 	public static void rssFeedPosts() {
 		List<Post> posts = Post.find("order by postedAt desc").fetch();
 		response.contentType = "application/rss+xml; charset=utf-8";
@@ -93,22 +100,22 @@ public class Application extends Controller {
 		Info info = new Info();
 		render(frontPost, olderPosts, info);
 	}
-	
+
 	public static void show(String year, String month, String day, String slugurl) {
-		Post post = Post.find("slugurl = ?",slugurl).first();
+		Post post = Post.find("slugurl = ?", slugurl).first();
 		String randomID = Codec.UUID();
 		Info info = new Info();
 		render(post, randomID, info);
 	}
-	
+
 	public static void showOld(Long id) {
 		Post post = Post.findById(id);
-		//String randomID = Codec.UUID();
-		//Info info = new Info();
+		// String randomID = Codec.UUID();
+		// Info info = new Info();
 		redirect("Application.show", post.getYear(), post.getMonth(), post.getDay(), post.slugurl);
-		//render("Application/show.html", post, randomID, info);
+		// render("Application/show.html", post, randomID, info);
 	}
-	
+
 	public static void site(Long id) {
 		Site site = Site.findById(id);
 		String randomID = Codec.UUID();
@@ -134,7 +141,7 @@ public class Application extends Controller {
 	public static void elasticSearchBeispiel() {
 		render("Beispiele/elasticSearch.html");
 	}
-	
+
 	public static void captcha(String id) {
 		Images.Captcha captcha = Images.captcha();
 		String code = captcha.getText("#000000");
@@ -236,6 +243,7 @@ public class Application extends Controller {
 		Info info = new Info();
 		render(tag, posts, info);
 	}
+
 	public static void listTaggedOld(String tag) {
 		redirect("Application.listTagged", tag);
 	}

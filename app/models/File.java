@@ -15,9 +15,11 @@ import javax.persistence.ManyToOne;
 
 import com.petebevin.markdown.MarkdownProcessor;
 
+import play.Play;
 import play.data.validation.Required;
 import play.db.jpa.Blob;
 import play.db.jpa.Model;
+import play.templates.JavaExtensions;
 
 /**
  * @author prime
@@ -26,29 +28,36 @@ import play.db.jpa.Model;
 @Entity
 public abstract class File extends Model {
 
-	public static final String IMAGE = "image"; 
-	
-	@Required
-	public String		title;
+	public static final String	IMAGE	= "image";
 
 	@Required
-	public String		description;
-	
+	public String				title;
+
 	@Required
-	public Date			postedAt;
+	public String				description;
+
+	@Required
+	public Date					postedAt;
 
 	@Required
 	@ManyToOne
-	public User			author;
+	public User					author;
 
 	@Required
-	public String		type;
+	public String				type;
 
 	@Required
-	public Blob			file;
+	public Blob					file;
+
+	public String				extension;
+	public String				fullUrl;
+	public String				slugUrl;
+	public String				thumbUrl;
 	
 	@ManyToMany(cascade = CascadeType.PERSIST)
-	public Set<Keyword>	keywords;
+	public Set<Keyword>			keywords;
+
+	public String				name;
 
 	public File(User author, String title, String description, Blob file, String type) {
 		this.keywords = new TreeSet();
@@ -58,6 +67,12 @@ public abstract class File extends Model {
 		this.description = description;
 		this.file = file;
 		this.postedAt = new Date();
+		this.extension = this.file.type().substring(6);
+		this.fullUrl = Play.configuration.getProperty("blog.url") + "/pictures/" + id + "/" + JavaExtensions.slugify(title, true) + "." + this.file.type().substring(6);
+		this.thumbUrl = Play.configuration.getProperty("blog.url") + "/pictures/thumb/" + id + "/100/" + JavaExtensions.slugify(title, true) + "." + this.file.type().substring(6);
+		this.slugUrl = JavaExtensions.slugify(title, true);
+		this.name = JavaExtensions.slugify(title, true) + "." + this.file.type().substring(6);
 	}
+
 
 }
