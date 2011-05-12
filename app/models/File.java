@@ -68,10 +68,12 @@ public abstract class File extends Model {
 		this.file = file;
 		this.postedAt = new Date();
 		this.extension = this.file.type().substring(6);
+		this.save();
 		this.fullUrl = Play.configuration.getProperty("blog.url") + "/pictures/" + id + "/" + JavaExtensions.slugify(title, true) + "." + this.file.type().substring(6);
 		this.thumbUrl = Play.configuration.getProperty("blog.url") + "/pictures/thumb/" + id + "/100/" + JavaExtensions.slugify(title, true) + "." + this.file.type().substring(6);
 		this.slugUrl = JavaExtensions.slugify(title, true);
 		this.name = JavaExtensions.slugify(title, true) + "." + this.file.type().substring(6);
+		this.save();
 	}
 
 

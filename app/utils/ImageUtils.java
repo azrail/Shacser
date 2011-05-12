@@ -25,14 +25,14 @@ public class ImageUtils {
 		double scale;
 		int sizeDifference, originalImageLargestDim;
 		// int largestDimension = 100;
-	
+
 		BufferedImage inImage = null;
 		try {
 			inImage = ImageIO.read(f.file.get());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	
+
 		if (inImage.getWidth(null) > inImage.getHeight(null)) {
 			scale = (double) largestDimension / (double) inImage.getWidth(null);
 			sizeDifference = inImage.getWidth(null) - largestDimension;
@@ -49,10 +49,15 @@ public class ImageUtils {
 																							// compiles
 		Graphics2D g2d;
 		AffineTransform tx;
-	
+
 		if (scale < 1.0d) // only scale if desired size is smaller than original
 		{
 			int numSteps = sizeDifference / 100;
+
+			if (numSteps == 0) {
+				numSteps = 1;
+			}
+
 			int stepSize = sizeDifference / numSteps;
 			int stepWeight = stepSize / 2;
 			int heavierStepSize = stepSize + stepWeight;
@@ -120,16 +125,16 @@ public class ImageUtils {
 			g2d.drawImage(inImage, tx, null);
 			g2d.dispose();
 		}
-	
+
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-	
+
 		try {
 			ImageIO.write(outImage, f.extension.toUpperCase(), baos);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-	
+
 		byte[] fileData = baos.toByteArray();
 		try {
 			baos.close();
@@ -137,7 +142,7 @@ public class ImageUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+
 		ByteArrayInputStream bais = new ByteArrayInputStream(fileData);
 		return bais;
 	}

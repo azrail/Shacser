@@ -3,23 +3,27 @@
 	<head>
 		<title>yab. #{get 'title' /} - Das Technik Blog</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/style.css'}" />
-		<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/jquery-ui-1.8.11.custom.css'}" />
-		<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/print.css'}" media="print" />
+
 		<link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}" />
 		<link rel="alternate" type="application/rss+xml" title="RSS-Feed von yab. Das Technik Blog" href="http://feeds.feedburner.com/YabDasTechnikBlog" />
-		<script src="@{'/public/javascripts/jquery-1.5.1.min.js'}"></script>
-		<script src="@{'/public/javascripts/jquery-ui-1.8.11.custom.min.js'}"></script>
-		<script src="@{'/public/javascripts/jquery.tools.min.js'}"></script>
+
+		<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/AdminExt/ext-all.css'}" /> 
+        <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/AdminExt/chooser.css'}" /> 
+        <link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/AdminExt/example.css'}" />
+
+
         <link rel="stylesheet" type="text/css" href="@{'/public/markitup/skins/markitup/style.css'}" />
 		<link rel="stylesheet" type="text/css" href="@{'/public/markitup/sets/markdown/style.css'}" />
 		
-		<link rel="stylesheet" type="text/css" href="@{'/public/ext-4.0.0/resources/css/ext-all.css'}" /> 
-        <link rel="stylesheet" type="text/css" href="@{'/public/ext-4.0.0/examples/view/chooser/chooser.css'}" /> 
-        <link rel="stylesheet" type="text/css" href="@{'/public/ext-4.0.0/examples/shared/example.css'}" />
-         
-        <script type="text/javascript" src="@{'/public/ext-4.0.0/bootstrap.js'}"></script> 
-        <script type="text/javascript" src="@{'/public/ext-4.0.0/examples/view/chooser/chooser.js'}"></script> 
+		<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/admin.css'}" />
+        
+        
+        <script src="@{'/public/javascripts/jquery-1.5.1.min.js'}"></script>
+		<script src="@{'/public/javascripts/jquery-ui-1.8.11.custom.min.js'}"></script>
+		<script src="@{'/public/javascripts/jquery.tools.min.js'}"></script>
+        
+        <script src="@{'/public/javascripts/AdminExt/bootstrap.js'}"></script> 
+        <script src="@{'/public/javascripts/AdminExt/chooser/chooser.js'}"></script> 
 		
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}" />
         <script src="@{'/public/markitup/jquery.markitup.js'}"></script>
@@ -35,46 +39,19 @@
     </head>
     <body>
 		<div class="main">
-			<div class="blok_header">
-				<div class="header">
-					<div class="logo">
-						<a href="@{Application.index()}">
-						<img src="/public/images/aheron_logo_yab.png" width="349" height="98" title="zur Startseite" alt="Aheron Logo | yab. das technik blog." class="one">
-						</a>
-					</div>
-					<div class="socialbox">
-						<p>
-							<a href="${twitter}" target="_blank" class="twitter">
-							<img src="/public/images/platzhalter.gif" title="Folge mir auf Twitter" alt="Twitter Icon" width="24" height="23">
-							</a>
-							<a href="#" class="facebook">
-							<img src="/public/images/platzhalter.gif" alt="Facebook Icon" title="Werde ein Facebook Fan" width="24" height="23">
-							</a>
-							<a href="http://feeds.feedburner.com/YabDasTechnikBlog" class="rss-feed">
-							<img src="/public/images/platzhalter.gif" title="Aboniere den RSS-Feed von yab. Das Technik Blog" alt="RSS Icon" width="24" height="23">
-							</a>
-						</p>
-					</div>
-				</div>
-				<div class="clr">
-				</div>
-			</div>
-			
 
-			
-			
 			<div class="menu_resize_bg">
 				<div class="menu_resize">
 					<div class="menu">
 						<ul>
 							<li>
 								<a href="@{Admin.index()}" class="${request.path == '/admin' ? 'active' : ''}">
-								<span>Deine Artikel</span>
+								<span>My Posts</span>
 								</a>
 							</li>
 							<li>
 								<a href="@{Admin.media()}" class="${request.path == '/admin/media' ? 'active' : ''}">
-								<span>Deine Bilder</span>
+								<span>My Images</span>
 								</a>
 							</li>
                				#{secure.check 'admin'}
@@ -142,27 +119,9 @@
 #{doLayout /}
 
         
-        	<div class="mittel-menue">
-				<div class="mittel-menue_resize">
-					<a href="@{Application.index()}">
-					<img src="/public/images/logo_ahero.png" title="zur Startseite" alt="Aheron Logo" width="144" height="62">
-					</a>
-					<div class="recent">
-						<h2>Yet another blog.</h2>
-					</div>
-					<div class="recent2">
-						<p>
-							Phantasie ist wichtiger als Wissen, denn Wissen ist begrenzt.
-						</p>
-					</div>
-					<div class="clr">
-					</div>
-				</div>
-				<div class="clr">
-				</div>
-			</div>
-		</div>
-				<div class="footer">
+        	
+</div>
+		<div class="footer">
 			<div class="footer_resize">
 				<p class="left">
 					© ${autor}.
@@ -170,41 +129,8 @@
 					<a id="facebookconnect" href="/impressum">Kontakt</a> |
 					<a href="http://feeds.feedburner.com/YabDasTechnikBlog">RSS Feed</a> | #{fbconnect.button label:'Login',scope:'email,user_about_me' /}
 				</p>
-				<p class="right">
-					<a href="http://www.playframework.org" hreflang="en" title="The Play framework makes it easier to build Web applications with Java">
-					<img width="88" height="32" src="@{'/public/images/powered_by_play_framework.png'}" alt="Powered by play framework" />
-					</a>
-					<a href="http://www.cherokee-project.com" hreflang="en" title="Cherokee is a very fast, flexible and easy to configure Web Server.">
-					<img width="88" height="32" src="@{'/public/images/powered_by_cherokee.png'}" alt="Powered by Cherokee" />
-					</a>
-					<a href="http://www.ubuntu.com" hreflang="en" title="Secure, fast and powerful, Ubuntu Server based on Debian">
-					<img width="88" height="32" src="@{'/public/images/powered_by_debian.png'}" alt="Powered by Debian" />
-					</a>
-				</p>
-				<div class="clr">
-				</div>
-			</div>
-			<div class="clr">
 			</div>
 		</div>
-		<!-- Start Piwik -->
-		<script>
-	var pkBaseURL = (("https:" == document.location.protocol) ? "https://bumblebee.aheron.de/stats/" : "http://bumblebee.aheron.de/stats/");
-	document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
-		</script>
-		<script>
-	try {
-		var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 1);
-		piwikTracker.trackPageView();
-		piwikTracker.enableLinkTracking();
-	} catch( err ) {
-	}
-		</script>
-		<noscript>
-			<p class="piwik">
-				<img src="http://bumblebee.aheron.de/stats/piwik.php?idsite=1" width="1" height="1" alt="piwik pixel, ignore it" />
-			</p>
-		</noscript>
-		<!-- Ende Piwik Tracking Code -->
+		</div>
 	</body>
 </html>
